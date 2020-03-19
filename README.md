@@ -1,5 +1,6 @@
 # Trip_Walkie
 
-Hello-world!!!
+여행거르미
 
-It's a test!
+팀장 박재근
+팀원 강현신 안종현 최재훈
