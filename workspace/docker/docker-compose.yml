@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  durumi:
+    image: durumi
+    volumes: 
+      - /home/hoon/durumi-Project/workspace/volumes:/home/
+    command:
+      - bash
+      - -c
+#      - gunicorn durumi/durumi.wsgi:application --bind 0.0.0.0:8000
+      - python3 /home/durumi/manage.py runserver 0:8000
+    ports: 
+      - "8000:8000"
+  nginx:
+    image: nginx
+    volumes: 
+      - /home/hoon/durumi-Project/workspace/volumes-nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on : 
+      - durumi
