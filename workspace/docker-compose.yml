@@ -1,25 +1,27 @@
-#docker-compose run durumi django-admin.py startproject durumi
+#첫 빌드시 : docker-compose up --build
+#이후 : docker-compose up
 version: "2"
-
 services:
-  durumi:
-    image: durumi
-    volumes: 
-      - /home/synod2/synod2/durumi/workspace/volumes:/home/
-    command:
-      - bash
-      - -c
-      - python3 /home/durumi/manage.py runserver 0:8000
-    ports: 
-      - "8000:8000"
-      
-  ----------------------
-      
   nginx:
     image: nginx
+    container_name : nginx_service
     volumes: 
       - /home/synod2/synod2/durumi/workspace/volumes-nginx:/etc/nginx/conf.d
     ports:
       - "80:80"
     depends_on : 
       - durumi
+  durumi:
+    # build : 
+    #   context : .
+    #   dockerfile : Dockerfile
+    image: durumi
+    container_name : durumi_service
+    volumes: 
+      - /home/synod2/synod2/durumi/workspace/volumes:/home/
+    working_dir : /home/durumi/
+    command: > 
+      bash -c "python3 manage.py migrate 
+      && gunicorn durumi.wsgi -b 0.0.0.0:8000 "
+    ports: 
+      - "8000:8000"

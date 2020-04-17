@@ -1,0 +1,15 @@
+asgiref==3.2.7
+asn1crypto==0.24.0
+cryptography==2.1.4
+Django==3.0.4
+gunicorn==20.0.2
+idna==2.6
+keyring==10.6.0
+keyrings.alt==3.0
+pycrypto==2.6.1
+pygobject==3.26.1
+pytz==2019.3
+pyxdg==0.25
+SecretStorage==2.3.1
+six==1.11.0
+sqlparse==0.3.1
