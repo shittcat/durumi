@@ -3,19 +3,22 @@ version: "2"
 services:
   durumi:
     image: durumi
+    container_name: durumi_service
     volumes: 
-      - /home/hoon/durumi-Project/workspace/volumes:/home/
-    command:
-      - bash
-      - -c
-#      - gunicorn durumi/durumi.wsgi:application --bind 0.0.0.0:8000
-      - python3 /home/durumi/manage.py runserver 0:8000
+      - /home/j/durumi-Project/workspace/volumes:/home/
+    working_dir: /home/durumi/
+    command: >
+       bash -c "python3 manage.py migrate 
+       && gunicorn durumi.wsgi:application -b 0.0.0.0:8000"
     ports: 
       - "8000:8000"
+    expose:
+      - "8000"
   nginx:
     image: nginx
+    container_name: nginx_service
     volumes: 
-      - /home/hoon/durumi-Project/workspace/volumes-nginx:/etc/nginx/conf.d
+      - /home/j/durumi-Project/workspace/volumes-nginx:/etc/nginx/conf.d
     ports:
       - "80:80"
     depends_on : 
