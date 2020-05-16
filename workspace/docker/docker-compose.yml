@@ -8,7 +8,9 @@ services:
       - /home/j/durumi-Project/workspace/volumes:/home/
     working_dir: /home/durumi/
     command: >
-       bash -c "python3 manage.py migrate 
+       bash -c "python3 manage.py makemigrations polls
+       && python3 manage.py migrate
+       && python3 manage.py collecstatic
        && gunicorn durumi.wsgi:application -b 0.0.0.0:8000"
     ports: 
       - "8000:8000"
