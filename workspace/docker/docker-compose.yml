@@ -19,6 +19,7 @@ services:
     container_name: nginx_service
     volumes: 
       - /home/j/durumi-Project/workspace/volumes-nginx:/etc/nginx/conf.d
+      - /home/j/durumi-Project/workspace/volumes/.static_root/:/static
     ports:
       - "80:80"
     depends_on : 
