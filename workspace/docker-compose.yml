@@ -1,7 +1,30 @@
 #첫 빌드시 : docker-compose up --build
 #이후 : docker-compose up
+# 방화벽 설정으로 실행 안될때 iptables 초기화 
+# sudo iptables -t filter -F
+# sudo iptables -t filter -X
+# systemctl restart docker
 version: "2"
 services:
+  durumi:
+#    build : 
+#     context : . 
+#     dockerfile : Dockerfile
+    image: durumi
+    container_name : durumi_service
+    volumes: 
+      - /home/synod2/synod2/durumi/workspace/volumes:/home/
+    working_dir : /home/durumi/
+    command: > 
+      bash -c "python3 manage.py makemigrations polls
+      && python3 manage.py migrate   
+      && gunicorn durumi.wsgi -b 0.0.0.0:8000 "
+#      && python3 /home/durumi/manage.py runserver 127.0.0.1:8000 "
+#      && gunicorn durumi.wsgi -b 0.0.0.0:8000 "
+    ports: 
+      - "8000:8000"
+    expose : 
+      - "8000"
   nginx:
     image: nginx
     container_name : nginx_service
@@ -11,17 +34,3 @@ services:
       - "80:80"
     depends_on : 
       - durumi
-  durumi:
-    # build : 
-    #   context : .
-    #   dockerfile : Dockerfile
-    image: durumi
-    container_name : durumi_service
-    volumes: 
-      - /home/synod2/synod2/durumi/workspace/volumes:/home/
-    working_dir : /home/durumi/
-    command: > 
-      bash -c "python3 manage.py migrate 
-      && gunicorn durumi.wsgi -b 0.0.0.0:8000 "
-    ports: 
-      - "8000:8000"
