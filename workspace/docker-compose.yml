@@ -5,16 +5,23 @@ services:
     image: durumi
     volumes: 
       - /home/eight/eight/durumi/workspace/volumes:/home/
-    command:
-      - bash
-      - -c
-      - python3 /home/durumi/manage.py runserver 0:8000
+    working_dir : /home/durumi/
+    command: >
+            bash -c "python3 manage.py migrate 
+            && gunicorn durumi.wsgi -b 0.0.0.0:8000 "
+        #- bash
+        #      - -c
+        #- python3 /home/durumi/manage.py runserver 0:8000
+        #- gunicorn durumi.wsgi:application --bind 0:8000
     ports: 
       - "8000:8000"
+    expose:
+      - "8000"
   nginx:
     image: nginx
     volumes: 
-    - /home/eight/eight/durumi/workspace/volumes-nginx:/etc/nginx/conf.d
+      - /home/eight/eight/durumi/workspace/volumes-nginx:/etc/nginx/conf.d
+      - /home/eight/eight/durumi/workspace/volumes/.static_root/:/static
     ports:
       - "80:80"
     depends_on:
