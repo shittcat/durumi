@@ -1,0 +1,8 @@
+<form method="post">{% csrf_token %}
+    {{ form }}
+    <input type="text" name="name"> 
+    <input type="submit" value="Send message">
+    {% if result %}
+        name is : {{ result }} 
+    {% endif %}
+</form>

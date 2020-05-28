@@ -1,0 +1,10 @@
+<html lang="ko">
+    <body>
+       <form action="{% url 'apitest:formtest' %}" method="POST" >
+           <input type="text" name="{{placename}}">
+           <input type="submit" value="찾기">
+       </form> 
+       <a herf="{% url 'apitest:formtest' %}" >link</a>
+    </body>
+    
+</html>
