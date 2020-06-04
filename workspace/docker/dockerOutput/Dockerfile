@@ -1,3 +1,4 @@
+#docker build -t durumi .
 FROM ubuntu:18.04
 
 RUN apt-get update
@@ -11,3 +12,4 @@ WORKDIR /home
 RUN pip3 install pip==20.0.2
 RUN pip install django==3.0.4
 RUN pip install gunicorn==20.0.2
+RUN pip install simplejson
