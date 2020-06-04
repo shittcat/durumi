@@ -1,5 +1,5 @@
 #! /bin/bash
-# ./git.sh
+#! ./git.sh
 
 msg="$(date '+%m')$(date '+%d')_desktop"
 
