@@ -20,6 +20,7 @@
         </div>
     </div>
 
+    <!-- 카카오맵 API를 이용한 지도 띄우기 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=88b41e5073f63f98d312b7b49cc3b87f"></script>
 
     <script>
@@ -34,16 +35,29 @@
 
 
     </script>
-
+    <!-- 카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수-->
     <script>
         function panTo(y,x)
        {
+            
             var moveLatLng = new kakao.maps.LatLng(y,x)
 
             map.panTo(moveLatLng)
         }
     </script>
+    <!-- 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌-->
+    <script>
+    document.addEventListener('keydown', function(event) 
+    {
+        if (event.keyCode === 13) 
+        {
+            event.preventDefault();
+            document.getElementById('search').click();
+        };
+    }, true);
+    </script>
 
+    <!-- Ajax 를 이용한 template와 view 사이의 통신-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
     $('#search').click(function()
@@ -56,7 +70,7 @@
         ({
             cache: false,
             //어떤 View 와 데이터통신을 진행할것인지 url로 표시
-            url : "{% url 'polls:Pos' %}",
+            url : "{% url 'durumiApp:Pos' %}",
             //POST방식을 사용할것임
             type: 'POST',
             //formData = $("PosForm").serialize();
@@ -64,14 +78,14 @@
             success : function(data)
             {
                 // 성공이라는 메시지를 띄워줌
-                alert("성공");
+                //alert("성공");
                 // object HTMLInputElement를 float형으로 파싱해줌
                 
                 var str = String(data['Input']);
                 var x = parseFloat(data['xPos']);
                 var y = parseFloat(data['yPos']);
-                alert(str)
-                alert(x+y)
+                //alert(str)
+                //alert(x+y)
                 panTo(y,x)
 
             },
