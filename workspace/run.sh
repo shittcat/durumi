@@ -1,1 +1,2 @@
-python3 manage.py runserver 192.168.0.20:8000
+sudo iptables -t filter -F && sudo iptables -t filter -X && sudo systemctl restart docker
+docker-compose up

@@ -3,6 +3,19 @@
     <input type="text" name="name"> 
     <input type="submit" value="Send message">
     {% if result %}
-        name is : {{ result }} 
+        {{ result | json_script:'jsonData'}}
+        name is : 
+    	<script type = "text/javascript"> 
+    	    var placeData = JSON.parse(document.getElementById('jsonData').textContent);
+    	    //var placeData = document.getElementById('jsonData');
+		    for( var key1 in placeData){
+    		    var jsonData = JSON.parse(placeData[key1])
+		   		for (var key2 in jsonData)
+    		    {
+    			    document.write(key2+" : " +jsonData[key2]+"<br>")			
+		        }
+	        }
+	    </script>
+    	
     {% endif %}
 </form>

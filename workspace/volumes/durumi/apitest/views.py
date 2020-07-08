@@ -7,29 +7,12 @@ from django.urls import reverse,reverse_lazy
 from django.views import generic
 from urllib.parse import urlencode, quote_plus
 from urllib.request import urlopen , Request
-
+from .apicodes import keyword
 #from keyword import *
 
 from apitest.forms import ContactForm
 
-ServiceKey = "0Uy%2BxurbDkET33KiC3fms09%2BMzmVPuCNUMwrjsCfai8CHp%2FT%2FD0MlSoaaXB8IOZjCc9S6WzmwQuzsrnNymJmzQ%3D%3D"
-
 # Create your views here.
-def keyFind(inputKeyword):
-    url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword'
-    queryParams = '?' + 'ServiceKey='+ServiceKey+'&'+urlencode({ 
-        quote_plus('MobileApp') : 'AppTest', 
-        quote_plus('MobileOS') : 'ETC', quote_plus('pageNo') : '1', quote_plus('numOfRows') : '10', 
-        quote_plus('listYN') : 'Y', quote_plus('arrange') : 'A', quote_plus('contentTypeId') : '12', 
-        quote_plus('areaCode') : '', quote_plus('sigunguCode') : '', quote_plus('cat1') : '', 
-        quote_plus('cat2') : '', quote_plus('cat3') : '', quote_plus('keyword') : inputKeyword 
-    })
-    request = Request(url + queryParams)
-    request.get_method = lambda: 'GET'
-    response_body = urlopen(request).read()
-    return (response_body)
-
-
 class IndexView(generic.ListView):
     template_name = 'apitest/index.html'
     context_object_name = 'latest_question_list'
@@ -50,24 +33,14 @@ class ContactView(generic.FormView): #contact
  
 class FormView(generic.View): #formtest
     template_name = 'apitest/contact.html'
-    form_class = ContactForm
-    #success_url = reverse_lazy("apitest:contact")
     
     def post(self,request):
         inputkw = request.POST.get('name')
-        result = keyFind(inputkw)
+        result = keyword.keywordFindAPI(inputkw)
         context ={
             'result' : result
         }
         return render(request,self.template_name,context)
-        
-    def get(self,request):
-        result = request.GET
-        context ={
-            'result' : result
-        }
-        return render(request,self.template_name,context)
-    
 
 def testView(request):   #testview
     test = reverse("apitest:formtest")
