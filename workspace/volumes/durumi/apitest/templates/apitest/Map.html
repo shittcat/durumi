@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <meta charset = "utf-8" />
+        <title> 당신의 여행지를 걸러드립니다! 여행거르미</title>
+    </head>
+<body>
+    <!-- Map이 들어갈 위치를 정해주는 태그-->
+    <div id = "map" style="width:100vw; height:100vh; z-index:1">
+        <!-- searchBox의 위치를 정해주는 태그-->
+        <div id="searchBox" style = "width:80vw; height:5vh;position:relative;top:5vh;left:5vw;z-index:2;">
+            <!--검색을 위한 FORM 태그-->
+            <form id="searchForm">
+                <!-- 보안을 위해 적어줌-->
+                {% csrf_token %}
+                <!-- 한개의 문자열로 검색하는 기능-->
+                <input type=text name="searchBox" id="searchBox" >
+                <input type=button id="search" value"확인">
+            </form>
+        </div>
+    </div>
+
+    <!-- 카카오맵 API를 이용한 지도 띄우기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
+
+    <script>
+       	var container = document.getElementById('map');
+		var options = {
+			//center: new kakao.maps.LatLng(33.450701, 126.570667),
+			center: new kakao.maps.LatLng({{Map.yPos}} , {{Map.xPos}}),
+            level: 3
+		};
+
+        var map = new kakao.maps.Map(container, options);
+
+
+    </script>
+    <!-- 카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수-->
+    <script>
+        function panTo(y,x)
+       {
+            
+            var moveLatLng = new kakao.maps.LatLng(y,x)
+
+            map.panTo(moveLatLng)
+        }
+    </script>
+    <!-- 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌-->
+    <script>
+    document.addEventListener('keydown', function(event) 
+    {
+        if (event.keyCode === 13) 
+        {
+            event.preventDefault();
+            document.getElementById('search').click();
+        };
+    }, true);
+    </script>
+
+    <!-- Ajax 를 이용한 template와 view 사이의 통신-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    $('#search').click(function()
+    {
+        //form 에 있는 데이터를 한번에 모아줌 .serialize();
+        var formData = $("#searchForm").serialize();
+
+
+        $.ajax
+        ({
+            cache: false,
+            //어떤 View 와 데이터통신을 진행할것인지 url로 표시
+            url : "{% url 'apitest:Pos' %}",
+            //POST방식을 사용할것임
+            type: 'POST',
+            //formData = $("PosForm").serialize();
+            data: formData,
+            success : function(data)
+            {
+                // 성공이라는 메시지를 띄워줌
+                //alert("성공");
+                // object HTMLInputElement를 float형으로 파싱해줌
+                
+                var str = String(data['Input']);
+                var x = parseFloat(data['xPos']);
+                var y = parseFloat(data['yPos']);
+                //alert(str)
+                //alert(x+y)
+                panTo(y,x)
+
+            },
+            error : function(xhr, status,)
+            {
+                //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
+                alert("실패");
+                alert(xhr + ":" + status);
+            },
+        });
+    })
+</script>

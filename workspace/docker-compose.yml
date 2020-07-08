@@ -9,9 +9,9 @@
 version: "2"
 services:
   durumi:
-#    build : 
-#     context : . 
-#     dockerfile : Dockerfile
+    # build : 
+    # context : . 
+    #dockerfile : Dockerfile
     image: durumi
     container_name : durumi_service
     volumes: 
