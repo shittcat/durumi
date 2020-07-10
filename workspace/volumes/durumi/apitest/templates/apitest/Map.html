@@ -1,9 +1,25 @@
+{% load static %}
 <html>
     <head>
         <meta charset = "utf-8" />
-        <title> 당신의 여행지를 걸러드립니다! 여행거르미</title>
+        <title> 함께 걸어가는 여행의 동반자! 여행거르미</title>
+        
+        <link rel="stylesheet" type="text/css" href=" {% static 'css/style-popup.css' %}">
+        
+        
+        <style>
+        
+            
+        </style>
     </head>
 <body>
+    
+    
+    <div id="popupDiv"> <!-- 팝업창 -->
+        <button id="popCloseBtn">close</button>
+    </div>
+    <div id ="popup_mask" ></div> <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
+
     <!-- Map이 들어갈 위치를 정해주는 태그-->
     <div id = "map" style="width:100vw; height:100vh; z-index:1">
         <!-- searchBox의 위치를 정해주는 태그-->
@@ -15,42 +31,32 @@
                 <!-- 한개의 문자열로 검색하는 기능-->
                 <input type=text name="searchBox" id="searchBox" >
                 <input type=button id="search" value"확인">
+                
             </form>
         </div>
     </div>
 
     <!-- 카카오맵 API를 이용한 지도 띄우기 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="{% static 'scripts/popup.js' %}"></script>
 
     <script>
+        
        	var container = document.getElementById('map');
 		var options = {
-			//center: new kakao.maps.LatLng(33.450701, 126.570667),
 			center: new kakao.maps.LatLng({{Map.yPos}} , {{Map.xPos}}),
             level: 3
 		};
+		
+	    $(document).ready(function()  {
+            SaveDiv = $("#popupDiv").html();
+        });  
+    
 
         var map = new kakao.maps.Map(container, options);
 
-
-    </script>
-    
-    <script>
-        //카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수
-        function panTo(y,x)
-       {
-            
-            var moveLatLng = new kakao.maps.LatLng(y,x)
-
-            map.panTo(moveLatLng)
-        }
-        //API에서 받아온 데이터 목록을 출력하는 함수 
-        function showlist(){
-            
-        }
-    </script>
-    <!-- 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌-->
-    <script>
+    // 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌
     document.addEventListener('keydown', function(event) 
     {
         if (event.keyCode === 13) 
@@ -59,10 +65,15 @@
             document.getElementById('search').click();
         };
     }, true);
+    
+    function panTo(y,x) //카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수
+    {
+        var moveLatLng = new kakao.maps.LatLng(y,x)
+        map.panTo(moveLatLng)
+    }
     </script>
 
     <!-- Ajax 를 이용한 template와 view 사이의 통신-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
     $('#search').click(function()
     {
@@ -81,18 +92,8 @@
             {
                 // 성공이라는 메시지를 띄워줌
                 alert("성공");
-                jdata = data['result'];
-                var list = $.parseJSON(jdata['item0'])
-                console.log(jdata);
-                console.log(list);
-                alert(list['title']+"검색 성공");
-                
-                var str = String(list['title']);
-                var x = parseFloat(list['mapx']);
-                var y = parseFloat(list['mapy']);
-        
-                panTo(y,x)
-
+                var jdata = data['result'];
+                popup(jdata);
             },
             error : function(xhr, status,)
             {
