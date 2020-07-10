@@ -8,10 +8,7 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 from urllib.parse import urlencode, quote_plus
 from urllib.request import urlopen , Request
-from .apicodes import keyword
-#from keyword import *
-from .apicodes import MapView
-
+from .apicodes import *
 from apitest.forms import ContactForm
 
 # Create your views here.

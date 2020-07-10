@@ -1,7 +1,8 @@
 #apitest/urls.py
 from django.urls import path
-from . import apicodes,views
+from . import views
 from .apicodes import MapView
+
 
 app_name = 'apitest'
 urlpatterns = [
@@ -9,7 +10,6 @@ urlpatterns = [
         path('contact/',views.ContactView.as_view(),name='contact'),
         path('formtest/',views.FormView.as_view(),name='formtest'),
         path('testview/',views.testView,name='testview'),
-        path("pos/", MapView.Pos, name="Pos"),
-        path("map/", MapView.MapView, name="Map"),
+        path("Pos/", MapView.Pos, name="Pos"),
+        path("Map/", MapView.MapView, name="Map"),
     ]
-    

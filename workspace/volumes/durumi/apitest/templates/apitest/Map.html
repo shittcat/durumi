@@ -34,14 +34,19 @@
 
 
     </script>
-    <!-- 카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수-->
+    
     <script>
+        //카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수
         function panTo(y,x)
        {
             
             var moveLatLng = new kakao.maps.LatLng(y,x)
 
             map.panTo(moveLatLng)
+        }
+        //API에서 받아온 데이터 목록을 출력하는 함수 
+        function showlist(){
+            
         }
     </script>
     <!-- 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌-->
@@ -63,8 +68,7 @@
     {
         //form 에 있는 데이터를 한번에 모아줌 .serialize();
         var formData = $("#searchForm").serialize();
-
-
+        console.log(formData);
         $.ajax
         ({
             cache: false,
@@ -72,19 +76,21 @@
             url : "{% url 'apitest:Pos' %}",
             //POST방식을 사용할것임
             type: 'POST',
-            //formData = $("PosForm").serialize();
             data: formData,
             success : function(data)
             {
                 // 성공이라는 메시지를 띄워줌
-                //alert("성공");
-                // object HTMLInputElement를 float형으로 파싱해줌
+                alert("성공");
+                jdata = data['result'];
+                var list = $.parseJSON(jdata['item0'])
+                console.log(jdata);
+                console.log(list);
+                alert(list['title']+"검색 성공");
                 
-                var str = String(data['Input']);
-                var x = parseFloat(data['xPos']);
-                var y = parseFloat(data['yPos']);
-                //alert(str)
-                //alert(x+y)
+                var str = String(list['title']);
+                var x = parseFloat(list['mapx']);
+                var y = parseFloat(list['mapy']);
+        
                 panTo(y,x)
 
             },

@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-#import simplejson as json
+from . import keyword
+import simplejson as json
 import os
 import sys
 
@@ -34,16 +35,20 @@ def Pos(request):
 		}
 		return render(request,template_name,context)
 	else:
-		Input = Input_str
-		map = MapModel.Map()
-		Pos = getPos(Input)
-		map.moveLocation(Pos[0], Pos[1])
-		# context를 HTML파일로 보내줌
+		result = keyword.keywordFindAPI(Input_str)
 		context = {
-			"Input": Input,
-			"xPos": map.xPos,
-			"yPos": map.yPos,
+			"result" : result
 		}
+		# Input = Input_str
+		# map = MapModel.Map()
+		# Pos = getPos(Input)
+		# map.moveLocation(Pos[0], Pos[1])
+		# # context를 HTML파일로 보내줌
+		# context = {
+		# 	"Input": Input,
+		# 	"xPos": map.xPos,
+		# 	"yPos": map.yPos,
+		# }
 		return HttpResponse(json.dumps(context), content_type="application/json")
 
 
