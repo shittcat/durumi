@@ -47,10 +47,3 @@ class FormView(generic.View): #formtest
 def testView(request):   #testview
     test = reverse("apitest:formtest")
     return HttpResponse("reverse return is %s"%request.POST)
-    
-def MapView(request):
-    MapView.MapView(request)
-
-@csrf_exempt  # 보안문제로 적어줌
-def Pos(request):
-    MapView.Pos(request)

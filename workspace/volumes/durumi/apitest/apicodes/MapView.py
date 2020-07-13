@@ -13,7 +13,7 @@ from ..Models import MapModel
 from .. import appkey
 
 
-def MapView(request):
+def MapView(request): # 맵 템플릿 연결 
 	template_name = 'apitest/Map.html'
 	# Map.html을 띄워줌
 	context = {
@@ -24,10 +24,10 @@ def MapView(request):
 
 
 @csrf_exempt  # 보안문제로 적어줌
-def Pos(request):
+def Pos(request): # 해당 장소에 대한 좌표정보 전송 
 	template_name = 'apitest/Map.html'
 	try:
-		Input_str = request.POST.get("searchBox", "")
+		Input_str = request.POST.get("searchBox", "") # searchbox에서 내용 받아와 keyword 함수 실행 하여 검색결과 JSON으로 받아옴. 
 	except (KeyError, Input_str == ""):
 		context = {
 			"Map": MapModel.Map, 
@@ -39,25 +39,32 @@ def Pos(request):
 		context = {
 			"result" : result
 		}
-		# Input = Input_str
-		# map = MapModel.Map()
-		# Pos = getPos(Input)
-		# map.moveLocation(Pos[0], Pos[1])
-		# # context를 HTML파일로 보내줌
-		# context = {
-		# 	"Input": Input,
-		# 	"xPos": map.xPos,
-		# 	"yPos": map.yPos,
-		# }
-		return HttpResponse(json.dumps(context), content_type="application/json")
+		return HttpResponse(json.dumps(context), content_type="application/json") 
+		
+def Tripnote(request):
+	template_name = 'apitest/Tripnote.html'
+	context = {
+		"Test": "test"
+	}
+	return render(request,template_name,context)
+	
+def HamburgerMenu(request):
+	template_name = 'apitest/HamburgerMenu.html'
+	context = {
+		"Test": "test"
+	}
+	return render(request,template_name,context)
 
-
-def getPos(Input_str):
-    if Input_str == "우리집":
-        return 37.49427475898042, 126.78703753036896
-    if Input_str == "학교":
-        return 37.48625412871462, 126.8016009357299
-    if Input_str == "myhome":
-        return 37.49427475898042, 126.78703753036896
-
-    return 33.450701, 126.570667
+def PlaceView(request):
+	template_name = 'apitest/PlaceView.html'
+	context = {
+		"Test": "test"
+	}
+	return render(request,template_name,context)
+	
+def PictureView(request):
+	template_name = 'apitest/PictureView.html'
+	context = {
+		"Test": "test"
+	}
+	return render(request,template_name,context)

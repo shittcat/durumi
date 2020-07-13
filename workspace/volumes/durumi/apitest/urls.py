@@ -12,4 +12,8 @@ urlpatterns = [
         path('testview/',views.testView,name='testview'),
         path("Pos/", MapView.Pos, name="Pos"),
         path("Map/", MapView.MapView, name="Map"),
+        path("Map/Tripnote/", MapView.Tripnote, name="Tripnote"),
+        path("Map/HamburgerMenu/", MapView.HamburgerMenu, name="HamburgerMenu"),
+        path("Map/PlaceView/", MapView.PlaceView, name="PlaceView"),
+        path("Map/PictureView/", MapView.PictureView, name="PictureView"),
     ]
