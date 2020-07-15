@@ -2,3 +2,5 @@
 metting_log/
 res/
 workspace/volumes/durumi/apitest/templates/apitest/apikey.py
+appkey.py
+apikey.py
