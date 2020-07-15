@@ -85,7 +85,6 @@ function popup(jdata){ //지역 검색시 팝업 및 검색결과 리스트 출�
             "top": (($(window).height()-$("#popupDiv").outerHeight())/2+$(window).scrollTop())+"px",
             "left": (($(window).width()-$("#popupDiv").outerWidth())/2+$(window).scrollLeft())+"px"
             //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-         
      }); 
         
     $("#popup_mask").css("display","block"); //팝업 뒷배경 display block

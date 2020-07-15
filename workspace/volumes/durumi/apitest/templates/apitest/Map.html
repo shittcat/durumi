@@ -25,21 +25,48 @@
         .info .link {color: #5085BB;}
         
         
+        body{ -ms-overflow-style: none; } 
+        ::-webkit-scrollbar { display: none; }
+        
         #searchDiv {
             position:relative; 
             top:5vh; 
-            left:40vw; 
+            left:10vw; 
             z-index:2;
         }
         
         #searchBox{
-            width:30vw; 
+            width:70vw; 
         }
             
+        #openNote{
+            position:relative;
+            top:98vh;
+            left:40vw;
+            width:10vw;
+            z-index:2;
+            background:white;
+        }    
+        
+        #noteDiv{
+        	top : 130vh;
+        	left : 30vw;
+        	position: absolute;
+        	background: white;
+        	width: 40vw;
+        	height: 30vh;
+            /*display: none; */
+        	z-index : 4;
+        	transition : top 1s;
+        }
+        
+        #openMenu{
+            
+        }
         </style>
     </head>
-<body>
-    
+<body scroll="overflow-x: hidden">
+    ㄴ
     
     <div id="popupDiv"> <!-- 팝업창 -->
         <button id="popCloseBtn">close</button>
@@ -47,7 +74,13 @@
     <div id ="popup_mask" ></div> <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
 
     <!-- Map이 들어갈 위치를 정해주는 태그-->
-    <div id = "map" style="width:100vw; height:100vh; z-index:1">
+    
+    <div id ="openMenu" onclick="OpenMenu()" >menu</div>
+    <div id ="openNote" onclick='OpenTripNote()' >opennote</div> 
+    <div id ="noteDiv"></div>
+    
+    
+    <div id = "map" style="width:100vw; height:100vh; z-index:1; position:absolute">
         <!-- searchBox의 위치를 정해주는 태그-->
         <div id="searchDiv" >
             <!--검색을 위한 FORM 태그-->
@@ -56,118 +89,31 @@
                 {% csrf_token %}
                 <!-- 한개의 문자열로 검색하는 기능-->
                 <input type=text name="searchBox" id="searchBox" >
-                <input type=button id="search" value"확인">
+                <input type=button id="search" value="확인">
                 
             </form>
         </div>
     </div>
-
+    
+    
+    
     <!-- 카카오맵 API를 이용한 지도 띄우기 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="{% static 'scripts/SearchList.js' %}"></script>
     
     <script>
-        // var SaveDiv;
-        // var GlobalList;
-        
-        // // 마커 이미지의 이미지 주소입니다
-        // var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-        
-        // function SetMarker(inum){
-        //     var list = $.parseJSON(GlobalList[inum]);
-        //     // 마커 이미지의 이미지 크기 입니다
-        //     var imageSize = new kakao.maps.Size(24, 35); 
-        //     // 마커 이미지를 생성합니다    
-        //     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-        //     // 마커를 생성합니다
-        //     var marker = new kakao.maps.Marker({
-        //         map: map, // 마커를 표시할 지도
-        //         position: new kakao.maps.LatLng(list['mapy'],list['mapx']), // 마커를 표시할 위치
-        //         title : list['title'], // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        //         image : markerImage // 마커 이미지 
-        //     });
-            
-        //     var content = '<div class="wrap">' + 
-        //     '    <div class="info">' + 
-        //     '        <div class="title">' + 
-        //     '            '+ list['title'] + 
-        //     '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-        //     '        </div>' + 
-        //     '        <div class="body">' + 
-        //     '            <div class="img">' +
-        //     '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-        //     '           </div>' + 
-        //     '            <div class="desc">' + 
-        //     '                <div class="ellipsis">'+list['addr1']+'</div>' + 
-        //     '                <div class="jibun ellipsis">'+list['addr2']+'</div>' + 
-        //     '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-        //     '            </div>' + 
-        //     '        </div>' + 
-        //     '    </div>' +    
-        //     '</div>';
-        
-        //     var overlay = new kakao.maps.CustomOverlay({
-        //         content: content,  // 오버레이에 표시할 내용
-        //         map: null,
-        //         position: marker.getPosition(),   
-        //     });
-        
-        //     // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-        //     kakao.maps.event.addListener(marker, 'click', function() {
-        //         overlay.setMap(map);
-        //     });
-        // }
-        
-        // function closeOverlay() {
-        //     overlay.setMap(null);     
-        // }
-        // function SelectPlace(inum){  //지역 선택 시 화면 전환 함수 
-        //     var list = $.parseJSON(GlobalList[inum]);
-        //     PopUpClose();
-        //     panTo(list['mapy'],list['mapx']);
-        // }
-        // function PopUpClose(){
-        //     $("#popup_mask").css("display","none"); //팝업창 뒷배경 display none
-        //     $("#popupDiv").css("display","none"); //팝업창 display none
-        //     $("body").css("overflow","auto");//body 스크롤바 생성
-        // }
-        
-        // function popup(jdata){ //지역 검색시 팝업 및 검색결과 리스트 출력 함수 
-        //     $("#popupDiv").html( //새로운 지역 검색시 팝업창 내용 초기화 
-        //         SaveDiv
-        //     );
-            
-        //     GlobalList = jdata;
-        //     for(var item in jdata){
-        //         var list = $.parseJSON(jdata[item]);
-        //         SetMarker(item);
-        //         var Ddata = "<div id ="+item+" class='items' onclick='SelectPlace(\"" + item + "\")'>"+list['title']+"</div>";
-                
-        //         $("#popupDiv").html(
-        //             $("#popupDiv").html()+Ddata
-        //         );    
-        //         console.log(item);
-        //     }
-        
-        //     $("#popupDiv").css({
-        //             "top": (($(window).height()-$("#popupDiv").outerHeight())/2+$(window).scrollTop())+"px",
-        //             "left": (($(window).width()-$("#popupDiv").outerWidth())/2+$(window).scrollLeft())+"px"
-        //             //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-                 
-        //      }); 
-                
-        //     $("#popup_mask").css("display","block"); //팝업 뒷배경 display block
-        //     $("#popupDiv").css("display","block"); //팝업창 display block
-            
-        //     $("#popCloseBtn").click(function(event){
-        //         PopUpClose(); 
-        //     });
-        // }
-        
-        
-        
-        
+    function OpenTripNote(){
+        $("#noteDiv").load("{% url 'apitest:Tripnote' %}");
+        // $("#noteDiv").css({
+        //     "top": (($(window).height()-$("#noteDiv").outerHeight())/2+$(window).scrollTop())+"px",
+        //     "left": (($(window).width()-$("#noteDiv").outerWidth())/2+$(window).scrollLeft())+"px",
+        //     //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+        // }); 
+        $("#noteDiv").css("display","block"); //팝업창 display block
+        $("#noteDiv").css("top","70vh");
+       // alert("note")
+    }
     </script>
 
 

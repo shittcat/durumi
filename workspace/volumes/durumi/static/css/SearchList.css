@@ -1,7 +1,7 @@
 
 #popupDiv {  /* 팝업창 css */
 	top : 20vw;
-	position: relative;
+	position: absolute;
 	background: white;
 	width: 80vw;
 	height: 80vh;

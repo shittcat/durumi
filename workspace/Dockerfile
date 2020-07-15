@@ -11,5 +11,6 @@ WORKDIR /home/durumi
 RUN pip3 install pip==20.0.2
 RUN pip3 install django==3.0.4
 RUN pip3 install gunicorn==20.0.2
+RUN pip3 install simplejson
 
 #RUN django-admin startproject mysite
