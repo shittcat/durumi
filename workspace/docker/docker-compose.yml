@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+  durumi:
+    image: durumi
+    container_name: durumi_service
+    volumes:
+      - /home/j/durumi-Project/workspace/volumes:/home/
+    working_dir: /home/durumi/
+    command: >
+      bash -c "python3 manage.py makemigrations durumiApp --noinput
+      && python3 manage.py migrate --noinput
+      && python3 manage.py collectstatic --noinput
+      && gunicorn durumi.wsgi:application -b 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+  nginx:
+    image: nginx
+    container_name: nginx_service
+    volumes:
+      - /home/j/durumi-Project/workspace/volumes-nginx:/etc/nginx/conf.d
+      - /home/j/durumi-Project/workspace/volumes/.static_root/:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - durumi
