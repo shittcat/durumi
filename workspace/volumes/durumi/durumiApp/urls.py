@@ -2,7 +2,7 @@
 from django.urls import path
 
 from . import views
-from .apicodes import MapView
+from .Views import MapView
 
 
 app_name = 'durumiApp'
