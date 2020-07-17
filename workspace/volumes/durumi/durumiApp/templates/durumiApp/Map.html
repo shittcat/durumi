@@ -5,64 +5,45 @@
         <title> 함께 걸어가는 여행의 동반자! 여행거르미</title>
         
         <link rel="stylesheet" type="text/css" href=" {% static 'css/SearchList.css' %}">
+        <link rel="stylesheet" type="text/css" href=" {% static 'css/uiButtons.css' %}">
         
         
         <style>
         
-        .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-        .wrap * {padding: 0;margin: 0;}
-        .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-        .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-        .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-        .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-        .info .close:hover {cursor: pointer;}
-        .info .body {position: relative;overflow: hidden;}
-        .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-        .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-        .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
-        .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-        .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-        .info .link {color: #5085BB;}
-        
         
         body{ -ms-overflow-style: none; } 
-        ::-webkit-scrollbar { display: none; }
-        
+        ::-webkit-scrollbar { display: none; } /*스크롤바 감추기 + 고정 */
+
         #searchDiv {
             position:relative; 
-            top:5vh; 
-            left:10vw; 
+            top:2vh; 
+            left:15vw; 
+            transition : top 1s;
             z-index:2;
         }
         
         #searchBox{
-            width:70vw; 
-        }
+            width:70vw;
+            height: 60px;
+            padding: .9em .9em;
+            border : none ;
+            outline-style: none; 
+            -webkit-appearance: none; 
+            -moz-appearance: none; 
+            font-family: inherit;
+            font-size : 30px;
             
-        #openNote{
-            position:relative;
-            top:98vh;
-            left:40vw;
-            width:10vw;
-            z-index:2;
-            background:white;
-        }    
-        
-        #noteDiv{
-        	top : 130vh;
-        	left : 30vw;
-        	position: absolute;
-        	background: white;
-        	width: 40vw;
-        	height: 30vh;
-            /*display: none; */
-        	z-index : 4;
-        	transition : top 1s;
+        	-moz-border-radius-topleft : 10px;  
+            -moz-border-radius-topright: 10px;  
+            -moz-border-radius-bottomleft: 10px;  
+            -moz-border-radius-bottomright: 10px;  
+            
+            -webkit-border-top-left-radius: 10px;  
+            -webkit-border-top-right-radius: 10px;  
+            -webkit-border-bottom-left-radius: 10px;  
+            -webkit-border-bottom-right-radius: 10px;  
         }
         
-        #openMenu{
-            
-        }
         </style>
     </head>
 <body scroll="overflow-x: hidden">
@@ -80,49 +61,87 @@
                 <!-- 보안을 위해 적어줌-->
                 {% csrf_token %}
                 <!-- 한개의 문자열로 검색하는 기능-->
-                <input type=text name="searchBox" id="searchBox" >
+                <input type=text name="searchBox" placeholder="여행지 검색" id="searchBox" >
                 <input type=button id="search" value="확인">
                 
             </form>
         </div>
     </div>
-    <div id ="openMenu" onclick="OpenMenu()" ></div>
-    <div id ="openNote" onclick='OpenTripNote()'>opennote</div> 
+    
+    <div id ="openNote" onclick='openTripNote()'>opennote</div> 
     <div id ="noteDiv"></div>
     
+    <div id ="openMenu" onclick='openMenu()'>openmenu</div> 
+    <div id ="menuDiv"></div>
     
+    <div id ="modeChange" onclick='modeChange()'>modechange</div> 
+    
+    <div id ="menuDiv"></div>
     
     <!-- 카카오맵 API를 이용한 지도 띄우기 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="{% static 'scripts/SearchList.js' %}"></script>
+    <script src="{% static 'scripts/searchList.js' %}"></script>
+    <script src="{% static 'scripts/uiButtons.js' %}"></script>
+    
+    <script> //페이지 로드시 초기화할 변수들 모음 
+    var markers = [];
+    var overlays = [];
+    $(document).ready(function()  {
+        SaveDiv = $("#popupDiv").html();
+        checkNote = -1 ; //tripnote 올라왔는지 내려왔는지 체크 
+        checkMenu = -1 ; //menu
+        viewMode = 1 ; //place
+        
+        $('#element').on('scroll touchmove mousewheel', function(event) { /*스크롤바 감추기 + 고정 */
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        });
+        
+    }); 
+    </script>
+    
     
     <script>
-    function OpenTripNote(){
-        $("#noteDiv").load("{% url 'durumiApp:Tripnote' %}");
-        // $("#noteDiv").css({
-        //     "top": (($(window).height()-$("#noteDiv").outerHeight())/2+$(window).scrollTop())+"px",
-        //     "left": (($(window).width()-$("#noteDiv").outerWidth())/2+$(window).scrollLeft())+"px",
-        //     //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-        // }); 
-        $("#noteDiv").css("display","block"); //팝업창 display block
-        $("#noteDiv").css("top","70vh");
+    function openTripNote(){
+        console.log(checkNote);
+        if (checkNote == 1){ //노트 올라와 있는 상태 
+            $("#noteDiv").css("top","130vh");
+            $("#openNote").css("top","95vh");
+            
+            $("#searchDiv").css("top","2vh");
+            $("#modeChange").css("top","3vh");
+            $("#openMenu").css("top","3vh");
+            
+        }
+        else if(checkNote == -1){//노트 내려와 있는 상태 
+            $("#noteDiv").css("display","block"); //팝업창 display block
+            $("#noteDiv").load("tripnote/");
+            $("#noteDiv").css("top","70vh");
+            $("#openNote").css("top","68vh");
+            
+            //다른 ui 숨기기
+            $("#searchDiv").css("top","-30vh");
+            $("#modeChange").css("top","-30vh");
+            $("#openMenu").css("top","-30vh");
+        }
+        
+        checkNote = checkNote * -1; 
        // alert("note")
     }
+    
     </script>
 
 
     <script>
-        
        	var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng({{Map.yPos}} , {{Map.xPos}}),
             level: 3
 		};
 		
-	    $(document).ready(function()  {
-            SaveDiv = $("#popupDiv").html();
-        });  
+        
         var map = new kakao.maps.Map(container, options);
 
 
@@ -163,7 +182,7 @@
                 // 성공이라는 메시지를 띄워줌
                 alert("성공");
                 var jdata = data['result'];
-                popup(jdata);
+                keywordSearch(jdata);
             },
             error : function(xhr, status,)
             {
