@@ -1,12 +1,12 @@
 ### 구성 파일 디렉토리 구조 가이드 
 
 volumes : docker 서비스 구성 파일 모음
-- durumi
+- durumiApp
 	- static : css, js , image 등 위치할 디렉토리
-	- apitest / durumi / polls : 앱 구성 파일 위치할 디렉토리 
-		- apicodes : 파이썬 코드 위치
-		- Models : 모델 설정 위치
-		- templates : html 파일 위치 
+	- apicodes : 백엔드 파이썬 코드 위치
+	- Models : 모델 설정 위치
+	- templates : html 파일 위치 
+	- Views : 뷰 파일 위치 
 
 volumes-nginx : nginx 서비스 구성 파일 모음
 
@@ -24,13 +24,14 @@ css , js는 우선 html 파일에서 개발하면서 테스트 하고, 기능 �
 ### 서비스 구성요소
 
 - #### main view 
-	- URL : /Map  , View : MapView.MapView
+	- URL : /Map  , View : apicodes/MapView.MapView
 	- tripnote
 	- 상세 view 
 		- picture 
 		- place 
 	- menu
 	- decision 
+	- searchKeyword -> apicodes/Keyword.py 
 
 
 
