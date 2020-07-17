@@ -1,52 +1,132 @@
-
+{% load static %}
 <html>
     <head>
         <meta charset = "utf-8" />
-        <title> 당신의 여행지를 걸러드립니다! 여행거르미</title>
+        <title> 함께 걸어가는 여행의 동반자! 여행거르미</title>
+        
+        <link rel="stylesheet" type="text/css" href=" {% static 'css/SearchList.css' %}">
+        
+        
+        <style>
+        
+        .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+        .wrap * {padding: 0;margin: 0;}
+        .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+        .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+        .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+        .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+        .info .close:hover {cursor: pointer;}
+        .info .body {position: relative;overflow: hidden;}
+        .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+        .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+        .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+        .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+        .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+        .info .link {color: #5085BB;}
+        
+        
+        body{ -ms-overflow-style: none; } 
+        ::-webkit-scrollbar { display: none; }
+        
+        #searchDiv {
+            position:relative; 
+            top:5vh; 
+            left:10vw; 
+            z-index:2;
+        }
+        
+        #searchBox{
+            width:70vw; 
+        }
+            
+        #openNote{
+            position:relative;
+            top:98vh;
+            left:40vw;
+            width:10vw;
+            z-index:2;
+            background:white;
+        }    
+        
+        #noteDiv{
+        	top : 130vh;
+        	left : 30vw;
+        	position: absolute;
+        	background: white;
+        	width: 40vw;
+        	height: 30vh;
+            /*display: none; */
+        	z-index : 4;
+        	transition : top 1s;
+        }
+        
+        #openMenu{
+            
+        }
+        </style>
     </head>
-<body>
+<body scroll="overflow-x: hidden">
+    <div id="popupDiv"> <!-- 팝업창 -->
+        <button id="popCloseBtn">close</button>
+    </div>
+    <div id ="popup_mask" ></div> <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
+
     <!-- Map이 들어갈 위치를 정해주는 태그-->
-    <div id = "map" style="width:100vw; height:100vh; z-index:1">
+    <div id = "map" style="width:100vw; height:100vh; z-index:1; position:absolute">
         <!-- searchBox의 위치를 정해주는 태그-->
-        <div id="searchBox" style = "width:80vw; height:5vh;position:relative;top:5vh;left:5vw;z-index:2;">
+        <div id="searchDiv" >
             <!--검색을 위한 FORM 태그-->
             <form id="searchForm">
                 <!-- 보안을 위해 적어줌-->
                 {% csrf_token %}
                 <!-- 한개의 문자열로 검색하는 기능-->
                 <input type=text name="searchBox" id="searchBox" >
-                <input type=button id="search" value"확인">
+                <input type=button id="search" value="확인">
+                
             </form>
         </div>
     </div>
-
+    <div id ="openMenu" onclick="OpenMenu()" ></div>
+    <div id ="openNote" onclick='OpenTripNote()'>opennote</div> 
+    <div id ="noteDiv"></div>
+    
+    
+    
     <!-- 카카오맵 API를 이용한 지도 띄우기 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{appKey}}"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="{% static 'scripts/SearchList.js' %}"></script>
+    
+    <script>
+    function OpenTripNote(){
+        $("#noteDiv").load("{% url 'durumiApp:Tripnote' %}");
+        // $("#noteDiv").css({
+        //     "top": (($(window).height()-$("#noteDiv").outerHeight())/2+$(window).scrollTop())+"px",
+        //     "left": (($(window).width()-$("#noteDiv").outerWidth())/2+$(window).scrollLeft())+"px",
+        //     //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+        // }); 
+        $("#noteDiv").css("display","block"); //팝업창 display block
+        $("#noteDiv").css("top","70vh");
+       // alert("note")
+    }
+    </script>
+
 
     <script>
+        
        	var container = document.getElementById('map');
 		var options = {
-			//center: new kakao.maps.LatLng(33.450701, 126.570667),
 			center: new kakao.maps.LatLng({{Map.yPos}} , {{Map.xPos}}),
             level: 3
 		};
-
+		
+	    $(document).ready(function()  {
+            SaveDiv = $("#popupDiv").html();
+        });  
         var map = new kakao.maps.Map(container, options);
 
 
-    </script>
-    <!-- 카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수-->
-    <script>
-        function panTo(y,x)
-       {
-            
-            var moveLatLng = new kakao.maps.LatLng(y,x)
-
-            map.panTo(moveLatLng)
-        }
-    </script>
-    <!-- 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌-->
-    <script>
+    // 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌
     document.addEventListener('keydown', function(event) 
     {
         if (event.keyCode === 13) 
@@ -55,39 +135,35 @@
             document.getElementById('search').click();
         };
     }, true);
+    
+    function panTo(y,x) //카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수
+    {
+        var moveLatLng = new kakao.maps.LatLng(y,x)
+        map.panTo(moveLatLng)
+    }
     </script>
 
     <!-- Ajax 를 이용한 template와 view 사이의 통신-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
     $('#search').click(function()
     {
         //form 에 있는 데이터를 한번에 모아줌 .serialize();
         var formData = $("#searchForm").serialize();
-
-
+        console.log(formData);
         $.ajax
         ({
             cache: false,
             //어떤 View 와 데이터통신을 진행할것인지 url로 표시
-            url : "{% url 'durumiApp:Pos' %}",
+            url : "{% url 'durumiApp:Pos' %}", // Pos view로 데이터를 전송 하면, Pos view 에서는 http로 결과값을 반환하므로, 해당 반환값을 받아서 data로 사용함. 
             //POST방식을 사용할것임
             type: 'POST',
-            //formData = $("PosForm").serialize();
             data: formData,
             success : function(data)
             {
                 // 성공이라는 메시지를 띄워줌
-                //alert("성공");
-                // object HTMLInputElement를 float형으로 파싱해줌
-                
-                var str = String(data['Input']);
-                var x = parseFloat(data['xPos']);
-                var y = parseFloat(data['yPos']);
-                //alert(str)
-                //alert(x+y)
-                panTo(y,x)
-
+                alert("성공");
+                var jdata = data['result'];
+                popup(jdata);
             },
             error : function(xhr, status,)
             {

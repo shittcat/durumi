@@ -20,6 +20,7 @@ STATIC_URL = "/static"
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATICFILES_DIR = [
     STATIC_DIR,
+    '/durumiApp/static/'
 ]
 STATIC_ROOT = os.path.join(ROOT_DIR, ".static_root")
 
