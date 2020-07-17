@@ -1,13 +1,17 @@
+#apitest/urls.py
 from django.urls import path
 
 from . import views
-from .Views import MapView
+from .apicodes import MapView
 
-app_name = "durumiApp"
+
+app_name = 'durumiApp'
 urlpatterns = [
-    # path("", views.main, name="main"),
-    path("Pos", MapView.Pos, name="Pos"),
-    path("Map", MapView.MapView, name="Map"),
-    # path("SimpleMap", views.SimpleMap, name="SimpleMap"),
-    # path('example' , views.example, name='example'),
-]
+        path('',views.IndexView.as_view(),name='main'),
+        path("Pos/", MapView.Pos, name="Pos"),
+        path("Map/", MapView.MapView, name="Map"),
+        path("Map/Tripnote/", MapView.Tripnote, name="Tripnote"),
+        path("Map/HamburgerMenu/", MapView.HamburgerMenu, name="HamburgerMenu"),
+        path("Map/PlaceView/", MapView.PlaceView, name="PlaceView"),
+        path("Map/PictureView/", MapView.PictureView, name="PictureView"),
+    ]

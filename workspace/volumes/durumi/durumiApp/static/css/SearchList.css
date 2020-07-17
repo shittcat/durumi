@@ -1,0 +1,47 @@
+
+#popupDiv {  /* 팝업창 css */
+	top : 20vw;
+	position: absolute;
+	background: white;
+	width: 80vw;
+	height: 80vh;
+	display: none; 
+	z-index : 4;
+	
+	-moz-border-radius-topleft : 10px;  
+	-moz-border-radius-topright: 10px;  
+	-moz-border-radius-bottomleft: 10px;  
+	-moz-border-radius-bottomright: 10px;  
+	
+	-webkit-border-top-left-radius: 10px;  
+	-webkit-border-top-right-radius: 10px;  
+	-webkit-border-bottom-left-radius: 10px;  
+	-webkit-border-bottom-right-radius: 10px;  
+}
+
+#popup_mask { /* 팝업 배경 css */
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+     display: none; 
+     background-color:#000;
+     opacity: 0.7;
+     z-index : 3;
+}
+
+
+/*팝업 리스트 css */
+div.items{ 
+    text-align : center;
+    font-size : 14px;
+    padding :3vw 5vh ;
+    border-bottom : 1.5px solid skyblue;
+}
+div.items:hover {
+    background : skyblue ;
+    color : white ;
+    font-size : 16px;
+    font-weight : bold;
+}
