@@ -10,8 +10,8 @@ urlpatterns = [
         path('',views.IndexView.as_view(),name='main'),
         path("Pos/", MapView.Pos, name="Pos"),
         path("Map/", MapView.MapView, name="Map"),
-        path("Map/Tripnote/", MapView.Tripnote, name="Tripnote"),
-        path("Map/HamburgerMenu/", MapView.HamburgerMenu, name="HamburgerMenu"),
-        path("Map/PlaceView/", MapView.PlaceView, name="PlaceView"),
-        path("Map/PictureView/", MapView.PictureView, name="PictureView"),
+        path("Map/tripnote/", MapView.Tripnote, name="tripnote"),
+        path("Map/hamburgerMenu/", MapView.HamburgerMenu, name="hamburgerMenu"),
+        path("Map/placeView/", MapView.PlaceView, name="placeView"),
+        path("Map/pictureView/", MapView.PictureView, name="pictureView"),
     ]

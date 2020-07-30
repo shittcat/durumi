@@ -8,15 +8,15 @@
 	display: none; 
 	z-index : 4;
 	
-	-moz-border-radius-topleft : 10px;  
-	-moz-border-radius-topright: 10px;  
-	-moz-border-radius-bottomleft: 10px;  
-	-moz-border-radius-bottomright: 10px;  
+	-moz-border-radius-topleft : 20px;  
+	-moz-border-radius-topright: 20px;  
+	-moz-border-radius-bottomleft: 20px;  
+	-moz-border-radius-bottomright: 20px;  
 	
-	-webkit-border-top-left-radius: 10px;  
-	-webkit-border-top-right-radius: 10px;  
-	-webkit-border-bottom-left-radius: 10px;  
-	-webkit-border-bottom-right-radius: 10px;  
+	-webkit-border-top-left-radius: 20px;  
+	-webkit-border-top-right-radius: 20px;  
+	-webkit-border-bottom-left-radius: 20px;  
+	-webkit-border-bottom-right-radius: 20px;  
 }
 
 #popup_mask { /* 팝업 배경 css */

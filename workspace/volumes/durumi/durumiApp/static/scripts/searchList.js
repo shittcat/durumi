@@ -53,18 +53,27 @@ function closeOverlay() {
     overlay.setMap(null);     
 }
 
-function SelectPlace(inum){  //지역 선택 시 화면 전환 함수 
+function selectPlace(inum){  //지역 선택 시 화면 전환 함수 
     var list = $.parseJSON(GlobalList[inum]);
-    PopUpClose();
+    popUpClose();
     panTo(list['mapy'],list['mapx']);
 }
-function PopUpClose(){
+
+function popUpClose(){
     $("#popup_mask").css("display","none"); //팝업창 뒷배경 display none
     $("#popupDiv").css("display","none"); //팝업창 display none
     $("body").css("overflow","auto");//body 스크롤바 생성
 }
 
-function popup(jdata){ //지역 검색시 팝업 및 검색결과 리스트 출력 함수 
+function keywordSearch(jdata){ //지역 검색시 팝업 및 검색결과 리스트 출력 함수 
+    
+    hideOverlays();
+    hideMarkers();
+    
+    markers = [];
+    overlays = [];
+    
+    
     $("#popupDiv").html( //새로운 지역 검색시 팝업창 내용 초기화 
         SaveDiv
     );
@@ -73,7 +82,7 @@ function popup(jdata){ //지역 검색시 팝업 및 검색결과 리스트 출�
     for(var item in jdata){
         var list = $.parseJSON(jdata[item]);
         SetMarker(item);
-        var Ddata = "<div id ="+item+" class='items' onclick='SelectPlace(\"" + item + "\")'>"+list['title']+"</div>";
+        var Ddata = "<div id ="+item+" class='items' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
         
         $("#popupDiv").html(
             $("#popupDiv").html()+Ddata
@@ -91,7 +100,7 @@ function popup(jdata){ //지역 검색시 팝업 및 검색결과 리스트 출�
     $("#popupDiv").css("display","block"); //팝업창 display block
     
     $("#popCloseBtn").click(function(event){
-        PopUpClose(); 
+        popUpClose(); 
     });
 }
 

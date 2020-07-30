@@ -24,7 +24,6 @@ STATICFILES_DIR = [
 ]
 STATIC_ROOT = os.path.join(ROOT_DIR, ".static_root")
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -122,3 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+
+MEDIA_URL = "/media/"
+MEDIA_DIR = os.path.join(BASE_DIR, "media")
+MEDIAFILES_DIR = [
+    MEDIA_DIR,
+    '/durumiApp/media/'
+]
+MEDIA_ROOT = os.path.join(ROOT_DIR, ".media_root")
