@@ -27,7 +27,6 @@ def keywordFindAPI(inputKeyword):
     tnum = (getJson['numOfRows'])
     
     if (tcount == 1) or (tnum == 1) : #if result count is 1
-        print ("error!")
         item = getJson["items"]["item"]
         retItems['item'+str(i)] = ( json.dumps(item,ensure_ascii=False) )
     else :
