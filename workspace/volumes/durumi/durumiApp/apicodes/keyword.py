@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 from urllib.parse import urlencode, quote_plus
 from urllib.request import urlopen , Request
-from apikey import * #if using on django , should using .apikey instead apikey 
+from .apikey import * #if using on django , should using .apikey instead apikey 
 import json 
 
 def keywordFindAPI(inputKeyword):
