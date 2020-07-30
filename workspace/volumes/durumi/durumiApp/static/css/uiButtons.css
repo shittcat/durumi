@@ -73,20 +73,3 @@
     background:white;
     transition : left 0.5s, top 1s;
 }
-
-.itemOverlays {
-    position:absolute;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    transition: 0.5s;
-}
-
-.place {
-    background: red;
-}
-
-.picture {
-    transform: rotateY(180deg);
-    background: green;
-    /*   backface-visibility:hidden; */
-}
