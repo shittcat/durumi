@@ -21,12 +21,11 @@
     </div>
 
     <!-- 카카오맵 API를 이용한 지도 띄우기 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{appKey}}"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{Appkey}}"></script>
 
     <script>
        	var container = document.getElementById('map');
-		var options = {
-			//center: new kakao.maps.LatLng(33.450701, 126.570667),
+		var options = {			//center: new kakao.maps.LatLng(33.450701, 126.570667),
 			center: new kakao.maps.LatLng({{Map.yPos}} , {{Map.xPos}}),
             level: 3
 		};
@@ -57,6 +56,11 @@
     }, true);
     </script>
 
+
+
+
+
+
     <!-- Ajax 를 이용한 template와 view 사이의 통신-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
@@ -64,7 +68,10 @@
     {
         //form 에 있는 데이터를 한번에 모아줌 .serialize();
         var formData = $("#searchForm").serialize();
-
+         var title = 'Simple Title';
+        var options = {
+            body: 'Simple piece of body text. \n Second line of body text :)'
+        };
 
         $.ajax
         ({
@@ -87,6 +94,7 @@
                 //alert(str)
                 //alert(x+y)
                 panTo(y,x)
+                registration.showNotification(title,options);
 
             },
             error : function(xhr, status,)
@@ -96,5 +104,11 @@
                 alert(xhr + ":" + status);
             },
         });
+
+
+       
+
+
+
     })
-</script>
+    </script>

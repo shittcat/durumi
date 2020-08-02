@@ -33,7 +33,7 @@ SECRET_KEY = "zlwi-fcx1--^^263_hl=0eo@6$!cs!rkmq^*1zy11&0$#)mp3+"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["durumi"]
+ALLOWED_HOSTS = ["durumi", "localhost"]
 
 
 # Application definition
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "durumiApp.apps.PollsConfig",
+    "durumiApp.apps.durumiConfig",
 ]
 
 MIDDLEWARE = [
