@@ -81,6 +81,7 @@ DATABASES = {
         'NAME': 'durumiDB',
         'USER': 'admin',
         'PASSWORD': 'DAudrmuimni',
+        'HOST': 'mysql_service',
         'PORT': '3306',
     }
 }

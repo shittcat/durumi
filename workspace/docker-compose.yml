@@ -7,10 +7,8 @@ services:
       - /home/eight/eight/durumi/workspace/volumes:/home/
     working_dir : /home/durumi/
     command: >
-            bash -c 'while true; do python3 manage.py migrate && gunicorn durumi.wsgi -b 0.0.0.0:8000;
-            sleep 2; done'
-        # bash -c "python3 manage.py migrate 
-        # && gunicorn durumi.wsgi -b 0.0.0.0:8000 "
+            bash -c "while true; do  python3 manage.py migrate && gunicorn durumi.wsgi -b 0.0.0.0:8000;
+            sleep 2; done "
         #
         #- bash
         #      - -c
