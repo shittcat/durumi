@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "durumiApp.apps.PollsConfig",
+    "durumiApp.apps.DurumiConfig",
+    "login.apps.LoginConfig"
 ]
 
 MIDDLEWARE = [

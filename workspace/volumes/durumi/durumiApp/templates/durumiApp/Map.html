@@ -142,8 +142,6 @@
             
             .itemOverlays{
                 position : relative;
-                width : 70vw;
-                height : 40vw;
                 white-space : normal;
                 backface-visibility: hidden;
                 transform-style: preserve-3d;
@@ -255,6 +253,7 @@
     </div>
     
     <!-- 카카오맵 API를 이용한 지도 띄우기 -->
+    {% include 'import.html' %}
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="{% static 'scripts/searchList.js' %}"></script>
@@ -359,23 +358,29 @@
     
         markers.push(marker);
         overlays.push(overlay);
-        // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다-> 클릭 이벤트 발생. 
-        // markers.on('click',function(evnet){
-        //     alert('마커 클릭');
-        // });
         
         kakao.maps.event.addListener(marker, 'click', function() {
             // markerClicked();
             var mtitle = marker.getTitle()
             var tmpcont = overlay.getContent().replace(/itemOverlays noMark/gi,'itemOverlays setMark');
+            
+            // 마커가 지도위에 처음으로 노출될 때의 스타일 설정 
+           
+            if(viewMode == 1){ //place view 일때
+                tmpcont = tmpcont.replace(/place/,'place" style="width: 70vw; height: 40vh;"')              
+            }
+            else if(viewMode == -1){ //picture 일때
+                tmpcont = tmpcont.replace(/place/,'place" style="transform: rotateY(0deg);"')
+                tmpcont = tmpcont.replace(/picture/,'picture" style="width: 70vw; height: 40vh; transform: rotateY(0deg);"')  
+            }
+    
             var list = $.parseJSON(GlobalList[findListByTitle(mtitle)]);
             
             mtitle += "<br/> 도로명 주소 :"+list['addr1']
             mtitle += "<br/> 지번 주소 :"+list['addr2']
             
             tmpcont = tmpcont.replace(/placeContent/,mtitle);
-            
-            
+
             console.log(list);
             overlay.setContent(tmpcont);
             overlay.setMap(map);
@@ -398,11 +403,19 @@
         
     function modeChange(){
         if(viewMode == 1){ //place -> picture 전환
+            $(".place").css("width","0");
+            $(".place").css("height","0");
             $(".place").css("transform","rotateY(180deg)");
+            $(".picture").css("width","70vw");
+            $(".picture").css("height","40vh");
             $(".picture").css("transform","rotateY(0deg)");
         }
         else if(viewMode == -1){ //picture -> place 전환 
+            $(".place").css("width","70vw");
+            $(".place").css("height","40vh");
             $(".place").css("transform","rotateY(0deg)");
+            $(".picture").css("width","0");
+            $(".picture").css("height","0");
             $(".picture").css("transform","rotateY(180deg)");
         }
         console.log(viewMode)

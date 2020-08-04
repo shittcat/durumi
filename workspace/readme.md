@@ -2,7 +2,7 @@
 
 volumes : docker 서비스 구성 파일 모음
 - durumiApp
-	- static : css, js , image 등 위치할 디렉토리
+	- static : css, js , image 등 위치할 디렉토리. manifest.json 위치함. 
 	- apicodes : 백엔드 파이썬 코드 위치
 	- Models : 모델 설정 위치
 	- templates : html 파일 위치 
@@ -32,8 +32,6 @@ css , js는 우선 html 파일에서 개발하면서 테스트 하고, 기능 �
 	- menu
 	- decision 
 	- searchKeyword -> apicodes/Keyword.py 
-
-
 
 ---------
 ### 웹 페이지 제작 가이드
