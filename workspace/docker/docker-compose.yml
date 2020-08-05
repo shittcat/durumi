@@ -18,6 +18,7 @@ services:
     working_dir: /home/durumi/
     command: >
       bash -c "python3 manage.py makemigrations durumiApp --noinput
+      && python3 manage.py makemigrations login --noinput
       && python3 manage.py migrate --noinput
       && python3 manage.py collectstatic --noinput
       && gunicorn durumi.wsgi:application -b 0.0.0.0:8000"
@@ -25,6 +26,9 @@ services:
       - "8000:8000"
     expose:
       - "8000"
+    # restart : always
+    # depends_on :
+    #   - mysql 
   nginx:
     image: nginx
     container_name: nginx_service
@@ -35,3 +39,20 @@ services:
       - "80:80"
     depends_on:
       - durumi
+  mysql:
+    image: mysql
+    container_name: mysql_service
+    # env_file :
+    #   - .env
+    volumes:
+      - ../volumes-mysql/mysql/:/var/lib/mysql/
+    environment: 
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    # command : --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+
