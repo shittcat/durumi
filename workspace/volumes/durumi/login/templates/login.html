@@ -84,28 +84,6 @@ $('#loginButton').on('click',function(event){
     });
 });
 
-
-
-$('#loginButton').on('click',function(event){
-    
-    var formData = $('#loginForm').serialize();
-    $.ajax({
-        cache : false,
-        url : "{% url 'login:loginCheck' %}" ,
-        type : 'POST',
-        data : formData,
-        success : function(data){
-            var uid = data['uid'];
-            var upass = data['upass'];
-            console.log("id: "+uid+"pass : "+upass);
-        },
-        error : function(xhr,status,)
-        {
-            alert("실패");
-        },
-    });
-});
-
 $('#loginCheck').on('click',function(event){
     window.open("{% url 'login:base' %}")
     
