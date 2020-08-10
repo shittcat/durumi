@@ -23,3 +23,47 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __str__(self):
         return self.choice_text
+
+
+class User(models.Model):
+    userId = models.CharField(max_length=15, unique=True)
+    userPw = models.CharField(max_length=200)
+    introduce = models.CharField(max_length=50, default="자기소개")
+    linkId = models.CharField(max_length=20, null=True, unique=True)
+
+    def __str__(self):
+        return self.userid
+
+
+class ContentType(models.Model):
+    typeId = models.IntegerField(primary_key=True)
+    describ = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.describ
+
+class Cat1(models.Model):
+    cat1Id = models.IntegerField(primary_key=True)
+    describ = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.describ
+
+class Cat2(models.Model):
+    typeId = models.IntegerField(primary_key=True)
+    describ = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.describ
+
+class Cat3(models.Model):
+    typeId = models.IntegerField(primary_key=True)
+    describ = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.describ
+
+"""
+class DurumiCat(models.Model):
+    durumiDesc = models.CharField(max_length)
+"""
