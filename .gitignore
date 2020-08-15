@@ -1,1 +1,3 @@
 ./workspace/mysql/*
+./workspace/volumes/durumi/polls/migrations/*
+./workspace/volumes/durumi/polls/models.py.backup
