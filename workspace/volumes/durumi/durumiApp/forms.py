@@ -1,5 +1,6 @@
-from django import forms
-
+#apitest/forms.py
+from django import forms 
+from django.http import HttpResponse , HttpResponseRedirect
 
 class PosForm(forms.Form):
     xPos = forms.FloatField(label='xPos')
@@ -7,4 +8,3 @@ class PosForm(forms.Form):
 
     def getxPos(self):
         return xPos
-    

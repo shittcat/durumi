@@ -1,0 +1,92 @@
+
+#openNote{
+    position:absolute;
+    top:95vh;
+    left:40vw;
+    width:10vw;
+    z-index:2;
+    background:white;
+    transition : top 0.5s;
+}    
+
+#noteDiv{
+	top : 130vh;
+	left : 10vw;
+	position: absolute;
+	background: white;
+	width: 80vw;
+	height: 30vh;
+    /*display: none;*/
+	z-index : 4;
+	transition : top 0.8s;
+	
+	-moz-border-radius-topleft : 10px;  
+    -moz-border-radius-topright: 10px;  
+    -moz-border-radius-bottomleft: 10px;  
+    -moz-border-radius-bottomright: 10px;  
+    
+    -webkit-border-top-left-radius: 10px;  
+    -webkit-border-top-right-radius: 10px;  
+    -webkit-border-bottom-left-radius: 10px;  
+    -webkit-border-bottom-right-radius: 10px;
+}
+        
+#openMenu{
+    position:absolute;
+    top:3vh;
+    left:88vw;
+    width:5vw;
+    height:5vw;
+    z-index:2;
+    background:white;
+    transition : left 0.5s, top 1s;
+}
+#menuDiv{
+	top : 0vh;
+	left : 130vw;
+	position: absolute;
+	background: white;
+	width: 30vw;
+	height: 100vh;
+    /*display: none;*/
+	z-index : 4;
+	transition : left 0.8s;
+	
+	-moz-border-radius-topleft : 20px;  
+    -moz-border-radius-topright: 20px;  
+    -moz-border-radius-bottomleft: 20px;  
+    -moz-border-radius-bottomright: 20px;  
+    
+    -webkit-border-top-left-radius: 20px;  
+    -webkit-border-top-right-radius: 20px;  
+    -webkit-border-bottom-left-radius: 20px;  
+    -webkit-border-bottom-right-radius: 20px;
+}
+
+#modeChange{
+    position:absolute;
+    top:3vh;
+    left:8vw;
+    width:5vw;
+    height:5vw;
+    z-index:2;
+    background:white;
+    transition : left 0.5s, top 1s;
+}
+
+.itemOverlays {
+    position:absolute;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+}
+
+.place {
+    background: red;
+}
+
+.picture {
+    transform: rotateY(180deg);
+    background: green;
+    /*   backface-visibility:hidden; */
+}

@@ -1,6 +1,5 @@
-
-
 .static_root/
+.vscode/
 metting_log/
 res/
 <<<<<<< HEAD
@@ -8,4 +7,8 @@ appkey.py/
 settings.py
 =======
 appkey.py
+<<<<<<< HEAD
 >>>>>>> 13bb5e4303ae9010d6e2d0ade9f146a57c54fad8
+=======
+apikey.py
+>>>>>>> bf8f945effdff81a48540b291fc59a66158ae95a

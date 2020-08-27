@@ -1,26 +1,24 @@
-from django.shortcuts import render
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.urls import reverse
+#-*- coding:utf-8 -*-
+#durumiApp/views.py
+
+from django.http import HttpResponse , HttpResponseRedirect
+from django.shortcuts import get_object_or_404,render
+from django.urls import reverse,reverse_lazy
+from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-import simplejson as json
-from .Views import MapView
+from urllib.parse import urlencode, quote_plus
+from urllib.request import urlopen , Request
+from .apicodes import *
 
 # Create your views here.
+class IndexView(generic.ListView):
+    template_name = 'durumiApp/index.html'
+    context_object_name = 'latest_question_list'
 
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return HttpResponse("Hello, world. You're at the durumiApp index.")
 
-# def ajax(request):
-#    #ajax 테스트를 위한 view
-#    example = 'hello AJAX!'
-#    hi = 'hi AJAX!'
-#    context = { 'hello' : example,
-#                'hi' : hi  }
-#    return HttpResponse(json.dumps(context), content_type="application/json")
-
-
-def MapView(request):
-    MapView.MapView(request)
-
-
-@csrf_exempt  # 보안문제로 적어줌
-def Pos(request):
-    MapView.Pos(request)
+def testView(request):   #testview
+    test = reverse("durumiApp:formtest")
+    return HttpResponse("reverse return is %s"%request.POST)
