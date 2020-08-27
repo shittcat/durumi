@@ -3,5 +3,9 @@
 .static_root/
 metting_log/
 res/
+<<<<<<< HEAD
 appkey.py/
 settings.py
+=======
+appkey.py
+>>>>>>> 13bb5e4303ae9010d6e2d0ade9f146a57c54fad8
