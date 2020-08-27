@@ -1,0 +1,16 @@
+version: "2"
+
+services:
+        durumi:
+                image: durumi
+                volumes: - /home/shittcat/Durumi_Project/workspace/volumes:/home/
+                command: - bash
+                         - -c
+                         - docker-compose run durumi django-admin.py startproject durumi
+                         - python3 /home/durumi/manage.py runserver 0:8000
+                ports: - "8000:8000"
+         nginx:
+                 image: nginx
+                 volumes: - /home/shittcat/Durumi_Project/workspace/volumes_nginx:/etc/nginx/conf.d
+                 ports: - "80.80"
+                 depends_on: - durumi
