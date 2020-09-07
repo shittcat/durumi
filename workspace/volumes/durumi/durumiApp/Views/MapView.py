@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from ..apicodes import keyword
+from ..apicodes import position
 import simplejson as json
 import os
 import sys
@@ -24,6 +24,18 @@ def MapView(request): # 맵 템플릿 연결
 
 
 @csrf_exempt  # 보안문제로 적어줌
+def Pos(request): # GPS 좌표 
+	template_name = 'durumiApp/Map.html'
+	
+	X = 126.804388
+	Y = 37.485773
+	result = position.positionFindAPI(X, Y)
+	context = {
+		"result" : result
+	}
+	return HttpResponse(json.dumps(context), content_type="application/json") 
+
+"""
 def Pos(request): # 해당 장소에 대한 좌표정보 전송 
 	template_name = 'durumiApp/Map.html'
 	try:
@@ -40,7 +52,8 @@ def Pos(request): # 해당 장소에 대한 좌표정보 전송
 			"result" : result
 		}
 		return HttpResponse(json.dumps(context), content_type="application/json") 
-		
+"""
+
 def Tripnote(request):
 	template_name = 'durumiApp/Tripnote.html'
 	context = {

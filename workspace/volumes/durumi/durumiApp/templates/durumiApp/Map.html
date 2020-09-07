@@ -164,27 +164,27 @@
         </div>
         
         <div id='larCat0' class ="midCatDiv main" >
-            <div class="midCat">0</div>
-            <div class="midCat">0</div>
-            <div class="midCat">0</div>
+            <div class="midCat">0_1</div>
+            <div class="midCat">0_2</div>
+            <div class="midCat">0_3</div>
         </div>
             
         <div id='larCat1' class ="midCatDiv other">
-            <div class="midCat">1</div>
-            <div class="midCat">1</div>
-            <div class="midCat">1</div>
+            <div class="midCat">1_1</div>
+            <div class="midCat">1_2</div>
+            <div class="midCat">1_3</div>
         </div>
         
         <div id='larCat2' class ="midCatDiv other">
-            <div class="midCat">2</div>
-            <div class="midCat">2</div>
-            <div class="midCat">2</div>
+            <div class="midCat">2_1</div>
+            <div class="midCat">2_2</div>
+            <div class="midCat">2_3</div>
         </div>
         
         <div id='larCat3' class ="midCatDiv other">
-            <div class="midCat">3</div>
-            <div class="midCat">3</div>
-            <div class="midCat">3</div>
+            <div class="midCat">3_1</div>
+            <div class="midCat">3_2</div>
+            <div class="midCat">3_3</div>
         </div>
     </div>
     
@@ -233,7 +233,7 @@
         $('#'+catNum1).animate({width:'toggle'},700);
     }
     
-    $('.larCat.main').on('click',function(evnet){
+    $('.larCat.main').on('click',function(event){
         $(".larCat.other").slideToggle();
     });
     
@@ -291,6 +291,35 @@
         map.panTo(moveLatLng)
     }
     </script>
+
+<!--
+    <script>
+        function getLocation() 
+        {
+             if (navigator.geolocation) 
+             { // GPS를 지원하면
+                navigator.geolocation.getCurrentPosition(function(position) 
+                {
+                    alert(position.coords.latitude + ' ' + position.coords.longitude);
+                }, 
+                function(error) 
+                {
+                    console.error(error);
+                }, 
+                {
+                    enableHighAccuracy: false,
+                    maximumAge: 0,
+                    timeout: Infinity
+                });
+            } 
+            else 
+            {
+                alert('GPS를 지원하지 않습니다');
+            }
+        }
+        getLocation();
+    </script>
+-->
 
     <!-- Ajax 를 이용한 template와 view 사이의 통신-->
     <script type="text/javascript">
