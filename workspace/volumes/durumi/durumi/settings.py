@@ -16,13 +16,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 
-STATIC_URL = "/static"
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-STATICFILES_DIR = [
-    STATIC_DIR,
-    '/durumiApp/static/'
-]
-STATIC_ROOT = os.path.join(ROOT_DIR, ".static_root")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -33,7 +26,9 @@ SECRET_KEY = "zlwi-fcx1--^^263_hl=0eo@6$!cs!rkmq^*1zy11&0$#)mp3+"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["durumi"]
+ALLOWED_HOSTS = ["durumi",
+                "192.168.0.20"
+                ]
 
 
 # Application definition
@@ -124,7 +119,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+
 STATIC_URL = "/static/"
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+STATICFILES_DIR = [
+    '/durumiApp/static/',
+    STATIC_DIR,
+    
+]
+STATIC_ROOT = os.path.join(ROOT_DIR, ".static_root")
 
 
 MEDIA_URL = "/media/"

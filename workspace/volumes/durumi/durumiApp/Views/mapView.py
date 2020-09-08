@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from ..apicodes import keyword
+from ..apicodes import searchAPI as sa
 import simplejson as json
 import os
 import sys
@@ -13,7 +13,7 @@ from ..Models import MapModel
 from .. import appkey
 
 
-def MapView(request): # 맵 템플릿 연결 
+def mapView(request): # 맵 템플릿 연결 
 	template_name = 'durumiApp/Map.html'
 	# Map.html을 띄워줌
 	context = {
@@ -24,7 +24,7 @@ def MapView(request): # 맵 템플릿 연결
 
 
 @csrf_exempt  # 보안문제로 적어줌
-def Pos(request): # 해당 장소에 대한 좌표정보 전송 
+def searchKeyword(request): # 해당 장소에 대한 좌표정보 전송 
 	template_name = 'durumiApp/Map.html'
 	try:
 		Input_str = request.POST.get("searchBox", "") # searchbox에서 내용 받아와 keyword 함수 실행 하여 검색결과 JSON으로 받아옴. 
@@ -35,36 +35,24 @@ def Pos(request): # 해당 장소에 대한 좌표정보 전송
 		}
 		return render(request,template_name,context)
 	else:
-		result = keyword.keywordFindAPI(Input_str)
+		result = sa.keywordFindAPI(Input_str)
 		context = {
 			"result" : result
 		}
 		return HttpResponse(json.dumps(context), content_type="application/json") 
 		
-def Tripnote(request):
-	template_name = 'durumiApp/Tripnote.html'
-	context = {
-		"Test": "test"
-	}
-	return render(request,template_name,context)
-	
-def HamburgerMenu(request):
-	template_name = 'durumiApp/HamburgerMenu.html'
-	context = {
-		"Test": "test"
-	}
-	return render(request,template_name,context)
-
-def PlaceView(request):
-	template_name = 'durumiApp/PlaceView.html'
-	context = {
-		"Test": "test"
-	}
-	return render(request,template_name,context)
-	
-def PictureView(request):
-	template_name = 'durumiApp/PictureView.html'
-	context = {
-		"Test": "test"
-	}
-	return render(request,template_name,context)
+def searchLocation(request):
+	try:
+		Input_str = request.POST.get("gpsLoc", "") # searchbox에서 내용 받아와 keyword 함수 실행 하여 검색결과 JSON으로 받아옴. 
+	except (KeyError, Input_str == ""):
+		context = {
+			"Map": MapModel.Map, 
+			"Appkey": appkey.Appkey
+		}
+		return render(request,template_name,context)
+	else:
+		result = sa.locationFindAPI(Input_str)
+		context = {
+			"result" : result
+		}
+		return HttpResponse(json.dumps(context), content_type="application/json") 

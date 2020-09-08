@@ -6,21 +6,21 @@
                 transition: 0.5s;
             }
             
-            .itemOverlays.noMark{
-                display : none;    
-            }
-            
-            .itemOverlays.setMark{
-                display : block;    
-            }
-            
-            .itemOverlays.place {
-                top : -2vh;
-                background: red;
-            }
-            
-            .itemOverlays.picture {
-                top : -20vh;
-                transform: rotateY(180deg);
-                background: green;
-            }
+.itemOverlays.noMark{
+    display : none;    
+}
+
+.itemOverlays.setMark{
+    display : block;    
+}
+
+.itemOverlays.place {
+    top : -2vh;
+    background: red;
+}
+
+.itemOverlays.picture {
+    top : -20vh;
+    transform: rotateY(180deg);
+    background: green;
+}

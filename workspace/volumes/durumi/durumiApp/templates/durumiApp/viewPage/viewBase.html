@@ -1,0 +1,59 @@
+<html>
+    <style>
+        #pageName{
+            text-align : center;
+            font-size : 24px;
+        }
+        
+        #pageTop{
+            background : green;
+            position : absolute;
+            top : 0vh;
+            height: 10vh;
+            width : 100vw;
+            
+        }
+        
+        #pageContent{
+            position : absolute;
+            top: 10vh;
+        }
+        
+        
+        #pageFooter{
+            background : red;
+            position : absolute;
+            top : 90vh;
+            height: 10vh;
+            width : 100vw;
+        }
+        
+
+    </style>
+    <script>
+        function closeView(){
+            $("#viewDiv").css("display","none");
+            $("#viewDiv").empty();
+        }
+    </script>
+    
+    <div id="pageTop">
+        this is base view top <br>
+        
+        <div id="closeView" style="float:right;" onclick="closeView()"> closeview</div>
+        
+        <div id="pageName">
+            {% block pageName %}
+            {% endblock %}
+        </div>
+    </div>
+    
+    <div id="pageContent">
+        {% block pageContent %}
+        {% endblock %}
+    </div>
+    
+    <div id="pageFooter">
+        this is base view footer <br>
+    </div>
+</html>

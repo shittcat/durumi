@@ -34,7 +34,7 @@ services:
     container_name: nginx_service
     volumes:
       - ../volumes-nginx:/etc/nginx/conf.d
-      - ../volumes/.static_root/:/static
+      - ../volumes/.static_root/:/static/
     ports:
       - "80:80"
     depends_on:

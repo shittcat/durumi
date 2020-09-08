@@ -13,7 +13,7 @@ WORKDIR /home
 RUN pip3 install pip==20.2.1
 RUN pip3 install django==3.0.4
 RUN pip3 install gunicorn==20.0.2
-
+RUN pip3 install bcrypt
 RUN pip3 install simplejson
 
 RUN apt-get install -y libmysqlclient-dev=5.7.31-0ubuntu0.18.04.1
