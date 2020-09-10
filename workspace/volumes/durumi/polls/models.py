@@ -71,21 +71,8 @@ class Photo(models.Model):
 "트립노트 정보"
 class Tripnote(models.Model):
     name = models.CharField(default="나만의 경로")
-    dest1 = models.CharField(null=False)
-    dest2 = models.CharField(blank=True)
-    dest3 = models.CharField(blank=True)
-    dest4 = models.CharField(blank=True)
-    dest5 = models.CharField(blank=True)
-    dest6 = models.CharField(blank=True)
-    dest7 = models.CharField(blank=True)
-    dest8 = models.CharField(blank=True)
-    dest9 = models.CharField(blank=True)
-    dest10 = models.CharField(blank=True)
-    dest11 = models.CharField(blank=True)
-    dest12 = models.CharField(blank=True)
-    dest13 = models.CharField(blank=True)
-    dest14 = models.CharField(blank=True)
-    dest15 = models.CharField(blank=True)
+    dest = models.CharField(null=False, max_length=10000)
+    cat = models.CharField(null=False, max_length=100)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -4,36 +4,29 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Choice, Question
+from .models import User
 
 
-class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
+#유저를 예시로 사용
 
-    def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
+#DB에 튜플 삽입, save 함수 사용. 
+def InsertUser(userId, userPw, introduce, linkId):
+    User(userId=userId, userPw=userPw, introduce=introduce, linkId=linkId).save()
+    
+
+    #return render문과 같이 사용하여 응답 페이지 렌더링 가능
+    
+    #EX)
+    #return render(request, 'polls/user.html', {'response_text': 'insert user' + userId })
 
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'polls/detail.html'
+def ShowUser(request, userId):
+    result = User.object.filter(userId=userId)[0] #userId로 검색한 첫 번째 튜플
 
+    #아래와 같이 튜플에서 여러 필드를 선택하여 저장 가능
+    userInfo = "userId: {0}; introduce: {1};".format(result.userId, result.introduce)
 
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'polls/results.html'
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        return render(request, 'polls/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+    #마찬가지로 return render문과 같이 사용하여 응답 페이지 렌더링 가능
+    
+    #EX)
+    #return render(request, 'polls/user.html', {'response_text': userInfo })
