@@ -50,8 +50,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "durumiApp.apps.PollsConfig",
-    "pwa",
-    "fcm_django",
 ]
 
 MIDDLEWARE = [
