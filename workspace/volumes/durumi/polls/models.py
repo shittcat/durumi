@@ -21,6 +21,14 @@ class ContentType(models.Model):
     def __str__(self):
         return self.describ
 
+"두루미 자체 분류"
+class DurumiCat(models.Model):
+    durumiDesc = models.CharField(primary_key=True, max_length=25)
+    iconAddr = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.durumiDesc
+
 "대분류"
 class Cat1(models.Model):
     type1Id = models.IntegerField(primary_key=True)
@@ -48,14 +56,6 @@ class Cat3(models.Model):
     def __str__(self):
         return self.describ
 
-"두루미 자체 분류"
-class DurumiCat(models.Model):
-    durumiDesc = models.CharField(primary_key=True, max_length=25)
-    iconAddr = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.durumiDesc
-
 "사진 정보"
 class Photo(models.Model):
     imgAddr = models.CharField(null=False, unique=True, max_length=100)
@@ -70,7 +70,7 @@ class Photo(models.Model):
 
 "트립노트 정보"
 class Tripnote(models.Model):
-    name = models.CharField(default="나만의 경로")
+    name = models.CharField(default="나만의 경로", max_length=30)
     dest = models.CharField(null=False, max_length=10000)
     cat = models.CharField(null=False, max_length=100)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -21,7 +21,7 @@ def InsertUser(userId, userPw, introduce, linkId):
 
 
 def ShowUser(request, userId):
-    result = User.object.filter(userId=userId)[0] #userId로 검색한 첫 번째 튜플
+    result = User.objects.filter(userId=userId)[0] #userId로 검색한 첫 번째 튜플
 
     #아래와 같이 튜플에서 여러 필드를 선택하여 저장 가능
     userInfo = "userId: {0}; introduce: {1};".format(result.userId, result.introduce)
