@@ -14,5 +14,6 @@ urlpatterns = [
         path("viewPage/",pageView.viewBase,name="viewBase"),
         path("viewPage/<pageName>/",pageView.viewPage,name="viewPage"),
         path("login",accountView.loginCheck,name="loginCheck"),
+        path("signup",accountView.signup,name="signup"),
         path("logout",accountView.logOut,name="logOut"),
     ]

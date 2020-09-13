@@ -1,3 +1,6 @@
+
+
+
 {% extends 'durumiApp/viewPage/viewBase.html' %}
 
 {% block pageName %}
@@ -6,5 +9,118 @@
 
 
 {% block pageContent %}
-    this is view Bases's block contents.
+    <style>
+    
+    body{
+        position : fixed;
+    }
+    
+    #loginPage .inputRow{
+        position: relative;
+        padding: 1vh 1vw 1vh 1vw;
+        border: solid 1px #bababa;
+        background: white;
+        
+    	-moz-border-radius-topleft : 10px;  
+        -moz-border-radius-topright: 10px;  
+        -moz-border-radius-bottomleft: 10px;  
+        -moz-border-radius-bottomright: 10px;  
+        
+        -webkit-border-top-left-radius: 10px;  
+        -webkit-border-top-right-radius: 10px;  
+        -webkit-border-bottom-left-radius: 10px;  
+        -webkit-border-bottom-right-radius: 10px; 
+    }
+    
+    #loginPage input:focus{
+        /*background : grey;*/
+        /*border: solid 1px #2196F3;*/
+    }
+    
+    
+    #loginPage input{
+        font-size : 1.25em;
+        border : none;
+        outline-style : none;
+    }
+    
+    #loginPage .accInput{
+        width : 80%;
+    }
+    
+    #loginPage #container{
+        margin : 0 auto;
+        width : 80% ;
+    }
+    
+    #loginSubmit{
+        width : 100%;
+        height : 7%;
+        background : #2196F3;
+        
+    	-moz-border-radius-topleft : 10px;  
+        -moz-border-radius-topright: 10px;  
+        -moz-border-radius-bottomleft: 10px;  
+        -moz-border-radius-bottomright: 10px;  
+        
+        -webkit-border-top-left-radius: 10px;  
+        -webkit-border-top-right-radius: 10px;  
+        -webkit-border-bottom-left-radius: 10px;  
+        -webkit-border-bottom-right-radius: 10px; 
+        
+    }
+    
+    #accountDiv{
+        width : 100%;
+        hight : 30vh;
+        background : red;
+        padding : 2vh 0vw 2vh 0vw;
+        margin : 0 auto;
+    }
+    
+    #accountDiv div{
+        margin : 0vh 5vw;
+        float : left;
+    }
+    </style>
+    
+    
+    <body>
+        <div id="container">
+            회원가입 페이지 <br/>
+            <form id="signupForm">
+                <div class="inputRow">
+                    <input type="text" name="id" placeholder="계정명" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    <input type="text" name="pw" placeholder="비밀번호" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    <input type="text" name="introduce" placeholder="자기소개" class="accInput"></input>
+                </div> <br/>
+                <input type="submit" value="가입하기" id="signSubmit"> <br/>
+            </form>
+        </div>
+    </body>   
+    
+    <script>
+        $('#signupForm').on('submit',function(event){
+           var formData = $('#signupForm').serialize();
+            $.ajax({
+                cache : false,
+                url : "{% url 'durumiApp:signup' %}" ,
+                type : 'POST',
+                data : formData,
+                success : function(data){
+                    var res = data['result']
+                    alert(res);
+                },
+                error : function(xhr,status,)
+                {
+                    alert("통신 실패");
+                },
+            });
+        });
+        
+    </script>
 {% endblock %}
