@@ -1,0 +1,66 @@
+{% load static %}
+<html>
+    this is hamburgerMenu
+    <style>
+    
+    .menuComponent{
+        margin-top : 3vh;
+        margin-left : 2vw;
+    }
+    
+
+    </style>
+    
+    <div id="userInfo" class="menuComponent">
+        {% if request.session.loginOk == True %}
+            <div id="userName" style="float:right;margin-right:2vw">유저이름</div>
+            <div id="userIcon" >유저아이콘</div>
+            <div id="etc"> 기타 정보(레벨, 도전과제) </div>
+            <div id="mypage" >마이페이지</div>
+        {% else %}
+            <div id="goLoginPage">먼저 로그인하세요. 로그인 버튼 </div>
+        {% endif %}
+    </div><br/>
+    {% if request.session.loginOk == True %}
+        <div id="logOut">로그아웃</div>
+        <div id="userContents" class="menuComponent">
+            <div id="viewMyNotes" class="openView">여행노트</div>
+            <div id="viewAcv" class="openView">도전과제</div>
+            <div id="viewCom" class="openView">내 리뷰</div>
+        </div>
+        
+    {% endif %}
+    <div id="appEtc" class="menuComponent">
+        <div id="viewNotice" class="openView">공지사항</div>
+        <div id="viewSC" class="openView">고객센터</div>
+        <div id="config" class="openView">설정</div>
+        
+    </div>
+
+
+    <script type="text/javascript">
+    function openPage(pageName){
+        $("#viewDiv").css("display","block");
+        $("#viewDiv").load("/durumiApp/viewPage/"+pageName);
+    }
+    
+    $("#logOut").on('click',function(event){
+        $.ajax({
+           cache : false,
+           url : "{% url 'durumiApp:logOut' %}" ,
+           type : 'POST',
+           data : "",
+           success : function(data){
+               alert("로그아웃 되었습니다");
+           },
+           error : function(data){
+               alert("통신 실패");
+           }
+        });
+        location.reload();
+    });
+    </script>
+    
+    
+</html>
+

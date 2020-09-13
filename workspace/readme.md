@@ -2,7 +2,7 @@
 
 volumes : docker 서비스 구성 파일 모음
 - durumiApp
-	- static : css, js , image 등 위치할 디렉토리
+	- static : css, js , image 등 위치할 디렉토리. manifest.json 위치함. 
 	- apicodes : 백엔드 파이썬 코드 위치
 	- Models : 모델 설정 위치
 	- templates : html 파일 위치 
@@ -33,8 +33,6 @@ css , js는 우선 html 파일에서 개발하면서 테스트 하고, 기능 �
 	- decision 
 	- searchKeyword -> apicodes/Keyword.py 
 
-
-
 ---------
 ### 웹 페이지 제작 가이드
 
@@ -45,4 +43,4 @@ css , js는 우선 html 파일에서 개발하면서 테스트 하고, 기능 �
 	> 웹 로딩시 A, B, C 한번에 미리 로드해놓고, z-index 조절하는 식으로 제일 앞에 보일 페이지 교체. 
 3. 각 메뉴가 독립적인 페이지를 가지게 제작. 
 4. static 파일에서는 {% url } 로 파일 가져오는것 불가능하므로, 하드코딩으로 경로 넣을것. (url에 등록된 대로)
-
+5. 테마 색상 코드 : 2196F3 / 9e9e9e , 8597aa , 44336, 9c27b0, 4caf50, ff5722

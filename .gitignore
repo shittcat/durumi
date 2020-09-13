@@ -2,5 +2,8 @@
 .vscode/
 metting_log/
 res/
+mysql/
+migrations/
 appkey.py
 apikey.py
+.env

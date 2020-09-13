@@ -1,0 +1,110 @@
+<html>
+<style>
+    #signupDiv{
+        display : none;
+    }
+    
+</style>
+this is base page 1
+<br/>
+<form id="loginForm">
+    {% csrf_token %}
+    <br/> input id <input type="text" name="id">
+    <br/> input password <input type="text" name="password">
+</form>
+<button id="loginButton" >push this button</button>
+
+<button id="loginCheck" >check login</button> <br/>
+
+<button id="signupButton">signup</button>
+<br/>
+<br/>
+
+<div id="signupDiv">
+    <form id="signupForm">
+        {% csrf_token %}
+        ID : <input type="text" name="id">
+        PASS : <input type="text" name="password">
+        EMAIL : <input type="text" name="email">
+        <button id="signupSend">signup</button>
+    </form>
+    
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+var login = -1;
+
+$(document).ready(function(){
+    
+});
+
+$('#signupButton').on('click',function(event) {
+    $('#signupDiv').css("display","block");
+})
+
+$('#signupSend').on('click',function(event) {
+    var formData = $('#signupForm').serialize();
+    $.ajax({
+        cache : false,
+        url : "{% url 'login:signup' %}" ,
+        type : 'POST',
+        data : formData,
+        success : function(data){
+            var res = data['result'];
+            var uid = data['uid'];
+            console.log(uid);
+            alert(res);
+        },
+        error : function(xhr,status,)
+        {
+            alert("통신 실패");
+        },
+    });
+})
+
+$('#loginButton').on('click',function(event){
+    
+    var formData = $('#loginForm').serialize();
+    $.ajax({
+        cache : false,
+        url : "{% url 'login:loginCheck' %}" ,
+        type : 'POST',
+        data : formData,
+        success : function(data){
+            var res = data['result']
+            alert(res);
+        },
+        error : function(xhr,status,)
+        {
+            alert("통신 실패");
+        },
+    });
+});
+
+$('#loginCheck').on('click',function(event){
+    window.open("{% url 'login:base' %}")
+    
+    var formData = $('#loginForm').serialize();
+    $.ajax({
+        cache : false,
+        url : "{% url 'login:loginOk' %}",
+        type : 'POST',
+        data : formData,
+        success : function(data){
+            if (data['ok'] == "True")
+                console.log("로그인 성공");
+            else
+                console.log("로그인 실패");
+        },
+        error : function(xhr,status,){
+            alert("실패")
+        },
+    });
+});
+    
+    
+</script>
+</html>

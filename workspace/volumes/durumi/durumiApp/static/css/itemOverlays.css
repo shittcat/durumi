@@ -1,0 +1,26 @@
+.itemOverlays{
+                position : relative;
+                white-space : normal;
+                backface-visibility: hidden;
+                transform-style: preserve-3d;
+                transition: 0.5s;
+            }
+            
+.itemOverlays.noMark{
+    display : none;    
+}
+
+.itemOverlays.setMark{
+    display : block;    
+}
+
+.itemOverlays.place {
+    top : -2vh;
+    background: red;
+}
+
+.itemOverlays.picture {
+    top : -20vh;
+    transform: rotateY(180deg);
+    background: green;
+}
