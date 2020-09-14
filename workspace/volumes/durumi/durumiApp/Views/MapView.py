@@ -40,25 +40,6 @@ def Pos(request):  # 해당 장소에 대한 좌표정보 전송
         return HttpResponse(json.dumps(context), content_type="application/json")
 
 
-def ReadTripnoteFromDB(ID):
-    TripnoteList
-
-    return TripnoteList
-
-
-def Tripnote(request):
-    template_name = 'durumiApp/Tripnote.html'
-    # ID = request.session("ID") 이런식으로 ID 받아오자
-    # tripnoteList = ReadTripnoteFromDB(ID = ID) 이런식으로 DB에서 해당 ID의 트립노트 받아오기
-    tripnoteList = ["test1", "test2", "test3"]
-    #tripnote = MapModel.Tripnote.objects.all()
-    context = {
-
-        "Test": "test",
-        "tripnoteList": tripnoteList
-    }
-    return render(request, template_name, context)
-
 
 def HamburgerMenu(request):
     template_name = 'durumiApp/HamburgerMenu.html'
