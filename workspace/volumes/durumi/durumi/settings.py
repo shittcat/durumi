@@ -26,13 +26,10 @@ SECRET_KEY = "zlwi-fcx1--^^263_hl=0eo@6$!cs!rkmq^*1zy11&0$#)mp3+"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ["durumi", "localhost"]
-=======
 ALLOWED_HOSTS = ["durumi",
                 "192.168.0.20"
                 ]
->>>>>>> 48f4589801339f4be8845132a9fa05a69f91db46
 
 
 # Application definition
@@ -44,12 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-<<<<<<< HEAD
     "durumiApp.apps.durumiConfig",
-=======
     "durumiApp",
     "login"
->>>>>>> 48f4589801339f4be8845132a9fa05a69f91db46
 ]
 
 MIDDLEWARE = [

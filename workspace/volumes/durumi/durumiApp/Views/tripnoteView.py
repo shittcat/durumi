@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from ..Models.
+from ..Models.UserModel import Tripnote
 from ..apicodes import keyword
 import simplejson as json
 import os
@@ -13,8 +13,13 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 
-def ReadTripnoteFromDB(ID):
-    TripnoteList
+def InsertTripnote(name, dest, cat, userId):
+    # Tripnote 생성시에는 장소와 카테고리가 비어있으므로 name 과 userId만 저장
+    Tripnote(name=name, userId=userId).save()
+
+
+def ReadTripnoteFromDB(userId):
+    TripnoteList = Tripnote.object.filter(userId=userId)
 
     return TripnoteList
 
