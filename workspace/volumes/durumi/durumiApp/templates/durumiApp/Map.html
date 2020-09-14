@@ -1,5 +1,6 @@
 {% load static %}
 <html>
+<<<<<<< HEAD
   <head>
     <meta charset="utf-8" />
 
@@ -246,9 +247,314 @@
           /*스크롤바 감추기 + 고정 */ event.preventDefault();
           event.stopPropagation();
           return false;
+=======
+    <head>
+        
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        
+        <meta charset = "utf-8" />
+        
+        <!--모바일 환경 뷰포트 대응-->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        
+        <title> 함께 걸어가는 여행의 동반자! 여행거르미</title>
+        
+        <link rel="stylesheet" type="text/css" href=" {% static 'css/searchList.css' %}">
+        <link rel="stylesheet" type="text/css" href=" {% static 'css/uiButtons.css' %}">
+        <link rel="stylesheet" type="text/css" href=" {% static 'css/itemOverlays.css' %}">
+        <link rel="stylesheet" type="text/css" href=" {% static 'css/catDiv.css' %}">
+        
+        <link rel="manifest" href=" {% static 'manifest.json' %}">
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'image/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'image/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/favicon-16x16.png' %}">
+        <link rel="mask-icon" href="{% static 'image/safari-pinned-tab.svg' %}" color="#5bbad5">
+        
+        
+        
+        <style>
+        
+        html{
+        /* 뷰 포트별 폰트 사이즈 조절 필요*/
+            font-size : 16px;
+            max-width: 110%;
+            max-height: 100%;
+            overflow : hidden;
+        }
+        
+        body{ 
+            -ms-overflow-style: none; 
+            width : 110vw;
+            height : 100vh;
+            margin : 0 0 0 0;
+        } 
+        ::-webkit-scrollbar { display: none; } /*스크롤바 감추기 + 고정 */
+
+        #searchDiv {
+            position : absolute;
+            width :90vw;
+            margin-left : 5vw;
+            top:4vh; 
+            transition : top 1s;
+            z-index: 2;
+            display : table;
+        }
+        
+        #searchForm{
+            width : 70vw;
+            display : table-cell;
+            text-align : center;
+            vertical-align : middle;            
+        }
+        
+        #searchBox{
+            width:70vw;
+            display : inline-block;
+            height: 5vh;
+            padding: .9em .9em;
+            
+            border : none ;
+            outline-style: none; 
+            -webkit-appearance: none; 
+            -moz-appearance: none; 
+            font-family: inherit;
+            font-size : 1.25em;
+            
+        	-moz-border-radius-topleft : 10px;  
+            -moz-border-radius-topright: 10px;  
+            -moz-border-radius-bottomleft: 10px;  
+            -moz-border-radius-bottomright: 10px;  
+            
+            -webkit-border-top-left-radius: 10px;  
+            -webkit-border-top-right-radius: 10px;  
+            -webkit-border-bottom-left-radius: 10px;  
+            -webkit-border-bottom-right-radius: 10px;  
+        }
+        
+        #modeChange{
+            display : table-cell;
+            z-index:2;
+            width : 3vw;
+            background:white;
+            transition : left 0.5s, top 1s;
+        }
+
+        
+        #openMenu{
+            display : table-cell;
+            z-index:2;
+            width : 3vw;
+            background:white;
+            transition : left 0.5s, top 1s;
+        }
+
+
+        #map {
+            position:absolute;
+            top:-.5em;
+            left:-.5em;
+            width:110vw; 
+            height:110vh; 
+            
+            z-index:1; 
+        }
+        </style>
+   
+        <!--상세 뷰 css -->
+        <style>
+        #menuDiv{
+        	top : 0vh;
+        	left : 130vw;
+        	position: absolute;
+        	background: white;
+        	width: 40vw;
+        	height: 100vh;
+        	font-size : 1.25em;
+            /*display: none;*/
+        	z-index : 4;
+        	transition : left 0.8s;
+        	
+        	-moz-border-radius-topleft : 20px;  
+            -moz-border-radius-bottomleft: 20px;   
+            
+            -webkit-border-top-left-radius: 20px;  
+            -webkit-border-bottom-left-radius: 20px; 
+        }
+
+            
+        #viewDiv{
+            position : relative;
+            /*top:-.5em;*/
+            /*left:-.5em;*/
+            
+            width : 100vw;
+            height : 100vh;
+            background : skyblue;
+            display : none;
+            z-index : 5 ;
+        }                
+                
+                
+        #loginPage{
+            text-align : center;
+            
+            display : block;
+            position : absolute ;
+            width : 90vw;
+            height : 65vh;
+            font-size : 1.25em;
+            transition : top 0.8s;
+            
+            top : 120vh;
+            margin : 0 5vw;
+            /*margin : 0 auto;*/
+            z-index : 4;
+            background : white;
+            
+            
+        	-moz-border-radius-topleft : 10px;  
+            -moz-border-radius-topright: 10px;  
+            -moz-border-radius-bottomleft: 10px;  
+            -moz-border-radius-bottomright: 10px;  
+            
+            -webkit-border-top-left-radius: 10px;  
+            -webkit-border-top-right-radius: 10px;  
+            -webkit-border-bottom-left-radius: 10px;  
+            -webkit-border-bottom-right-radius: 10px; 
+        }        
+
+        .itemOverlays .close{
+            position : relative;
+            text-align : right;
+            background : white ;
+
+        }
+
+        </style>
+        
+    </head>
+<body scroll="overflow-x: hidden">
+    <div id="popupDiv"> <!-- 팝업창 -->
+        <button id="popCloseBtn">close</button>
+    </div>
+    
+    <div id ="popup_mask" ></div> <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
+
+    <!-- Map이 들어갈 위치를 정해주는 태그-->
+    <!-- Map이 들어갈 위치를 정해주는 태그-->
+    <div id = "map">
+    </div>
+    
+        <!-- searchBox의 위치를 정해주는 태그-->
+    <div id="searchDiv" >
+        <!--검색을 위한 FORM 태그-->
+        <div id ="modeChange" onclick='modeChange()'>modechange</div> 
+        <form id="searchForm">
+            <!-- 보안을 위해 적어줌-->
+            {% csrf_token %}
+            <!-- 한개의 문자열로 검색하는 기능-->
+            <input type=text name="searchBox" placeholder="여행지 검색" id="searchBox" >
+            <input type=button id="search" value="확인" style="display:none;">
+        </form>
+        <input type=hidden id="gpsLoc" name="gpsLoc">
+        <div id ="openMenu" onclick='openMenu()'>openmenu</div> 
+    </div>
+    
+
+    
+    <!-- div 태그 선언 영역 -->
+    
+        
+    
+    <div id="viewDiv"> 페이지 view div</div>
+    
+    <div id ="openNote" onclick='openTripNote()'>opennote</div> 
+    
+    <div id ="noteDiv">{% include 'durumiApp/tripNote.html' %}</div>
+    <div id ="menuDiv">{% include 'durumiApp/hamburgerMenu.html' %}</div>
+
+    <div id ="catDiv">
+        
+        <div class = "larCatDiv">
+            <div id ="lar0" class ="larCatDiv main"  >
+                <img src='{% static "image/icons/13.png" %}' name="larCat0">    
+            </div>
+            <div id ="lar1" class ="larCatDiv other" >
+                <img src='' name="larCat1">
+            </div>
+            <div id ="lar2" class ="larCatDiv other" >
+                <img src='' name="larCat2">
+            </div>
+            <div id ="lar3" class ="larCatDiv other" >
+                <img src='' name="larCat3">    
+            </div>
+        </div>
+        
+        <div id='larCat0' class ="midCatDiv main" >
+            <div class="midCat">0</div>
+            <div class="midCat">0</div>
+            <div class="midCat">0</div>
+        </div>
+            
+        <div id='larCat1' class ="midCatDiv other">
+            <div class="midCat">1</div>
+            <div class="midCat">1</div>
+            <div class="midCat">1</div>
+        </div>
+        
+        <div id='larCat2' class ="midCatDiv other">
+            <div class="midCat">2</div>
+            <div class="midCat">2</div>
+            <div class="midCat">2</div>
+        </div>
+        
+        <div id='larCat3' class ="midCatDiv other">
+            <div class="midCat">3</div>
+            <div class="midCat">3</div>
+            <div class="midCat">3</div>
+        </div>
+    </div>
+
+    <div class = "itemOverlays">
+        <div class = "itemOverlays noMark place">
+            <div class="close" onclick="closeOverlay(olnum)">닫기</div>
+            <div class="contentDiv">placeContent</div>
+        </div>
+        <div class = "itemOverlays noMark picture">
+            <div class="close" onclick="closeOverlay(olnum)">닫기</div>
+            <div class="contentDiv">pictureContent</div>
+        </div>
+    </div>
+    
+    <div id="loginPage"> {% include 'durumiApp/loginPage.html' %} </div>
+</body>    
+    <script src="{% static 'scripts/searchList.js' %}"></script>
+    <script src="{% static 'scripts/uiButtons.js' %}"></script>
+    <script src="{% static 'scripts/itemOverlays.js' %}"></script>
+    <script src="{% static 'scripts/catDiv.js' %}"></script>
+    
+    <script> //페이지 로드시 초기화할 변수들 모음 
+    var markers = [];
+    var overlays = [];
+    $(document).ready(function()  {
+        SaveDiv = $("#popupDiv").html();
+        checkNote = -1 ; //tripnote 올라왔는지 내려왔는지 체크 
+        checkMenu = -1 ; //menu
+        viewMode = 1 ; //place
+        checkLoginPage = -1;
+        searchFocus = -1;
+        
+        $('#element').on('scroll touchmove mousewheel', function(event) { /*스크롤바 감추기 + 고정 */
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+>>>>>>> 48f4589801339f4be8845132a9fa05a69f91db46
         });
       });
     </script>
+<<<<<<< HEAD
 
     <script>
       $(".larCat.other").on("click", function (event) {
@@ -313,10 +619,57 @@
         document.addEventListener('keydown', function(event)
         {
             if (event.keyCode === 13)
+=======
+    
+    <script>
+        function openMenu(){
+            if (checkMenu == -1){ //메뉴 나와 있는 상태 
+                $("#popup_mask").css("display","block"); //팝업창 뒷배경 mask display block
+                $("#menuDiv").css("display","block"); //팝업창 display block
+                $("#menuDiv").css("left","60vw");
+                $("#openMenu").css("left","68vw");
+                checkMenu = checkMenu * -1; 
+            }
+           // alert("note")
+        }
+        
+                
+        $(".openView").on('click',function(event){ //해당 객체의 아이디 값 가져와서 페이지 로드 
+            var tName = $(event.target).attr("id");
+            $("#viewDiv").css("display","block");
+            $("#viewDiv").load("/durumiApp/viewPage/"+tName);
+        });
+    </script> 
+
+    <script>
+       	var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng({{Map.yPos}} , {{Map.xPos}}),
+            level: 3
+		};
+        
+        var map = new kakao.maps.Map(container, options);
+
+
+    // 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌
+    {   //검색창 활성화 시에만 엔터키를 이용한 submit 가능하게 지정. - 로그인 기능과 충돌 방지 
+        $('#searchBox').on('focus',function(event){
+            searchFocus = 1;
+        });
+        
+        $('#searchBox').on('focusout',function(event){
+            searchFocus = -1;
+        });
+        
+        document.addEventListener('keydown', function(event) 
+        {
+            if ((event.keyCode === 13) && (searchFocus === 1))
+>>>>>>> 48f4589801339f4be8845132a9fa05a69f91db46
             {
                 event.preventDefault();
                 document.getElementById('search').click();
             };
+<<<<<<< HEAD
         }, true);
 
         function panTo(y,x) //카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수
@@ -324,7 +677,18 @@
             var moveLatLng = new kakao.maps.LatLng(y,x)
             map.panTo(moveLatLng)
         }
+=======
+        }, true);    
+    }
+    
+    function panTo(y,x) //카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수
+    {
+        var moveLatLng = new kakao.maps.LatLng(y,x)
+        map.panTo(moveLatLng)
+    }
+>>>>>>> 48f4589801339f4be8845132a9fa05a69f91db46
     </script>
+
 
     <!-- Ajax 를 이용한 template와 view 사이의 통신-->
     <script type="text/javascript">
@@ -332,6 +696,7 @@
         //form 에 있는 데이터를 한번에 모아줌 .serialize();
         var formData = $("#searchForm").serialize();
         console.log(formData);
+<<<<<<< HEAD
         $.ajax({
           cache: false,
           //어떤 View 와 데이터통신을 진행할것인지 url로 표시
@@ -355,3 +720,112 @@
     </script>
   </body>
 </html>
+=======
+        $.ajax
+        ({
+            cache: false,
+            //어떤 View 와 데이터통신을 진행할것인지 url로 표시
+            url : "{% url 'durumiApp:searchKeyword' %}", 
+            // Pos view로 데이터를 전송 하면, Pos view 에서는 http로 결과값을 반환하므로, 해당 반환값을 받아서 data로 사용함. 
+            //POST방식을 사용할것임
+            type: 'POST',
+            data: formData,
+            success : function(data)
+            {
+                // 성공이라는 메시지를 띄워줌
+                alert("성공");
+                var jdata = data['result'];
+                keywordSearch(jdata);
+            },
+            error : function(xhr, status,)
+            {
+                //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
+                alert("실패");
+                alert(xhr + ":" + status);
+            },
+        });
+    })
+</script>
+
+    <!--GPS정보 가져오기 -->
+    <script> 
+    function getLocation(){
+        if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(function(position){
+         		$('#gpsLoc').val(position.coords.latitude+":"+position.coords.longitude);
+                },function(error){
+                    console.error(error);
+                },
+                {
+                    enableHighAccuracy: false,
+                    maximumAge:0,
+                    timeout:Infinity
+                },
+            );
+        }
+        else{
+            return "gps를 지원하지 않습니다." 
+        }
+    }
+    function loctest(){
+        $('#gpsLoc').html("126.804388:37.485773");
+    }
+    //  좌표기반 검색 함수 호출
+    function locationSearchtest(){
+        // getLocation();
+        loctest()
+        var formData = $("#searchForm").serialize()+"&gpsLoc="+$("#gpsLoc").text();
+        
+        $.ajax
+        ({
+            cache: false,
+            //어떤 View 와 데이터통신을 진행할것인지 url로 표시
+            url : "{% url 'durumiApp:searchLocation' %}", 
+            //POST방식을 사용할것임
+            type: 'POST',
+            data : formData,
+            success : function(data)
+            {
+                // 성공이라는 메시지를 띄워줌
+                alert("성공");
+                var jdata = data['result'];
+                locationSearch(jdata);
+            },
+            error : function(xhr, status,)
+            {
+                //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
+                alert("실패");
+                alert(xhr + ":" + status);
+            },
+        });
+    }
+    
+    
+    </script>
+<script>
+    
+function openTripNote(){
+    console.log(checkNote);
+    
+    if (checkNote == 1){ //노트 올라와 있는 상태 
+        $("#noteDiv").css("top","130vh");
+        $("#openNote").css("top","95vh");
+        $("#searchDiv").css("top","4vh");
+        $("#catDiv").css("top","12vh");
+    }
+    else if(checkNote == -1){//노트 내려와 있는 상태 
+        locationSearchtest();
+        $("#noteDiv").css("display","block"); //팝업창 display block
+        $("#noteDiv").css("top","70vh");
+        $("#openNote").css("top","68vh");
+        $("#searchDiv").css("top","-10vh");
+        $("#catDiv").css("top","-10vh");
+    }
+    //다른 ui 숨기기
+    checkNote = checkNote * -1; 
+       // alert("note")
+}
+</script>
+
+</html>
+>>>>>>> 48f4589801339f4be8845132a9fa05a69f91db46

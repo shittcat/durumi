@@ -25,10 +25,10 @@
     height: 100vh;
     top: 0px;
     left: 0px;
-     display: none; 
-     background-color:#000;
-     opacity: 0.7;
-     z-index : 3;
+    display: none; 
+    background-color:#000;
+    opacity: 0.7;
+    z-index : 3;
 }
 
 

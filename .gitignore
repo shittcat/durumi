@@ -2,7 +2,13 @@
 .vscode/
 metting_log/
 res/
+<<<<<<< HEAD
 appkey.py/
 settings.py
+=======
+mysql/
+migrations/
+>>>>>>> 48f4589801339f4be8845132a9fa05a69f91db46
 appkey.py
 apikey.py
+.env
