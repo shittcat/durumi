@@ -18,39 +18,48 @@ def InsertTripnote(name, dest, cat, userId):
     Tripnote(name=name, userId=userId).save()
 
 
-def ReadTripnoteFromDB(userId):
+def ReadTripnoteListFromDB(userId):
     TripnoteList = Tripnote.object.filter(userId=userId)
 
     return TripnoteList
 
 
-def Tripnote(request):
+def ReadTripnoteFromDB(userId, name):
+    TripnoteList = Tripnote.object.filter(userId=userId, name=name)
+
+    return TripnoteList
+
+
+def tripnoteView(request):
     template_name = 'durumiApp/Tripnote.html'
     # ID = request.session("ID") 이런식으로 ID 받아오자
     # tripnoteList = ReadTripnoteFromDB(ID = ID) 이런식으로 DB에서 해당 ID의 트립노트 받아오기
-    tripnoteList = ["test1", "test2", "test3"]
+    Test = ["test1", "test2", "test3"]
+    userId = request.session["userId"]
+    result = ReadTripnoteListFromDB(userId)
     #tripnote = MapModel.Tripnote.objects.all()
     context = {
 
-        "Test": "test",
-        "tripnoteList": tripnoteList
+        "Test": Test,
+        "result": result
     }
-    return render(request, template_name, context)
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 
-def SelectTripnote(request):
+def selectTripnote(request):
     template_name = 'durumiApp/Tripnote.html'
     try:
-        # searchbox에서 내용 받아와 keyword 함수 실행 하여 검색결과 JSON으로 받아옴.
-        Input_str = request.POST.get("tripnote", "")
-    except (KeyError, Input_str == ""):
-        tripnoteList = ["test1", "test2", "test3"]
+        name = request.POST.get("name", "")
+        userId = request.session["userId"]
+
+    except (KeyError, name == "", userId == ""):
+        result = '실패'
         context = {
-            "tripnoteList": tripnoteList
+            "result": result
         }
-        return render(request, template_name, context)
+        return HttpResponse(json.dumps(context), content_type="application/json")
     else:
-        result = "test"
+        result = ReadTripnoteFromDB(userId, name)
         context = {
             "result": result
         }

@@ -28,8 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["durumi", "localhost"]
 ALLOWED_HOSTS = ["durumi",
-                "192.168.0.20"
-                ]
+                 "192.168.0.20"
+                 ]
 
 
 # Application definition
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "durumiApp.apps.durumiConfig",
     "durumiApp",
     "login"
 ]
@@ -127,7 +126,7 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATICFILES_DIR = [
     '/durumiApp/static/',
     STATIC_DIR,
-    
+
 ]
 STATIC_ROOT = os.path.join(ROOT_DIR, ".static_root")
 

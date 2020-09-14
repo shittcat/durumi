@@ -1,58 +1,21 @@
 {% load static %}
 <!--this is tripnote : {{ test }} -->
 
-{% if tripnoteList %}
-<ul>
-  {% for tripnote in tripnoteList %}
-  <li onclick="selectTripNote(tripnote)">this is tripnote : {{tripnote}}</li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No tripnote</p>
-{% endif %}
-
 <script>
-  function selectTripNote() {
-    $.ajax({
-      cache: false,
-      url: "{% url 'durumiApp:SelectTripnote' %}",
+  $.ajax({
+    cache: false,
+    url: "{% url 'durumiApp:tripnote' %}",
 
-      type: "POST",
-      success : function(data){
-        alert("성공");
+    type: "POST",
+    success : function(data){
+      alert("성공");
 
-      }
-      error : function(xhr, status){
-        alert("실패");
-        alert(xhr + ":" + status);
-      }
-    });
-  }
-</script>
-<!-- Ajax 를 이용한 template와 view 사이의 통신-->
-<script type="text/javascript">
-  $("#search").click(function () {
-    //form 에 있는 데이터를 한번에 모아줌 .serialize();
-    var formData = $("#searchForm").serialize();
-    console.log(formData);
-    $.ajax({
-      cache: false,
-      //어떤 View 와 데이터통신을 진행할것인지 url로 표시
-      url: "{% url 'durumiApp:Pos' %}", // Pos view로 데이터를 전송 하면, Pos view 에서는 http로 결과값을 반환하므로, 해당 반환값을 받아서 data로 사용함.
-      //POST방식을 사용할것임
-      type: "POST",
-      data: formData,
-      success: function (data) {
-        // 성공이라는 메시지를 띄워줌
-        alert("성공");
-        var jdata = data["result"];
-        keywordSearch(jdata);
-      },
-      error: function (xhr, status) {
-        //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
-        alert("실패");
-        alert(xhr + ":" + status);
-      },
-    });
+    }
+    error : function(xhr, status){
+      alert("실패");
+      alert(xhr + ":" + status);
+    }
   });
 </script>
+
+<sctipt> </sctipt>
