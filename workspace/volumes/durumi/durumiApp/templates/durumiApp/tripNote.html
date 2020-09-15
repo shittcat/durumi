@@ -1,20 +1,26 @@
-{% load static %}
-<!--this is tripnote : {{ test }} -->
+{% load static %} 
+{% csrf_token %}
 
+<!--this is tripnote : {{ test }} -->
+<div id="tripnoteDiv">
+  <!-- 팝업창 -->
+  <button id="tripnoteCloseBtn">close</button>
+</div>
 <script>
   $.ajax({
     cache: false,
     url: "{% url 'durumiApp:tripnote' %}",
 
     type: "POST",
-    success : function(data){
+    success: function (data) {
       alert("성공");
-
-    }
-    error : function(xhr, status){
-      alert("실패");
+      var jdata = data["result"];
+      showTripnote(jData);
+    },
+    error: function (xhr, status) {
+      alert("tripnote실패");
       alert(xhr + ":" + status);
-    }
+    },
   });
 </script>
 

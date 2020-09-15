@@ -18,6 +18,13 @@ def InsertTripnote(name, dest, cat, userId):
     Tripnote(name=name, userId=userId).save()
 
 
+def InsertPlace(name, dest, cat, userId):
+    tripnote = Tripnote.object.filter(userId=userId, name=name)[0]
+    tripnote.dest += dest + "~"
+    tripnote.cat += cat + "~"
+    tripnote.save()
+
+
 def ReadTripnoteListFromDB(userId):
     TripnoteList = Tripnote.object.filter(userId=userId)
 
@@ -25,23 +32,28 @@ def ReadTripnoteListFromDB(userId):
 
 
 def ReadTripnoteFromDB(userId, name):
-    TripnoteList = Tripnote.object.filter(userId=userId, name=name)
+    PlaceList = Tripnote.object.filter(userId=userId, name=name)
 
-    return TripnoteList
+    return PlaceList
 
 
+@csrf_exempt  # 보안문제로 적어줌
 def tripnoteView(request):
     template_name = 'durumiApp/Tripnote.html'
-    # ID = request.session("ID") 이런식으로 ID 받아오자
-    # tripnoteList = ReadTripnoteFromDB(ID = ID) 이런식으로 DB에서 해당 ID의 트립노트 받아오기
-    Test = ["test1", "test2", "test3"]
-    userId = request.session["userId"]
-    result = ReadTripnoteListFromDB(userId)
+    #userId = request.session["userId"]
+    #result = ReadTripnoteListFromDB(userId=userId)
+    Tripnote(name="Test1", dest="광화문~종각~인사동~",
+                      cat="관광지~관광지~관광지~", userId="J")
+    retItems = {}
+    i = 0
+    for item in result:
+        retItems['item'+str(i)] = json.dumps(item.name, ensure_ascii=False)
+        i += 1
     #tripnote = MapModel.Tripnote.objects.all()
     context = {
 
         "Test": Test,
-        "result": result
+        "result": retItems
     }
     return HttpResponse(json.dumps(context), content_type="application/json")
 
