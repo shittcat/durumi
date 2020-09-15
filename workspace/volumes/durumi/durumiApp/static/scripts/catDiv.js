@@ -1,5 +1,5 @@
-    
-$('.larCatDiv.other').on('click',function(event){
+// 대분류 선택시 두 대분류간 태그 교체 스크립트 
+$('.larCatDiv.other').on('click',function(event){ 
     var obj = $(event.target);
     var tmp = $('.larCatDiv.main').html();
     

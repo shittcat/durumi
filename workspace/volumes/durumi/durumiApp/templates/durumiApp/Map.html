@@ -112,6 +112,12 @@
             
             z-index:1; 
         }
+        
+        .midcat imge{
+            width : 10vw ;
+            height : 10vw;
+            
+        }
         </style>
    
         <!--상세 뷰 css -->
@@ -183,6 +189,12 @@
             background : white ;
 
         }
+        
+        .midCat img {
+            width: auto; height: auto;
+            max-width: 100px;
+            max-height: 100px;
+        }
 
         </style>
         
@@ -230,19 +242,19 @@
     <div id ="catDiv">
         
         <div class = "larCatDiv">
-            <div id ="tourspotCat" class ="larCatDiv main"  >
+            <div id ="tourspotlarCat" class ="larCatDiv main"  >
                 <img src='{% static "image/icons/tourspot.png" %}' name="tourspotCat">
             </div>
-            <div id ="foodCat" class ="larCatDiv other" >
+            <div id ="foodlarCat" class ="larCatDiv other" >
                 <img src='{% static "image/icons/food.png" %}' name="foodCat">
             </div>
-            <div id ="etcCat" class ="larCatDiv other" >
+            <div id ="etclarCat" class ="larCatDiv other" >
                 <img src='{% static "image/icons/etc.png" %}' name="etcCat">
             </div>
         </div>
         
         <!-- tourspot -->
-        <div id='larCat0' class ="midCatDiv main" >
+        <div id='tourspotCat' class ="midCatDiv main" >
             <div class="midCat">
                 <img src='{% static "image/icons/tourspot_nature.png" %}' name="natureCat">
             </div>
@@ -279,7 +291,7 @@
         </div>
         
         <!-- food -->
-        <div id='larCat1' class ="midCatDiv other">
+        <div id='foodCat' class ="midCatDiv other">
             <div class="midCat">
                 <img src='{% static "image/icons/food_Korean.png" %}' name="foodKorean">
             </div>
@@ -310,7 +322,7 @@
         </div>
         
         <!-- etc -->
-        <div id='larCat2' class ="midCatDiv other">
+        <div id='etcCat' class ="midCatDiv other">
             <div class="midCat">
                 <img src='{% static "image/icons/etc_accommodation.png" %}' name="accommodationCat">
             </div>
