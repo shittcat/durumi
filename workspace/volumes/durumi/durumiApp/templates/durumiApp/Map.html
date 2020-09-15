@@ -26,7 +26,6 @@
         <link rel="mask-icon" href="{% static 'image/safari-pinned-tab.svg' %}" color="#5bbad5">
         
         
-        
         <style>
         
         html{
@@ -114,11 +113,6 @@
             z-index:1; 
         }
         
-        .midcat imge{
-            width : 10vw ;
-            height : 10vw;
-            
-        }
         </style>
    
         <!--상세 뷰 css -->
@@ -145,9 +139,6 @@
             
         #viewDiv{
             position : relative;
-            /*top:-.5em;*/
-            /*left:-.5em;*/
-            
             width : 100vw;
             height : 100vh;
             background : skyblue;
@@ -191,48 +182,72 @@
 
         }
         
-        .midCat img {
-            width: auto; height: auto;
-            max-width: 10vw;
-            max-height: 10vw;
+        .swiper-container{
+            width : 80vw;
+        }
+        
+        .swiper-slide {
+            width:95%;
+            margin : 1vh 3vw 3vw 1vh;
+        }
+        
+        .midCatDiv{
+            width: 70vw; height: 11vh;
+            float : none;
+            position : relative;
+            border-radius : 10vw;
+            background-color: rgba( 255, 255, 255, 0.5 );
+        	top : 1vh;
+        	z-index : 2;
         }
         
         .midCat{
-            width: 10vw; height: 10vw;
-            position : relative;
-            /*top : 1vh;*/
+            width: 15vw; height: 15vw;
             float : left;
-            margin: 1vh 8vw;
-            padding : 1vh 1vw;
-            background: white;
+            box-shadow : 0 2px 10px #000;
+            background : white;
+            border-radius : 10vw;
             transition : top 0.5s, visibility 0.5s ,opacity 0.5s;
             z-index : 2;
         }
         
-        .swiper-slide {
-          text-align: center;
-          font-size: 18px;
-          background: #fff;
-    
-          /* Center slide text vertically */
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: -webkit-flex;
-          display: flex;
-          -webkit-box-pack: center;
-          -ms-flex-pack: center;
-          -webkit-justify-content: center;
-          justify-content: center;
-          -webkit-box-align: center;
-          -ms-flex-align: center;
-          -webkit-align-items: center;
-          align-items: center;
+        .midCat img {
+            max-width: 85%; height: auto;
+            margin : 1vw;
+            border-radius : 5vw;
         }
-
+        
         </style>
         
     </head>
+    
+        </script>
+
+    <style>
+    #loading {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: fixed;
+        display: block;
+        background: white;
+        z-index: 99;
+        text-align: center;
+    }
+
+    #loading img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 100;
+    }
+    </style>
 <body scroll="overflow-x: hidden">
+    
+    <div id="loading"><img id="loading-image" src='{% static "image/loading.gif" %}' alt="Loading." /></div>
+    
+    
     <div id="popupDiv"> <!-- 팝업창 -->
         <button id="popCloseBtn">close</button>
     </div>
@@ -259,12 +274,7 @@
         <div id ="openMenu" onclick='openMenu()'>openmenu</div> 
     </div>
     
-
-    
     <!-- div 태그 선언 영역 -->
-    
-        
-    
     <div id="viewDiv"> 페이지 view div</div>
     
     <div id ="openNote" onclick='openTripNote()'>opennote</div> 
@@ -284,96 +294,86 @@
             <div id ="etclarCat" class ="larCatDiv other" >
                 <img src='{% static "image/icons/etc.png" %}' name="etcCat">
             </div>
-            <div id ="etclarCat" class ="larCatDiv other" >
-                <img src='{% static "image/icons/etc.png" %}' name="swipeCat">
-            </div>
-        </div>
-        
-        <div id='swipeCat' class ="midCatDiv other" >
-            <div class="swiper-wrapper">
-                <div class="midCat swiper-slide">
-                    <img src='{% static "image/icons/tourspot_nature.png" %}' name="natureCat">
-                </div>
-                <div class="midCat swiper-slide">
-                    <img src='{% static "image/icons/tourspot_nature.png" %}' name="natureCat">
-                </div>
-            </div>
         </div>
         
         <!-- tourspot -->
-        <div id='tourspotCat' class ="midCatDiv main" >
-            <div class="midCat">
-                <img src='{% static "image/icons/tourspot_nature.png" %}' name="natureCat">
+        <div id='tourspotCat' class ="midCatDiv swiper-container swiper1" >
+            <div class="swiper-wrapper">
+            <div class="midCat swiper-slide">
+                <img src='{% static "image/icons/tourspot_nature.png" %}' name="natureCat" >
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_history.png" %}' name="historyCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_recreation.png" %}' name="recreationCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_experience.png" %}' name="experienceCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_industry.png" %}' name="industryCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_architecture.png" %}' name="architectureCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_culture.png" %}' name="cultureCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_festival.png" %}' name="festivalCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_leportsGround.png" %}' name="leportsGroundCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_leportsWater.png" %}' name="leportsWaterCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/tourspot_leportsSky.png" %}' name="leportsSkyCat">
+            </div>
             </div>
         </div>
         
         <!-- food -->
-        <div id='foodCat' class ="midCatDiv other">
-            <div class="midCat">
+        <div id='foodCat' class ="midCatDiv swiper-container swiper2">
+            <div class="swiper-wrapper">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Korean.png" %}' name="foodKorean">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Western.png" %}' name="foodWestern">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Japaneses.png" %}' name="foodJapanesesCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Chineses.png" %}' name="foodChinesesCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Asian.png" %}' name="foodAsianCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Restaurant.png" %}' name="foodRestaurantCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Exotic.png" %}' name="foodExoticCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Vegetarian.png" %}' name="foodVegetarianCat">
             </div>
-            <div class="midCat">
+            <div class="midCat swiper-slide">
                 <img src='{% static "image/icons/food_Bar.png" %}' name="foodBarCat">
             </div>
+             </div>
         </div>
         
         <!-- etc -->
-        <div id='etcCat' class ="midCatDiv other">
-            <div class="midCat">
+        <div id='etcCat' class ="midCatDiv swiper-container">
+            <div class="midCat ">
                 <img src='{% static "image/icons/etc_accommodation.png" %}' name="accommodationCat">
             </div>
-            <div class="midCat">
+            <div class="midCat ">
                 <img src='{% static "image/icons/etc_toilet.png" %}' name="toiletCat">
             </div>
         </div>
@@ -401,15 +401,18 @@
     
     <!-- Initialize Swiper -->
     <script>
-    var swiper = new Swiper('.midCatDiv', {
-        slidesPerView: 3,
-        spaceBetween: 2,
-        width: 100,
-        height: 100,
+    var swiper1 = new Swiper('.swiper1', {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        freeMode : true,
+    });
+    
+    var swiper2 = new Swiper('.swiper2', {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        freeMode : true,
     });
     </script>
-    
-    
     
     <script> //페이지 로드시 초기화할 변수들 모음 
     var markers = [];
@@ -428,7 +431,16 @@
             return false;
         });
         
+        
+        
     }); 
+    
+    $(window).ready(function()  { //페이지 로드 완료시 이벤트 
+        $('.midCatDiv').css("display","none");
+        $('#tourspotCat').css("display","block");
+        $('#loading').fadeOut();
+        $('#loading').remove();
+    });
     </script>
     
     <script>
@@ -520,7 +532,7 @@
             },
         });
     })
-</script>
+    </script>
 
     <!--GPS정보 가져오기 -->
     <script> 

@@ -1,12 +1,12 @@
 #catDiv{
     /*float : left;*/
     position : relative;
-    top : 12vh ;
+    top : 8vh ;
     left : 5vw ;
     width : 90vw;
-    height : 10vh;
+    height : auto;
     z-index : 2;
-    background: red;
+    /*background: red;*/
     
     transition : top 1s;
 }
@@ -16,7 +16,6 @@
     height : 10vw;
     margin : 1vh 1vw;
     padding : 1vh 1vw;
-
     background: white;
     transition : top 0.5s, visibility 0.5s ,opacity 0.5s;
     z-index : 2;
@@ -46,30 +45,26 @@
 }
 
 
-.midCatDiv{
-    float : left;
-    position : relative;
-    background: green;
-	height: 5vh;
-	top : 1vh;
-	z-index : 2;
-}
+/*.midCatDiv{*/
+/*    float : left;*/
+/*    position : relative;*/
+/*    background: green;*/
+/*	height: 5vh;*/
+/*	top : 1vh;*/
+/*	z-index : 2;*/
+/*}*/
 
 .midCatDiv.main{
     display : block;
 }
 
-.midCatDiv.other{
-    display : none;
-}
-
-.midCat{
-    position : relative;
+/*.midCat{*/
+/*    position : relative;*/
     /*top : 1vh;*/
-    float : left;
-    margin: 1vh 8vw;
-    padding : 1vh 1vw;
-    background: white;
-    transition : top 0.5s, visibility 0.5s ,opacity 0.5s;
-    z-index : 2;
-}
+/*    float : left;*/
+/*    margin: 1vh 8vw;*/
+/*    padding : 1vh 1vw;*/
+/*    background: white;*/
+/*    transition : top 0.5s, visibility 0.5s ,opacity 0.5s;*/
+/*    z-index : 2;*/
+/*}*/
