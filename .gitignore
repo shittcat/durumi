@@ -7,4 +7,5 @@ migrations/
 __pycache__/
 appkey.py
 apikey.py
+hides.py
 .env

@@ -18,7 +18,6 @@ services:
     working_dir: /home/durumi/
     command: >
       bash -c "python3 manage.py makemigrations durumiApp --noinput
-      && python3 manage.py makemigrations login --noinput
       && python3 manage.py migrate --noinput
       && python3 manage.py collectstatic --noinput
       && gunicorn durumi.wsgi:application -b 0.0.0.0:8000"
