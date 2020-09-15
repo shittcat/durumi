@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from hides import SECRET_KEY , DATABASES
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "zlwi-fcx1--^^263_hl=0eo@6$!cs!rkmq^*1zy11&0$#)mp3+"
+# SECRET_KEY = DONT WRITE HERE
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "durumiApp",
-    "login"
 ]
 
 MIDDLEWARE = [
@@ -78,16 +78,9 @@ WSGI_APPLICATION = "durumi.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'durumiDB',
-        'USER': 'admin',
-        'PASSWORD': 'DAudrmuimni',
-        'HOST': 'mysql_service',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+# DONT WRITE HERE
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

@@ -4,6 +4,8 @@ metting_log/
 res/
 mysql/
 migrations/
+__pycache__/
 appkey.py
 apikey.py
+hides.py
 .env
