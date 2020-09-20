@@ -18,8 +18,9 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 
-def InsertTripnote(name, dest, cat, userId):
+def addTripnote(name, dest, cat, userId):
     # Tripnote 생성시에는 장소와 카테고리가 비어있으므로 name 과 userId만 저장
+    
     Tripnote(name=name, userId=userId).save()
 
 
@@ -111,16 +112,17 @@ def selectTripnote(request):
                     code_ = d[1]
                 # cat = "/static/image/icons/13.png"
 
-                place = sa.codeFindAPI(code_)
+                place = json.loads(sa.codeFindAPI(code_)['item0'])
 
                 item = {}
 
                 item['cat'] = cat_
                 item['dest'] = dest_
                 item['code'] = code_
-                #item['mapx'] = place.mapx
+                item['mapx'] = str(place['mapx'])
+                item['mapy'] = str(place['mapy'])
                 #item['mapy'] = place['item0'].mapy
-                item['place'] = place
+                #item['place'] = place
 
                 retItems['item'+str(i)] = item
                 i += 1
