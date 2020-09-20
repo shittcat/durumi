@@ -1,9 +1,14 @@
+# -*- coding:utf-8 -*-
+
 from ..Models import MapModel
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from ..Models.UserModel import Tripnote
+from ..Models.UserModel import User
+from ..Models.UserModel import DurumiCat
+from ..apicodes import searchAPI as sa
 from ..apicodes import keyword
 import simplejson as json
 import os
@@ -26,53 +31,102 @@ def InsertPlace(name, dest, cat, userId):
 
 
 def ReadTripnoteListFromDB(userId):
-    TripnoteList = Tripnote.object.filter(userId=userId)
+    TripnoteList = Tripnote.objects.filter(userId=userId)
 
     return TripnoteList
 
 
-def ReadTripnoteFromDB(userId, name):
-    PlaceList = Tripnote.object.filter(userId=userId, name=name)
-
+def ReadTripnoteFromDB(name):
+    # PlaceList = Tripnote.objects.filter(userId=userId, name=name)
+    PlaceList = Tripnote.objects.filter(name=name)
     return PlaceList
 
 
 @csrf_exempt  # 보안문제로 적어줌
 def tripnoteView(request):
-    template_name = 'durumiApp/Tripnote.html'
-    #userId = request.session["userId"]
-    #result = ReadTripnoteListFromDB(userId=userId)
-    Tripnote(name="Test1", dest="광화문~종각~인사동~",
-                      cat="관광지~관광지~관광지~", userId="J")
+    template_name = 'durumiApp/tripnote.html'
+    # userId = request.session["userId"]
+    # result = ReadTripnoteListFromDB(userId=userId)
+    result = []
+    Tripnote(id=1, name='Test1', dest="광화문`126512~종묘 [유네스코 세계문화유산]`126510~인사동`264353~",
+             cat="관광지~관광지~관광지~").save()
+    Tripnote(id=2, name="Test2",
+             dest="종로~혜화~대학로~", cat="관광지~관광지~관광지~").save()
+    result = Tripnote.objects.filter()
     retItems = {}
     i = 0
     for item in result:
-        retItems['item'+str(i)] = json.dumps(item.name, ensure_ascii=False)
+        items = item.name
+        retItems['item'+str(i)] = items
         i += 1
-    #tripnote = MapModel.Tripnote.objects.all()
+    # tripnote = MapModel.Tripnote.objects.all()
     context = {
 
-        "Test": Test,
-        "result": retItems
+        "result": retItems,
     }
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 
+@csrf_exempt  # 보안문제로 적어줌
 def selectTripnote(request):
-    template_name = 'durumiApp/Tripnote.html'
+    template_name = 'durumiApp/tripnote.html'
     try:
+        # req = json.loads(request.body)
+        # name = req['name']
         name = request.POST.get("name", "")
-        userId = request.session["userId"]
-
-    except (KeyError, name == "", userId == ""):
+        # name = request.POST["name"]
+        # userId = request.session["userId"]
+        # return render(request, 'durumiApp/test.html', {"name": "mmmmmmmmmm"})
+    except (KeyError):
         result = '실패'
         context = {
             "result": result
         }
         return HttpResponse(json.dumps(context), content_type="application/json")
     else:
-        result = ReadTripnoteFromDB(userId, name)
+        DurumiCat(durumiDesc="관광지", iconAddr="/static/image/icons/13.png").save()
+        # tripNote = ReadTripnoteFromDB(userId=userId, name=name)
+
+        tripNotes = Tripnote.objects.filter(name=name)
+        retItems = {}
+
+        i = 0
+        dests = []
+        cats = []
+        codes = []
+        for tripNote in tripNotes:
+            # dests_codes = tripNote.dest.split('~')
+            dests = tripNote.dest.split('~')
+            cats = tripNote.cat.split('~')
+
+            for dest,   cat in zip(dests,   cats):
+                category = []
+                category = DurumiCat.objects.filter(durumiDesc=cat)
+
+                for c in category:
+                    cat_ = c.iconAddr
+
+                    d = dest.split('`')
+                    dest_ = d[0]
+                    code_ = d[1]
+                # cat = "/static/image/icons/13.png"
+
+                place = sa.codeFindAPI(code_)
+
+                item = {}
+
+                item['cat'] = cat_
+                item['dest'] = dest_
+                item['code'] = code_
+                #item['mapx'] = place.mapx
+                #item['mapy'] = place['item0'].mapy
+                item['place'] = place
+
+                retItems['item'+str(i)] = item
+                i += 1
+
         context = {
-            "result": result
+            "Test": request.POST.get("name", ""),
+            "result": retItems
         }
         return HttpResponse(json.dumps(context), content_type="application/json")

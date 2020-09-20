@@ -5,6 +5,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from ..apicodes import searchAPI as sa
+from ..Models.UserModel import User
 import simplejson as json
 import os
 import sys
@@ -40,6 +41,7 @@ def searchKeyword(request):  # 해당 장소에 대한 좌표정보 전송
     else:
         result = sa.keywordFindAPI(Input_str)
         context = {
+            "Test": Input_str,
             "result": result
         }
         return HttpResponse(json.dumps(context), content_type="application/json")

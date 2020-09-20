@@ -411,6 +411,7 @@
           // 성공이라는 메시지를 띄워줌
           alert("성공");
           var jdata = data["result"];
+          console.log(data);
           keywordSearch(jdata);
         },
         error: function (xhr, status) {
@@ -454,7 +455,6 @@
       loctest();
       var formData =
         $("#searchForm").serialize() + "&gpsLoc=" + $("#gpsLoc").text();
-
       $.ajax({
         cache: false,
         //어떤 View 와 데이터통신을 진행할것인지 url로 표시
@@ -488,6 +488,7 @@
         $("#catDiv").css("top", "12vh");
       } else if (checkNote == -1) {
         //노트 내려와 있는 상태
+        appearTripnote();
         $("#noteDiv").css("display", "block"); //팝업창 display block
         $("#noteDiv").css("top", "70vh");
         $("#openNote").css("top", "68vh");

@@ -96,7 +96,7 @@ class Tripnote(models.Model):
     name = models.CharField(default="나만의 경로", max_length=30)
     dest = models.CharField(null=True, max_length=10000)
     cat = models.CharField(null=True, max_length=100)
-    userId = models.ForeignKey(User, on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
