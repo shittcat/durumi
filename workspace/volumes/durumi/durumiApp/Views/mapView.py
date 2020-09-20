@@ -10,7 +10,7 @@ import sys
 # 상위폴더의 파일을 import 하기 위해 상위폴더의 Path를 등록해줌
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from ..Models import MapModel
-from .. import appkey
+from . import appkey
 
 
 def mapView(request): # 맵 템플릿 연결 

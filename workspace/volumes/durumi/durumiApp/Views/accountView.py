@@ -67,7 +67,7 @@ def loginCheck(request):
             "uid" : "empty",
             "upw" : "empty",
         }
-        return HttpResponse(json.dumps(context),content_type="application/json")
+        return HttpResponse(content_type="application/json")
     
     if User.objects.filter(userId= data['id']).exists():
         result = User.objects.filter(userId=inputId)[0] #userId로 검색한 첫 번째 튜플
@@ -87,7 +87,7 @@ def loginCheck(request):
         context = {
             "result" : "존재하지 않는 ID입니다."
         }
-    return HttpResponse(json.dumps(context),content_type="application/json")
+    return HttpResponse(content_type="application/json")
     
 @csrf_exempt
 def loginOk(request):
