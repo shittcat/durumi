@@ -1,0 +1,45 @@
+version: "2"
+
+services:
+  durumi:
+    image: durumi
+    volumes: 
+      - /home/eight/eight/durumi/workspace/volumes:/home/
+    working_dir : /home/durumi/
+    command: >
+            bash -c "while true; do python3 manage.py makemigrations && python3 manage.py migrate && gunicorn durumi.wsgi -b 0.0.0.0:8000;
+            sleep 2; done "
+        #
+        #- bash
+        #      - -c
+        #- python3 /home/durumi/manage.py runserver 0:8000
+        #- gunicorn durumi.wsgi:application --bind 0:8000
+    ports: 
+      - "8000:8000"
+    expose:
+      - "8000"
+    depends_on: 
+      - mysql
+  nginx:
+    image: nginx
+    volumes: 
+      - /home/eight/eight/durumi/workspace/volumes-nginx:/etc/nginx/conf.d
+      - /home/eight/eight/durumi/workspace/volumes/.static_root/:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - durumi
+  mysql:
+    image: mysql
+    container_name: mysql_service
+    volumes:
+      - ./mysql:/var/lib/mysql      
+        #- ../volumes-mysql:/mysql/
+    environment: 
+      MYSQL_ROOT_PASSWORD: "DMuyrSuQmLi"
+      MYSQL_DATABASE: "durumiDB"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "DAudrmuimni"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    ports:
+      - "3306:3306"

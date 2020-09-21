@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+<<<<<<< HEAD
 from hides import SECRET_KEY , DATABASES
+=======
+>>>>>>> eight-b1
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,20 +25,29 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 # SECRET_KEY = DONT WRITE HERE
+=======
+SECRET_KEY = '=^3acngf91xi5v5w6b2zs^bfc5r3=@@wzfz)r#6ag4zo&3s5jw'
+>>>>>>> eight-b1
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ["durumi", "localhost"]
 ALLOWED_HOSTS = ["durumi",
                  "192.168.0.20"
                  ]
+=======
+ALLOWED_HOSTS = ["localhost", "durumi"]
+>>>>>>> eight-b1
 
 
 # Application definition
 
 INSTALLED_APPS = [
+<<<<<<< HEAD
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -68,51 +80,128 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+=======
+    'polls.apps.PollsConfig',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ROOT_URLCONF = 'durumi.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+>>>>>>> eight-b1
             ],
         },
     },
 ]
 
+<<<<<<< HEAD
 WSGI_APPLICATION = "durumi.wsgi.application"
+=======
+WSGI_APPLICATION = 'durumi.wsgi.application'
+>>>>>>> eight-b1
 
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+<<<<<<< HEAD
 # DATABASES = {
 # DONT WRITE HERE
 # }
+=======
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'durumiDB',
+        'USER': 'admin',
+        'PASSWORD': 'DAudrmuimni',
+        'HOST': 'mysql_service',
+        'PORT': '3306',
+    }
+}
+
+>>>>>>> eight-b1
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
+<<<<<<< HEAD
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
+=======
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+>>>>>>> eight-b1
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
+<<<<<<< HEAD
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
+=======
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'Asia/Seoul'
+>>>>>>> eight-b1
 
 USE_I18N = True
 
 USE_L10N = True
 
+<<<<<<< HEAD
 USE_TZ = True
+=======
+USE_TZ = False
+>>>>>>> eight-b1
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+<<<<<<< HEAD
 
 STATIC_URL = "/static/"
 STATIC_DIR = os.path.join(BASE_DIR, "static")
@@ -131,3 +220,11 @@ MEDIAFILES_DIR = [
     '/durumiApp/media/'
 ]
 MEDIA_ROOT = os.path.join(ROOT_DIR, ".media_root")
+=======
+STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+        STATIC_DIR,
+        ]
+STATIC_ROOT = os.path.join(ROOT_DIR,'.static_root')
+>>>>>>> eight-b1

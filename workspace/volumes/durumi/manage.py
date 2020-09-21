@@ -5,7 +5,11 @@ import sys
 
 
 def main():
+<<<<<<< HEAD
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "durumi.settings")
+=======
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'durumi.settings')
+>>>>>>> eight-b1
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -17,5 +21,9 @@ def main():
     execute_from_command_line(sys.argv)
 
 
+<<<<<<< HEAD
 if __name__ == "__main__":
+=======
+if __name__ == '__main__':
+>>>>>>> eight-b1
     main()
