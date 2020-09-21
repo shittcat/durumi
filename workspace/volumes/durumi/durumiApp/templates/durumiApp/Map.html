@@ -2,7 +2,7 @@
 <html>
     <head>
         
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f5d5f8cae467bcfcc2fd2ed0a65b173"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         
         <meta charset = "utf-8" />
@@ -302,75 +302,75 @@
         
         <!-- tourspot -->
         <div id='tourspotCat' class ="midCatDiv main" >
-            <div class="midCat">
+            <div class="midCat" id="12:A01:A0101">
                 <img src='{% static "image/icons/tourspot_nature.png" %}' name="natureCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="12:A02:A0201">
                 <img src='{% static "image/icons/tourspot_history.png" %}' name="historyCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="12:A02:A0202">
                 <img src='{% static "image/icons/tourspot_recreation.png" %}' name="recreationCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="12:A02:A0203">
                 <img src='{% static "image/icons/tourspot_experience.png" %}' name="experienceCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="12:A02:A0204">
                 <img src='{% static "image/icons/tourspot_industry.png" %}' name="industryCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="12:A02:A0205">
                 <img src='{% static "image/icons/tourspot_architecture.png" %}' name="architectureCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="14:A02:A0206">
                 <img src='{% static "image/icons/tourspot_culture.png" %}' name="cultureCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="15:A02:A0208">
                 <img src='{% static "image/icons/tourspot_festival.png" %}' name="festivalCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="28:A03:A0302">
                 <img src='{% static "image/icons/tourspot_leportsGround.png" %}' name="leportsGroundCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="28:A03:A0303">
                 <img src='{% static "image/icons/tourspot_leportsWater.png" %}' name="leportsWaterCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="28:A03:A0304">
                 <img src='{% static "image/icons/tourspot_leportsSky.png" %}' name="leportsSkyCat">
             </div>
         </div>
         
         <!-- food -->
         <div id='foodCat' class ="midCatDiv other">
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020100">
                 <img src='{% static "image/icons/food_Korean.png" %}' name="foodKorean">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020200">
                 <img src='{% static "image/icons/food_Western.png" %}' name="foodWestern">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020300">
                 <img src='{% static "image/icons/food_Japaneses.png" %}' name="foodJapanesesCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020400">
                 <img src='{% static "image/icons/food_Chineses.png" %}' name="foodChinesesCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020500">
                 <img src='{% static "image/icons/food_Asian.png" %}' name="foodAsianCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020600">
                 <img src='{% static "image/icons/food_Restaurant.png" %}' name="foodRestaurantCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020700">
                 <img src='{% static "image/icons/food_Exotic.png" %}' name="foodExoticCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020800">
                 <img src='{% static "image/icons/food_Vegetarian.png" %}' name="foodVegetarianCat">
             </div>
-            <div class="midCat">
+            <div class="midCat" id="39:A05:A0502:A05020900">
                 <img src='{% static "image/icons/food_Bar.png" %}' name="foodBarCat">
             </div>
         </div>
         
         <!-- etc -->
         <div id='etcCat' class ="midCatDiv other">
-            <div class="midCat">
+            <div class="midCat" id="32:B02:B0201">
                 <img src='{% static "image/icons/etc_accommodation.png" %}' name="accommodationCat">
             </div>
             <div class="midCat">
@@ -542,14 +542,23 @@
             return "gps를 지원하지 않습니다." 
         }
     }
+
+    $(".midcat").click(function(){
+        var test = $(this).attr('id');
+        alert(test);
+        locationSearchtest(test);
+  
+    });
+
     function loctest(){
         $('#gpsLoc').html("126.804388:37.485773");
     }
     //  좌표기반 검색 함수 호출
-    function locationSearchtest(){
+    function locationSearchtest(code){
         // getLocation();
         loctest()
-        var formData = $("#searchForm").serialize()+"&gpsLoc="+$("#gpsLoc").text();
+        alert(code);
+        var formData = $("#searchForm").serialize()+"&gpsLoc="+$("#gpsLoc").text()+"&code="+code;
         
         $.ajax
         ({

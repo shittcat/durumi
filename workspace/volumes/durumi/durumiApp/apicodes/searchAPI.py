@@ -38,8 +38,9 @@ def keywordFindAPI(inputKeyword):
     return retItems #return datas to json data
 
 
-def locationFindAPI(gpsLoc):
+def locationFindAPI(gpsLoc, code):
     gpsLoc = gpsLoc.split(":")
+    code = code.split(":")
     url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList'
     queryParams = '?' + 'ServiceKey=' + ServiceKey + '&' + urlencode({
         quote_plus('numOfRows') : '10',
@@ -48,7 +49,7 @@ def locationFindAPI(gpsLoc):
         quote_plus('MobileApp') : 'AppTest',
         quote_plus('listYN') : 'Y',
         quote_plus('arrange') : 'A',
-        quote_plus('contentTypeId') : '12',
+        quote_plus('contentTypeId') : code[0],
         quote_plus('mapX') : gpsLoc[0],
         quote_plus('mapY') : gpsLoc[1],
         quote_plus('radius') : '3000',
@@ -68,13 +69,27 @@ def locationFindAPI(gpsLoc):
     
     if (tcount == 1) or (tnum == 1) : #if result count is 1
         item = getJson["items"]["item"]
-        retItems['item'+str(i)] = ( json.dumps(item,ensure_ascii=False) )
+        save_code = []
+        for j in range(0, len(code)):
+            save_code.append(code[j])
+        for j in range(len(code), 4):
+            save = "cat"+ str(j)
+            save_code.append(item[save])
+        if item['cat1'] == save_code[1] and item['cat2'] == save_code[2] and item['cat3'] == save_code[3]:
+            retItems['item'+str(i)] = ( json.dumps(item,ensure_ascii=False) )
     else :
         for item in getJson["items"]["item"] :
-            item = dict( item.items() )
-            retItems['item'+str(i)] = ( json.dumps(item,ensure_ascii=False) )
-            i += 1
-            #make dict_items type Objects to list type objects
+            item = dict( item.items())
+            save_code = []
+            for j in range(0, len(code)):
+                save_code.append(code[j])
+            for j in range(len(code), 4):
+                save = "cat"+ str(j)
+                save_code.append(item[save])
+            if item['cat1'] == save_code[1] and item['cat2'] == save_code[2] and item['cat3'] == save_code[3]:
+                retItems['item'+str(i)] = ( json.dumps(item,ensure_ascii=False) )
+                i += 1
+                #make dict_items type Objects to list type objects
     return retItems #return datas to json data
 
 if __name__ == "__main__" : 
