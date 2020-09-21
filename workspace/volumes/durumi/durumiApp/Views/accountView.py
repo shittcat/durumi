@@ -7,6 +7,7 @@ from ..Models.UserModel import User
 import simplejson as json
 import os
 import sys
+import bcrypt
 
 # 상위폴더의 파일을 import 하기 위해 상위폴더의 Path를 등록해줌
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -43,9 +44,13 @@ def signup(request):
         }
         return HttpResponse(json.dumps(context),content_type="application/json")
     else :
+        encodedPw = data['pw'].encode('utf-8')
+        salt = bcrypt.gensalt()
+        hashedPw = bcrypt.hashpw(encodedPw, salt)
         User(
             userId = data['id'] , 
-            userPw= data['pw'],
+            userPw = hashedPw,
+            userSalt = salt,
             introduce = data['introduce'] ,
             linkId = "none" ,
         ).save()
@@ -62,7 +67,7 @@ def loginCheck(request):
         data = request.POST
         inputId = data['id']
         inputPW = data['password']
-    except (KeyError,inputId == "",inputPassword == "") :
+    except (KeyError,inputId == "",inputPW == "") :
         context = {
             "uid" : "empty",
             "upw" : "empty",
@@ -71,7 +76,8 @@ def loginCheck(request):
     
     if User.objects.filter(userId= data['id']).exists():
         result = User.objects.filter(userId=inputId)[0] #userId로 검색한 첫 번째 튜플
-        userInfo = "userId: {0}; introduce: {1};".format(result.userId, result.userPw)
+        new_salt = result.userSalt
+        inputPW = bcrypt.hashpw(inputPW, new_salt)
         if( (inputId == result.userId) and (inputPW == result.userPw)):
             request.session['loginOk'] = True
             context = {
