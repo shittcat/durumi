@@ -6,7 +6,8 @@ from django.utils import timezone
 "유저 정보"
 class User(models.Model):
     userId = models.CharField(max_length=15, unique=True)
-    userPw = models.CharField(max_length=200)
+    userPw = models.CharField(max_length=500)
+    userSalt = models.CharField(max_length=100)
     introduce = models.CharField(max_length=50, default="자기소개")
     linkId = models.CharField(max_length=20, blank=True, unique=True)
 
@@ -33,7 +34,7 @@ class DurumiCat(models.Model):
 class Cat1(models.Model):
     type1Id = models.IntegerField(primary_key=True)
     describ = models.CharField(max_length=30, unique=True)
-    durumiDesc = models.ForeignKey(durumiCat, on_delete=models.DO_NOTHING)
+    durumiDesc = models.ForeignKey(DurumiCat, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.describ
@@ -42,7 +43,7 @@ class Cat1(models.Model):
 class Cat2(models.Model):
     typeId = models.IntegerField(primary_key=True)
     describ = models.CharField(max_length=30, unique=True)
-    durumiDesc = models.ForeignKey(durumiCat, on_delete=models.DO_NOTHING)
+    durumiDesc = models.ForeignKey(DurumiCat, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.describ
@@ -51,7 +52,7 @@ class Cat2(models.Model):
 class Cat3(models.Model):
     typeId = models.IntegerField(primary_key=True)
     describ = models.CharField(max_length=30, unique=True)
-    durumiDesc = models.ForeignKey(durumiCat, on_delete=models.DO_NOTHING)
+    durumiDesc = models.ForeignKey(DurumiCat, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.describ
