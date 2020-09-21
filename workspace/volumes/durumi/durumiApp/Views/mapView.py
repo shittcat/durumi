@@ -1,5 +1,3 @@
-from .. import appkey
-from ..Models import MapModel
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse

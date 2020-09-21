@@ -106,8 +106,6 @@
             /*position : relative;*/
             max-width: 100%; 
             width:auto; height:auto;
-            /*margin: 1vw;*/
-            /*top:0; bottom:0; left:0; right:0;*/
             border-radius : 1vw;
         }
 
@@ -115,9 +113,16 @@
         #openMenu{
             display : table-cell;
             z-index:2;
-            width : 3vw;
-            background:white;
+            width : 7vw; height: 7vw;
             transition : left 0.5s, top 1s;
+            
+        }
+        
+        #openMenu img{
+            max-height: 100%; 
+            width:auto; height:auto;
+            vertical-align : sub;
+            margin-bottom : 1vw;
         }
 
         /*메인페이지 표시될 지도*/
@@ -161,7 +166,7 @@
             position : relative;
             width : 100vw;
             height : 100vh;
-            background : skyblue;
+            background : white;
             display : none;
             z-index : 5 ;
         }                
@@ -255,7 +260,7 @@
             backface-visibility: hidden;
             transform-style: preserve-3d;
             transition: 0.5s;
-            bottom : 20vw;
+            bottom : 28vw;
         }
         
         .itemOverlays:after{
@@ -351,7 +356,7 @@
         /*catDiv.css*/    
             #catDiv{
             position : relative;
-            margin-top : 2vh;
+            margin-top : 3vh;
             top : 10vw ;
             left : 5vw ;
             width : 90vw;
@@ -494,7 +499,9 @@
             <input type=button id="search" value="확인" style="display:none;">
         </form>
         <input type=hidden id="gpsLoc" name="gpsLoc">
-        <div id ="openMenu" onclick='openMenu()'>openmenu</div> 
+        <div id ="openMenu" onclick='openMenu()'>
+            <img src = '{% static "image/menu2.png" %}'>
+        </div> 
     </div>
     
     <!-- div 태그 선언 영역 -->
