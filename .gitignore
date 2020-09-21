@@ -1,7 +1,5 @@
 .static_root/
 .vscode/
-metting_log/
-res/
 mysql/
 migrations/
 __pycache__/
