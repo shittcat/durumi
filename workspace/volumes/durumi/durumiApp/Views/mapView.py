@@ -49,19 +49,18 @@ def searchKeyword(request):  # 해당 장소에 대한 좌표정보 전송
 
 
 def searchLocation(request):
-    try:
-        # searchbox에서 내용 받아와 keyword 함수 실행 하여 검색결과 JSON으로 받아옴.
-        Input_str = request.POST.get("gpsLoc", "")
-    except (KeyError, Input_str == ""):
-        context = {
-            "Map": MapModel.Map,
-            "Appkey": appkey.Appkey
-
-        }
-        return render(request, template_name, context)
-    else:
-        result = sa.locationFindAPI(Input_str)
-        context = {
-            "result": result
-        }
-        return HttpResponse(json.dumps(context), content_type="application/json")
+	try:
+		Input_str = request.POST.get("gpsLoc", "") # searchbox에서 내용 받아와 keyword 함수 실행 하여 검색결과 JSON으로 받아옴. 
+		code = request.POST.get("code", "") 
+	except (KeyError, Input_str == "", code == ""):
+		context = {
+			"Map": MapModel.Map, 
+			"Appkey": appkey.Appkey
+		}
+		return render(request,template_name,context)
+	else:
+		result = sa.locationFindAPI(Input_str, code)
+		context = {
+			"result" : result
+		}
+		return HttpResponse(json.dumps(context), content_type="application/json") 
