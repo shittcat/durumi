@@ -27,9 +27,10 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ["durumi", "localhost"]
 ALLOWED_HOSTS = ["durumi",
-                "192.168.0.20"
-                ]
+                 "192.168.0.20"
+                 ]
 
 
 # Application definition
@@ -89,9 +90,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
 
@@ -118,7 +119,7 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATICFILES_DIR = [
     '/durumiApp/static/',
     STATIC_DIR,
-    
+
 ]
 STATIC_ROOT = os.path.join(ROOT_DIR, ".static_root")
 

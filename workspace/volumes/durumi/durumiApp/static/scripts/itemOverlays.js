@@ -58,31 +58,31 @@ var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerS
 // } 
 
 function hideMarkers(map) {
-    for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(null);
-    }            
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
 }
 
 function hideOverlays(map) {
-    for (var i = 0; i < markers.length; i++) {
-            overlays[i].setMap(null);
-    }            
+  for (var i = 0; i < markers.length; i++) {
+    overlays[i].setMap(null);
+  }
 }
 
 function closeOverlay(num) {
-    overlays[num].setMap(null);     
+  overlays[num].setMap(null);
 }
 
-function findListByTitle(title){ //장소 이름으로 특정 JSON 리스트 찾아오기 
-    for(idx in GlobalList){
-        if($.parseJSON(GlobalList[idx])["title"] == title){
-            return idx;
-        }
+function findListByTitle(title) {
+  //장소 이름으로 특정 JSON 리스트 찾아오기
+  for (idx in GlobalList) {
+    if ($.parseJSON(GlobalList[idx])["title"] == title) {
+      return idx;
     }
-    return "fail" ;
+  }
+  return "fail";
 }
-    
-    
+  
 // function modeChange(){
     
 //     if(viewMode == 1){ //place -> picture 전환

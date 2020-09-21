@@ -471,8 +471,9 @@
     <div id="popupDiv"> <!-- 팝업창 -->
         <button id="popCloseBtn">close</button>
     </div>
-    
-    <div id ="popup_mask" ></div> <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
+
+    <div id="popup_mask"></div>
+    <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
 
     <!-- Map이 들어갈 위치를 정해주는 태그-->
     <!-- Map이 들어갈 위치를 정해주는 태그-->
@@ -601,17 +602,42 @@
             </div>
             </div>
         </div>
+      </div>
+
+      <div id="larCat0" class="midCatDiv main">
+        <div class="midCat">0</div>
+        <div class="midCat">0</div>
+        <div class="midCat">0</div>
+      </div>
+
+      <div id="larCat1" class="midCatDiv other">
+        <div class="midCat">1</div>
+        <div class="midCat">1</div>
+        <div class="midCat">1</div>
+      </div>
+
+      <div id="larCat2" class="midCatDiv other">
+        <div class="midCat">2</div>
+        <div class="midCat">2</div>
+        <div class="midCat">2</div>
+      </div>
+
+      <div id="larCat3" class="midCatDiv other">
+        <div class="midCat">3</div>
+        <div class="midCat">3</div>
+        <div class="midCat">3</div>
+      </div>
     </div>
 
-    <div class = "itemOverlays">
-        <div class = "itemOverlays noMark place">
-            <div class="close" onclick="closeOverlay(olnum)">닫기</div>
-            <div class="contentDiv">placeContent</div>
-        </div>
-        <div class = "itemOverlays noMark picture">
-            <div class="close" onclick="closeOverlay(olnum)">닫기</div>
-            <div class="contentDiv">pictureContent</div>
-        </div>
+    <div class="itemOverlays">
+      <div class="itemOverlays noMark place">
+        <div class="close" onclick="closeOverlay(olnum)">닫기</div>
+        <div class="contentDiv">placeContent</div>
+      </div>
+      <div class="itemOverlays noMark picture">
+        <div class="close" onclick="closeOverlay(olnum)">닫기</div>
+        <div class="contentDiv">pictureContent</div>
+      </div>
     </div>
     
     <div id="loginPage"> {% include 'durumiApp/loginPage.html' %} </div>
@@ -773,42 +799,48 @@
                     timeout:Infinity
                 },
             );
-        }
-        else{
-            return "gps를 지원하지 않습니다." 
-        }
+          },
+          function (error) {
+            console.error(error);
+          },
+          {
+            enableHighAccuracy: false,
+            maximumAge: 0,
+            timeout: Infinity,
+          }
+        );
+      } else {
+        return "gps를 지원하지 않습니다.";
+      }
     }
-    function loctest(){
-        $('#gpsLoc').html("126.804388:37.485773");
+    function loctest() {
+      $("#gpsLoc").html("126.804388:37.485773");
     }
     //  좌표기반 검색 함수 호출
-    function locationSearchtest(){
-        // getLocation();
-        loctest()
-        var formData = $("#searchForm").serialize()+"&gpsLoc="+$("#gpsLoc").text();
-        
-        $.ajax
-        ({
-            cache: false,
-            //어떤 View 와 데이터통신을 진행할것인지 url로 표시
-            url : "{% url 'durumiApp:searchLocation' %}", 
-            //POST방식을 사용할것임
-            type: 'POST',
-            data : formData,
-            success : function(data)
-            {
-                // 성공이라는 메시지를 띄워줌
-                alert("성공");
-                var jdata = data['result'];
-                locationSearch(jdata);
-            },
-            error : function(xhr, status,)
-            {
-                //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
-                alert("실패");
-                alert(xhr + ":" + status);
-            },
-        });
+    function locationSearchtest() {
+      // getLocation();
+      loctest();
+      var formData =
+        $("#searchForm").serialize() + "&gpsLoc=" + $("#gpsLoc").text();
+      $.ajax({
+        cache: false,
+        //어떤 View 와 데이터통신을 진행할것인지 url로 표시
+        url: "{% url 'durumiApp:searchLocation' %}",
+        //POST방식을 사용할것임
+        type: "POST",
+        data: formData,
+        success: function (data) {
+          // 성공이라는 메시지를 띄워줌
+          alert("성공");
+          var jdata = data["result"];
+          locationSearch(jdata);
+        },
+        error: function (xhr, status) {
+          //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
+          alert("실패");
+          alert(xhr + ":" + status);
+        },
+      });
     }
     
     

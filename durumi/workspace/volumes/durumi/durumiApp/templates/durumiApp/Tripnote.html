@@ -1,0 +1,12 @@
+{% load static %}
+<!--this is tripnote : {{ test }} -->
+
+{% if tripnoteList %}
+<ul>
+  {% for tripnote in tripnoteList %}
+  <li>this is tripnote : {{tripnote}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No tripnote</p>
+{% endif %}

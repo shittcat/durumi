@@ -1,2 +1,60 @@
+{% csrf_token %}
+
+<!--this is tripnote : {{ test }} -->
+<div id="tripnoteDiv">
+  <!-- 팝업창 -->
+  <button id="addTripNoteListBtn" onclick="addTripNote()">add</button>
+  <button id="tripnoteBackBtn" onclick="appearTripnote()">back</button>
+  <button id="tripnoteModifyBtn">Modify</button>
+  <button id="tripnoteCloseBtn" onclick="openTripNote()">close</button>
+</div>
 {% load static %}
-this is tripnote : {{ test }} 
+
+<script src="{% static 'scripts/tripNote.js' %}"></script>
+<script src="{% static 'scripts/itemOverlays.js' %}"></script>
+
+<script>
+  function appearTripnote() {
+    $.ajax({
+      cache: false,
+      url: "{% url 'durumiApp:tripnote' %}",
+
+      type: "POST",
+      success: function (data) {
+        alert("성공");
+        var jdata = data["result"];
+        console.log(jdata);
+        showTripnoteList(jdata);
+      },
+      error: function (xhr, status) {
+        alert("tripnote실패");
+        alert(xhr + ":" + status);
+      },
+    });
+  }
+</script>
+
+<script>
+  function selectTripnote(name) {
+    //reqData = JSON.stringify(name);
+    reqData = name;
+    data = { name: reqData };
+    console.log(data);
+    $.ajax({
+      cache: false,
+      url: "{% url 'durumiApp:selectTripnote' %}",
+      data: data,
+      type: "POST",
+      success: function (data) {
+        alert("성공");
+        var jdata = data["result"];
+        console.log(data);
+        showTripnote(jdata);
+      },
+      error: function (xhr, status) {
+        alert("tripnote실패");
+        alert(xhr + ":" + status);
+      },
+    });
+  }
+</script>

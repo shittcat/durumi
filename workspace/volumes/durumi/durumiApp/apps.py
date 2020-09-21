@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class DurumiConfig(AppConfig):
+class durumiConfig(AppConfig):
     name = "durumiApp"
