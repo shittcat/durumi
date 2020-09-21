@@ -1,17 +1,16 @@
-{% csrf_token %}
+{% csrf_token %} {% load static %}
+
+<script src="{% static 'scripts/tripNote.js' %}"></script>
+<script src="{% static 'scripts/itemOverlays.js' %}"></script>
 
 <!--this is tripnote : {{ test }} -->
-<div id="tripnoteDiv">
+<div style="overflow-y: scroll" id="tripnoteDiv">
   <!-- 팝업창 -->
-  <button id="addTripNoteListBtn" onclick="addTripNote()">add</button>
+  <button id="addTripNoteListBtn" onclick="addTripNoteListOpen()">add</button>
   <button id="tripnoteBackBtn" onclick="appearTripnote()">back</button>
   <button id="tripnoteModifyBtn">Modify</button>
   <button id="tripnoteCloseBtn" onclick="openTripNote()">close</button>
 </div>
-{% load static %}
-
-<script src="{% static 'scripts/tripNote.js' %}"></script>
-<script src="{% static 'scripts/itemOverlays.js' %}"></script>
 
 <script>
   function appearTripnote() {

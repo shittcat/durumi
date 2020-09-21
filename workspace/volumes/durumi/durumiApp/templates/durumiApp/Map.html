@@ -233,6 +233,29 @@
             z-index : 3;
         }
         
+        /* 트립노트추가 css */
+        
+        #addTripnoteListDiv {
+            top: 20vw;
+            position: absolute;
+            background: white;
+            width: 60vw;
+            height: 20vh;
+            display: none;
+            z-index: 4;
+
+            -moz-border-radius-topleft: 20px;
+            -moz-border-radius-topright: 20px;
+            -moz-border-radius-bottomleft: 20px;
+            -moz-border-radius-bottomright: 20px;
+
+            -webkit-border-top-left-radius: 20px;
+            -webkit-border-top-right-radius: 20px;
+            -webkit-border-bottom-left-radius: 20px;
+            -webkit-border-bottom-right-radius: 20px;
+        }
+
+
         
         /*팝업 리스트 css */
         div.items{ 
@@ -312,7 +335,7 @@
             font-weight : bold;
         }
         
-        .itemOverlays.place .addTripNote{
+        .itemOverlays.place .addTripnote{
             background : #2196F3;
             color : white;
             font-weight : bold;
@@ -471,6 +494,27 @@
     <div id="popupDiv"> <!-- 팝업창 -->
         <button id="popCloseBtn">close</button>
     </div>
+
+    
+    <div id="addTripnoteListDiv">
+    <!-- 팝업창 -->
+    <input
+        type="text"
+        name="TripnoteListNameBox"
+        placeholder="트립노트의 이름을 입력하세요"
+        id="TripnoteListNameBox"
+    />
+    <BR><BR>
+
+
+
+    <button id="addTripnoteListBtn" onclick="addTripnoteList()">OK</button>
+    <button id="addTripnoteListcancelBtn" onclick="addTripnoteListCancel()">
+        cancel
+    </button>
+    </div>
+
+
 
     <div id="popup_mask"></div>
     <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
@@ -647,7 +691,8 @@
     <script src="{% static 'scripts/itemOverlays.js' %}"></script>
     <script src="{% static 'scripts/catDiv.js' %}"></script>
     <script src="{% static 'scripts/swiper-bundle.min.js' %}"></script>
-    
+    <script src="{% static 'scripts/tripNote.js' %}"></script>
+
     
     <!-- Initialize Swiper -->
     <script>
@@ -956,7 +1001,7 @@ function SetMarker(inum){
 
         mtitle += "<div class=\"placeType\"> "+list['cat3']+"</div>";
         mtitle += "<div class=\"addr1\">"+list['addr1']+"</div>  </div>";
-        mtitle += "<div class=\"addTripNote\" onclick=\"addTripNote("+list['contentid']+")\">거르미에 추가</div>"
+        mtitle += "<div class=\"addTripnote\" onclick=\"addTripnote("+list['contentid']+")\">거르미에 추가</div>"
         
         tmpcont = tmpcont.replace(/placeContent/,mtitle);
         tmpcont = tmpcont.replace(/olnum/gi,idx.replace(/item/,''));
@@ -970,6 +1015,57 @@ function SetMarker(inum){
     
 </script>
 
+<script>
+    function addTripnote(contentid){
+        console.log(contentid);
+        var reqData = {contentid : contentid}
+
+        $.ajax({
+            cache:false,
+            url:"{% url 'durumiApp:addTripnote' %}",
+            data: reqData,
+            type:"POST",
+            success: function(data)
+            {
+                alert("성공");
+                
+            },
+            error: function(xhr,status,)
+            {
+                alert("실패");
+                alert(xhr + ":" status);
+
+            },
+
+        });
+    }
+</script>
+
+<script>
+    function addTripnoteList(){
+        var formData = $("#TripnoteListNameBox").serialize();
+
+        $.ajax({
+            cache: false,
+            url: "{% url 'durumiApp:addTripnoteList' %}",
+            data: formData,
+            type:"POST",
+            success: function(data)
+            {
+                alert("성공");
+                appearTripnote();
+                addTripnoteListCancel();
+            },
+            error : function(xhr, status,data)
+            {
+                alert("실패");
+                alert(xhr + ":" + status);
+            },
+
+        });
+    }
+
+</script>
 
 
 </html>

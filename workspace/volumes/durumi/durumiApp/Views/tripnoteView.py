@@ -18,10 +18,43 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 
-def addTripnote(name, dest, cat, userId):
-    # Tripnote 생성시에는 장소와 카테고리가 비어있으므로 name 과 userId만 저장
-    
-    Tripnote(name=name, userId=userId).save()
+@csrf_exempt  # 보안문제로 적어줌
+def addTripnote(request):
+    try:
+        contentid = request.POST.get("contentid", "")
+    except(KeyError, contentid == ""):
+        result = '실패'
+        context = {
+            "result": result
+        }
+        return HttpResponse(json.dumps(context), content_type="application/json")
+    else:
+        place = json.loads(sa.codeFindAPI(contentid)['item0'])
+        # 여기부터 해야함 , 어떤 Tripnote에 넣을지 선택하는 창 만들고 거기서 입력받은 Tripnote에
+        # 해당 장소의 정보를 넣어주면 됨
+
+
+@csrf_exempt  # 보안문제로 적어줌
+def addTripnoteList(request):
+    try:
+        tripnoteName = request.POST.get("TripnoteListNameBox", "")
+        userId = ""
+    except (KeyError, tripnoteName == ""):
+        result = '실패'
+        context = {
+            "result": result
+        }
+        return HttpResponse(json.dumps(context), content_type="application/json")
+    else:
+        size = len(Tripnote.objects.filter()) + 1
+        Tripnote(id=size, dest="", cat="", name=tripnoteName).save()
+        # Tripnote 생성시에는 장소와 카테고리가 비어있으므로 name 과 userId만 저장
+        # userId 넣는 코드 만들어야함 현재는 유저정보가 없어서 외래키를 지정할 수 없음
+        result = '성공'
+        context = {
+            "result": result
+        }
+        return HttpResponse(json.dumps(context), content_type="application/json")
 
 
 def InsertPlace(name, dest, cat, userId):
@@ -49,11 +82,8 @@ def tripnoteView(request):
     # userId = request.session["userId"]
     # result = ReadTripnoteListFromDB(userId=userId)
     result = []
-    Tripnote(id=1, name='Test1', dest="광화문`126512~종묘 [유네스코 세계문화유산]`126510~인사동`264353~",
-             cat="관광지~관광지~관광지~").save()
-    Tripnote(id=2, name="Test2",
-             dest="종로~혜화~대학로~", cat="관광지~관광지~관광지~").save()
-    result = Tripnote.objects.filter()
+
+    result = Tripnote.objects.all()
     retItems = {}
     i = 0
     for item in result:
