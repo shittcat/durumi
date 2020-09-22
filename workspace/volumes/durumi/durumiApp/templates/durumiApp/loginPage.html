@@ -1,8 +1,14 @@
+{% load static %}
 <html>
 <style>
 
 body{
     position : fixed;
+}
+
+#container {
+    width : 80vw;
+    margin : 0 auto;
 }
 
 #loginPage .inputRow{
@@ -38,24 +44,12 @@ body{
     width : 80%;
 }
 
-#container{
-    left: 5vw;
-    position: fixed;
-    width: 90vw;
-    height: 50vh;
-    margin-top: 8vh;
-    background: white;
-    border-color: #626263;
-    border: solid thin #c0c0c0;
-    border-radius: 15px;
-}
-
 #loginSubmit{
     width : 100%;
-    height : 15%;
+    height : 7%;
     background : #2196F3;
     border-radius : 5px;
-    
+    padding-top : 2%;
 	-moz-border-radius-topleft : 10px;  
     -moz-border-radius-topright: 10px;  
     -moz-border-radius-bottomleft: 10px;  
@@ -69,23 +63,38 @@ body{
 }
 
 #accountDiv{
-    width : 100%;
-    hight : 30vh;
+    width: 70%;
+    margin: 0 auto;
     background : red;
-    padding : 2vh 0vw 2vh 0vw;
-    margin : 0 auto;
 }
 
 #accountDiv div{
-    margin : 0vh 5vw;
-    float : left;
+    font-size : 80%;
 }
+
+#container #logo{
+    width : 40vw;
+}
+
 </style>
 
 
 <body>
-    <div id="container">
-        로그인 페이지 <br/>
+    <div id="container">        
+        <img src='{% static "image/logo_full.png" %}' id="logo">
+        <br/>
+        {% if request.session.loginOk == True %}
+        <div id="userInfoDiv" style="width:80%;margin:0 auto;">
+            <div id="userIcon" >
+                <img src='{% static "image/usericon/usericon1.png" %}'>
+            </div>
+            <div id="userName" >{{ request.session.userId }} </div>
+            <br/>
+            <div id="userLvl" >lv1</div>
+            <br/><br/>
+        </div>
+        <div id="loginSubmit" onclick="goLogout()">로그아웃</div>
+        {% else %}
         <form id="loginForm" method="post">
             {% csrf_token %}
             <div class="inputRow">
@@ -94,17 +103,30 @@ body{
             <div class="inputRow">
                 <input type="password" name="password" placeholder="비밀번호" class="accInput"></input>
             </div> <br/>
-            <input type="submit" value="로그인" id="loginSubmit"> <br/>
+            <div id="errorStr"></div>
+            <div id="loginSubmit" onclick=goLogin() >로그인</div> <br/> 
         </form>
         <div id="accountDiv">
-            <div id="viewSignup" class="openView" >회원가입</div>   
             <div id="viewFindPW" class="openView" >비밀번호 찾기 </div>
+            <div id="viewSignup" class="openView" >회원가입</div>   
         </div>
+        {% endif%}
     </div>
 
 </body>    
 
 <script>
+
+    document.addEventListener('keydown', function(event) 
+    {
+        if ((event.keyCode === 13) && (checkLoginPage === 1))
+        {
+            event.preventDefault();
+            goLogin();
+        };
+    }, true);   
+
+
     $('#loginPage input').on('focus',function(event){
         $(event.target).closest('.inputRow').css('border','solid 1px #2196F3')
     });
@@ -113,8 +135,8 @@ body{
         $(event.target).closest('.inputRow').css('border','solid 1px #bababa')
     });
     
-    $('#loginForm').on('submit',function(event){
-       var formData = $('#loginForm').serialize();
+    function goLogin(){
+        var formData = $('#loginForm').serialize();
         $.ajax({
             cache : false,
             url : "{% url 'durumiApp:loginCheck' %}" ,
@@ -122,14 +144,17 @@ body{
             data : formData,
             success : function(data){
                 var res = data['result']
-                alert(res);
+                if(res == "ok") 
+                    {location.reload();}
+                else
+                    $('#errorStr').html(res);
             },
             error : function(xhr,status,)
             {
                 alert("통신 실패");
             },
         });
-    });
+    }
     
 </script>
 

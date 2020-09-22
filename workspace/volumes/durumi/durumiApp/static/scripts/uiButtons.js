@@ -12,20 +12,23 @@ $("#popup_mask").click(function(){
         closeMenu();
     }
     if( checkLoginPage == 1){ //로그인페이지 닫기 
+        checkLoginPage = -1
         closeLoginPage();
     }
 });
 
-$("#goLoginPage").on('click',function(event){ //로그인 페이지 열기
+
+function openLoginPage(){
     closeMenu();
     $("#popup_mask").css("display","block");
     $("#loginPage").css("display","block");
     $("#loginPage").css("top","20vh");
-    checkLoginPage *= -1;
-});
+    checkLoginPage = 1;
+    
+}
 
 function closeLoginPage(){
     $("#popup_mask").css("display","none");
     $("#loginPage").css("top","120vh");
-    checkLoginPage *= -1;
+    checkLoginPage = -1;
 }

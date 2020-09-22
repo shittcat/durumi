@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block pageName %}
-    <img src='{% static "image/logo_full.png" %}' class="logo" sytle="width : 80vw;">
+    <img src='{% static "image/logo_full.png" %}' id="logo">
 {% endblock%}
 
 
@@ -13,8 +13,21 @@
         position : fixed;
     }
     
-    #container {
-        width : 100vw;
+    #logo{
+        width : 50vw;
+    }
+    
+    #signupContainer{
+        left: 5vw;
+        position: fixed;
+        width: 90vw;
+        height: 55vh;
+        margin-top: 8vh;
+        padding-bottom : 3vh;
+        background: white;
+        border-color: #626263;
+        border: solid thin #c0c0c0;
+        border-radius: 15px;
     }
     
     #signupForm{
@@ -57,24 +70,41 @@
         margin: 0 auto;
         padding-top : 1vw;
         text-align: center;
-        border-radius: 0.1em;
+        border-radius: 2vw;
+        margin-bottom:1vw;
+    }
+    
+    #pageFooter{
+        background : #f5f6f8;
+        position : absolute;
+        top : 90vh;
+        height: 10vh;
+        width : 100vw;
     }
     
     </style>
     
     
     <body>
-        <div id="container">
+        <div id="signupContainer">
             <form id="signupForm" method="post">
                 {% csrf_token %}
-                여행 거르미에 오신것을 환영합니다! <br/>
+                <br/>함께 걸어가는 여행의 동반자 <br/>여행 거르미에 오신것을 환영합니다! <br/>
+                <br/>
                 <div class="inputRow">
-                    <input type="text" name="id" placeholder="계정명" class="accInput"></input>
-                </div> <br/>
+                    <input type="text" name="id" placeholder="아이디" class="accInput"></input>
+                </div> * 영문자 숫자만 가능합니다. 
                 <div class="inputRow">
                     <input type="password" name="pw" placeholder="비밀번호" class="accInput"></input>
                 </div> <br/>
+                <div class="inputRow">
+                    <input type="password" name="pwcheck" placeholder="비밀번호확인" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    <input type="text" name="" placeholder="이메일" class="accInput"></input>
+                </div> <br/>
                 <input type="submit" value="여행거르미 시작하기" id="signSubmit"> <br/>
+                <br/>
             </form>
         </div>
     </body>   
