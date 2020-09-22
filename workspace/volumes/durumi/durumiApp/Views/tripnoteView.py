@@ -19,26 +19,56 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 
 @csrf_exempt  # 보안문제로 적어줌
+def selectTripnoteForaddTripnote(request):
+    result = []
+    userId = request.session['userId']
+    user = User.objects.filter(userId=userId)[0]
+    result = Tripnote.objects.filter(userId=user)
+    retItems = {}
+    i = 0
+    for item in result:
+        items = item.name
+        retItems['TripnoteForadd'+str(i)] = items
+        i += 1
+
+    # tripnote = MapModel.Tripnote.objects.all()
+    context = {
+
+        "result": retItems,
+    }
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+@csrf_exempt  # 보안문제로 적어줌
 def addTripnote(request):
-    try:
-        contentid = request.POST.get("contentid", "")
-    except(KeyError, contentid == ""):
-        result = '실패'
-        context = {
-            "result": result
-        }
-        return HttpResponse(json.dumps(context), content_type="application/json")
+    contentid = request.POST.get("contentid", "")
+    tripnoteName = request.POST.get("tripnoteName", "")
+    userId = request.session['userId']
+    user = User.objects.filter(userId=userId)[0]
+    place = json.loads(sa.codeFindAPI(contentid)['item0'])
+    # 여기부터 해야함 , 어떤 Tripnote에 넣을지 선택하는 창 만들고 거기서 입력받은 Tripnote에
+    # 해당 장소의 정보를 넣어주면 됨
+    Tn = Tripnote.objects.filter(name=tripnoteName, userId=user)[0]
+    if Tn.dest:
+        Tn.dest += "~"+str(place['title'])+":"+str(place['contentid'])
+        Tn.cat += "~"+str(place['cat3'])
     else:
-        place = json.loads(sa.codeFindAPI(contentid)['item0'])
-        # 여기부터 해야함 , 어떤 Tripnote에 넣을지 선택하는 창 만들고 거기서 입력받은 Tripnote에
-        # 해당 장소의 정보를 넣어주면 됨
+        Tn.dest += str(place['title']) + ":" + str(place['contentid'])
+        Tn.cat += str(place['cat3'])
+
+    Tn.save()
+    context = {
+
+    }
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 
 @csrf_exempt  # 보안문제로 적어줌
 def addTripnoteList(request):
     try:
         tripnoteName = request.POST.get("TripnoteListNameBox", "")
-        userId = ""
+        userId = request.session['userId']
+        user = User.objects.filter(userId=userId)[0]
     except (KeyError, tripnoteName == ""):
         result = '실패'
         context = {
@@ -46,8 +76,9 @@ def addTripnoteList(request):
         }
         return HttpResponse(json.dumps(context), content_type="application/json")
     else:
-        size = len(Tripnote.objects.filter()) + 1
-        Tripnote(id=size, dest="", cat="", name=tripnoteName).save()
+        #size = len(Tripnote.objects.filter()) + 1
+        Tripnote(dest="", cat="",
+                 name=tripnoteName, userId=user).save()
         # Tripnote 생성시에는 장소와 카테고리가 비어있으므로 name 과 userId만 저장
         # userId 넣는 코드 만들어야함 현재는 유저정보가 없어서 외래키를 지정할 수 없음
         result = '성공'
@@ -80,16 +111,20 @@ def ReadTripnoteFromDB(name):
 def tripnoteView(request):
     template_name = 'durumiApp/tripnote.html'
     # userId = request.session["userId"]
-    # result = ReadTripnoteListFromDB(userId=userId)
-    result = []
 
-    result = Tripnote.objects.all()
+    userId = request.session['userId']
+
+    result = []
+    user = User.objects.filter(userId=userId)[0]
+
+    result = Tripnote.objects.filter(userId=user)
     retItems = {}
     i = 0
     for item in result:
         items = item.name
-        retItems['item'+str(i)] = items
+        retItems['Tripnote'+str(i)] = items
         i += 1
+
     # tripnote = MapModel.Tripnote.objects.all()
     context = {
 
@@ -131,17 +166,19 @@ def selectTripnote(request):
             cats = tripNote.cat.split('~')
 
             for dest,   cat in zip(dests,   cats):
+                DurumiCat(durumiDesc=cat).save()
                 category = []
+
                 category = DurumiCat.objects.filter(durumiDesc=cat)
 
                 for c in category:
                     cat_ = c.iconAddr
 
-                    d = dest.split('`')
+                    d = dest.split(':')
                     dest_ = d[0]
                     code_ = d[1]
                 # cat = "/static/image/icons/13.png"
-
+                # 여기 윗부분 카테고리 아이콘 하는 방식에 따라 수정해야함
                 place = json.loads(sa.codeFindAPI(code_)['item0'])
 
                 item = {}
@@ -151,14 +188,14 @@ def selectTripnote(request):
                 item['code'] = code_
                 item['mapx'] = str(place['mapx'])
                 item['mapy'] = str(place['mapy'])
-                #item['mapy'] = place['item0'].mapy
-                #item['place'] = place
-
-                retItems['item'+str(i)] = item
+                item['place'] = place
+                retItems['TripnotePlace'+str(i)] = item
                 i += 1
 
         context = {
             "Test": request.POST.get("name", ""),
-            "result": retItems
+            "result": retItems,
+            "TTTT": name,
+            "items": item
         }
         return HttpResponse(json.dumps(context), content_type="application/json")
