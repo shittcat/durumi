@@ -1,17 +1,34 @@
+{% load static %}
 <html>
     <style>
         #pageName{
-            text-align : center;
-            font-size : 24px;
+            text-align: center;
+            width: 80vw;
+            height: 8vh;
+            font-size: 24px;
+            margin: 0 auto;
+            padding-top : 2vh;
+            vertical-align: middle;
         }
         
         #pageTop{
-            background : green;
+            /*background : #2196F3;*/
             position : absolute;
             top : 0vh;
             height: 10vh;
             width : 100vw;
+            /*color : white;*/
             
+        }
+        
+        #viewDiv{
+            background : #f5f6f8 ;;
+        }
+        
+        #dummy{
+            display: table-cell;
+            float: left;
+            width : 2vw; height : auto;
         }
         
         #pageContent{
@@ -28,6 +45,14 @@
             width : 100vw;
         }
         
+        #closeView img{
+            width : 4vw; height : auto;
+            margin : 1vw;
+            display : table-cell;
+            float : right;
+            /*filter: invert(100%);        */
+        }
+        
 
     </style>
     <script>
@@ -38,14 +63,18 @@
     </script>
     
     <div id="pageTop">
-        this is base view top <br>
-        
-        <div id="closeView" style="float:right;" onclick="closeView()"> closeview</div>
+        <div id="dummy">
+        </div>
+        <div id="closeView" onclick="closeView()"> 
+            <img src='{% static "image/close.png" %}' >
+        </div>
         
         <div id="pageName">
             {% block pageName %}
             {% endblock %}
         </div>
+        
+        
     </div>
     
     <div id="pageContent">
@@ -54,6 +83,6 @@
     </div>
     
     <div id="pageFooter">
-        this is base view footer <br>
+         <br>
     </div>
 </html>

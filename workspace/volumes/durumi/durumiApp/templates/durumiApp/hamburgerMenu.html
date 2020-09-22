@@ -1,50 +1,77 @@
 {% load static %}
 <html>
-    this is hamburgerMenu
     <style>
     
     .menuComponent{
-        margin-top : 3vh;
-        margin-left : 2vw;
+        font-size : 90%;
+        border-top : 1px solid #d3eefb;
     }
     
+    .menuSel{
+        padding : 1vh 0 1vh 0 ;
+    }
+    .menuSel:hover{
+        background : #d3eefb;
+    }
+    
+    #userInfoDiv{
+        height : 13vh;
+    }
+    
+    #userIcon {
+        margin-top : 3vh;
+        width : 5vh;
+    }
+    
+    #userIcon img{
+        margin : 0 2vw 0 2vw;
+        width : 12vw; height : auto;
+        float : left;
+    }
+    #userLvl{
+        color : #2196F3;
+        font-size : 0.75em;
+    }
 
     </style>
-    
-    <div id="userInfo" class="menuComponent">
-        {% if request.session.loginOk == True %}
-            <div id="userName" style="float:right;margin-right:2vw">유저이름</div>
-            <div id="userIcon" >유저아이콘</div>
-            <div id="etc"> 기타 정보(레벨, 도전과제) </div>
-            <div id="mypage" >마이페이지</div>
-        {% else %}
-            <div id="goLoginPage">먼저 로그인하세요. 로그인 버튼 </div>
-        {% endif %}
-    </div><br/>
-    {% if request.session.loginOk == True %}
-        <div id="logOut">로그아웃</div>
-        <div id="userContents" class="menuComponent">
-            <div id="viewMyNotes" class="openView">여행노트</div>
-            <div id="viewAcv" class="openView">도전과제</div>
-            <div id="viewCom" class="openView">내 리뷰</div>
+    <div id="userInfoDiv" class="menuSel" onclick="openLoginPage()">
+        {% if request.session.loginOk == True %}    
+        <div id="userIcon" >
+            <img src='{% static "image/usericon/usericon1.png" %}'>
         </div>
-        
+        <div id="userName" >{{ request.session.userId }} </div>
+        <div id="userLvl" >lv1</div>
+        <br/>
+        {% else %}
+        <div id="userIcon" onclick="openLoginPage()">
+            <img src='{% static "image/usericon/usericon5.png" %}'>
+        </div>
+        <div id="goLoginPage" onclick="openLoginPage()" style="font-size:0.65em;"> 
+            로그인이 필요합니다
+        </div>
+        {% endif %}
+    </div>
+    
+    {% if request.session.loginOk == True %}
+        <div id="userContents" class="menuComponent">
+            <div id="viewMyPages" class="openView menuSel">마이페이지</div>
+            <div id="viewMyNotes" class="openView menuSel">여행노트</div>
+            <div id="viewAcv" class="openView menuSel">도전과제</div>
+            <div id="viewCom" class="openView menuSel">내 리뷰</div>
+        </div>
     {% endif %}
     <div id="appEtc" class="menuComponent">
-        <div id="viewNotice" class="openView">공지사항</div>
-        <div id="viewSC" class="openView">고객센터</div>
-        <div id="config" class="openView">설정</div>
-        
+        <div id="viewNotice" class="openView menuSel">공지사항</div>
+        <div id="viewSC" class="openView menuSel">고객센터</div>
+        <div id="config" class="openView menuSel">설정</div>
     </div>
-
-
-    <script type="text/javascript">
-    function openPage(pageName){
-        $("#viewDiv").css("display","block");
-        $("#viewDiv").load("/durumiApp/viewPage/"+pageName);
+  
+  <script type="text/javascript">
+    function openPage(pageName) {
+      $("#viewDiv").css("display", "block");
+      $("#viewDiv").load("/durumiApp/viewPage/" + pageName);
     }
-    
-    $("#logOut").on('click',function(event){
+    function goLogout(){
         $.ajax({
            cache : false,
            url : "{% url 'durumiApp:logOut' %}" ,
@@ -58,9 +85,6 @@
            }
         });
         location.reload();
-    });
+    }
     </script>
-    
-    
 </html>
-

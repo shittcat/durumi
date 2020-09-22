@@ -10,13 +10,13 @@ RUN apt-get install -y net-tools
 RUN apt-get install -y dnsutils
 RUN apt-get install -y wget
 WORKDIR /home
-RUN pip3 install pip==20.2.1
-RUN pip3 install django==3.0.4
-RUN pip3 install gunicorn==20.0.2
+RUN pip3 install pip
+RUN pip3 install django
+RUN pip3 install gunicorn
 RUN pip3 install bcrypt
 RUN pip3 install simplejson
 
-RUN apt-get install -y libmysqlclient-dev=5.7.31-0ubuntu0.18.04.1
+RUN apt-get install -y libmysqlclient-dev
 RUN pip3 install mysqlclient
 
 ENV DOCKERIZE_VERSION v0.6.1

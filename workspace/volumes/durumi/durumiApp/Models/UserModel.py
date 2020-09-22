@@ -8,12 +8,14 @@ from django.db import models
 
 class User(models.Model):
     userId = models.CharField(max_length=15, unique=True)
-    userPw = models.CharField(max_length=200)
-    introduce = models.CharField(max_length=50, default="자기소개")
+    userPw = models.CharField(max_length=500)
+    userSalt = models.CharField(max_length=100)
+    userMail = models.EmailField(max_length=120)
+    introduce = models.CharField(max_length=150, default="자기소개")
     linkId = models.CharField(max_length=20, blank=True, unique=True)
 
     def __str__(self):
-        return self.userid
+        return self.userId
 
 
 "관광타입 ID"
