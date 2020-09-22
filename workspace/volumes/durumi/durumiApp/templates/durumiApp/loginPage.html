@@ -86,12 +86,13 @@ body{
 <body>
     <div id="container">
         로그인 페이지 <br/>
-        <form id="loginForm">
+        <form id="loginForm" method="post">
+            {% csrf_token %}
             <div class="inputRow">
                 <input type="text" name="id" placeholder="계정명" class="accInput"></input>
             </div> <br/>
             <div class="inputRow">
-                <input type="text" name="password" placeholder="비밀번호" class="accInput"></input>
+                <input type="password" name="password" placeholder="비밀번호" class="accInput"></input>
             </div> <br/>
             <input type="submit" value="로그인" id="loginSubmit"> <br/>
         </form>

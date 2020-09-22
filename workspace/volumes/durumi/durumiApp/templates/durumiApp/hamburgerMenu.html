@@ -13,7 +13,7 @@
     
     <div id="userInfo" class="menuComponent">
         {% if request.session.loginOk == True %}
-            <div id="userName" style="float:right;margin-right:2vw">유저이름</div>
+            <div id="userName" style="float:right;margin-right:2vw">{{ request.session.userId }}</div>
             <div id="userIcon" >유저아이콘</div>
             <div id="etc"> 기타 정보(레벨, 도전과제) </div>
             <div id="mypage" >마이페이지</div>

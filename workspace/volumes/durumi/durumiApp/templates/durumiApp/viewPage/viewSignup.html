@@ -65,7 +65,8 @@
     
     <body>
         <div id="container">
-            <form id="signupForm">
+            <form id="signupForm" method="post">
+                {% csrf_token %}
                 여행 거르미에 오신것을 환영합니다! <br/>
                 <div class="inputRow">
                     <input type="text" name="id" placeholder="계정명" class="accInput"></input>
