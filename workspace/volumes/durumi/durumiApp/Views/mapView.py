@@ -1,4 +1,4 @@
-from .. import appkey
+from . import appkey
 from ..Models import MapModel
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
@@ -14,7 +14,6 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from ..Models import MapModel
-from . import appkey
 
 def mapView(request):  # 맵 템플릿 연결
     template_name = 'durumiApp/Map.html'

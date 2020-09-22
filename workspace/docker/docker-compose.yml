@@ -41,8 +41,8 @@ services:
   mysql:
     image: mysql
     container_name: mysql_service
-    # env_file :
-    #   - .env
+    env_file :
+      - .env
     volumes:
       - ../volumes-mysql/mysql/:/var/lib/mysql/
     environment: 
