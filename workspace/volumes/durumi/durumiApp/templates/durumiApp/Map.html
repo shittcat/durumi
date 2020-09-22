@@ -481,8 +481,6 @@
             top:0; bottom:0; left:0; right:0;
             border-radius : 3vw;
         }
-        
-
 
         </style>
         
@@ -513,49 +511,18 @@
     </style>
 <body scroll="overflow-x: hidden">
     
-    <div id="loading"><img id="loading-image" src='{% static "image/loading.gif" %}' alt="Loading." /></div>
+    <div id="loading">
+        <img id="loading-image" src='{% static "image/loading.gif" %}' alt="Loading." />
+    </div>
     
     
     <div id="popupDiv"> <!-- 팝업창 -->
         <button id="popCloseBtn">close</button>
     </div>
 
-    <!--트립노트 추가를 위한 팝업창-->
-    <div id="addTripnoteListDiv">
-    <!-- 팝업창 -->
-    <input
-        type="text"
-        name="TripnoteListNameBox"
-        placeholder="트립노트의 이름을 입력하세요"
-        id="TripnoteListNameBox"
-    />
-    <BR><BR>
-
-
-
-    <button id="addTripnoteListBtn" onclick="addTripnoteList()">OK</button>
-    <button id="addTripnoteListcancelBtn" onclick="addTripnoteListCancel()">
-        cancel
-    </button>
-    </div>
-
-    <!--트립노트에 장소 추가시 트립노트를 선택하기 위한 팝업창-->
-    
-    <div id="selectTripnoteForaddTripnoteDiv">
-    <!-- 팝업창 -->
- 
-
-    <button id="addTripnoteListcancelBtn" onclick="selectTripnoteForaddTripnoteCancel()">
-        cancel
-    </button>
-    </div>
-
-
-
     <div id="popup_mask"></div>
     <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
 
-    <!-- Map이 들어갈 위치를 정해주는 태그-->
     <!-- Map이 들어갈 위치를 정해주는 태그-->
     <div id = "map">
     </div>
@@ -697,6 +664,36 @@
         <div class="close" onclick="closeOverlay(olnum)">닫기</div>
         <div class="contentDiv">pictureContent</div>
       </div>
+    </div>
+    
+    <!--트립노트 추가를 위한 팝업창-->
+    <div id="addTripnoteListDiv">
+    <!-- 팝업창 -->
+    <input
+        type="text"
+        name="TripnoteListNameBox"
+        placeholder="트립노트의 이름을 입력하세요"
+        id="TripnoteListNameBox"
+    />
+    <BR><BR>
+
+
+
+    <button id="addTripnoteListBtn" onclick="addTripnoteList()">OK</button>
+    <button id="addTripnoteListcancelBtn" onclick="addTripnoteListCancel()">
+        cancel
+    </button>
+    </div>
+
+    <!--트립노트에 장소 추가시 트립노트를 선택하기 위한 팝업창-->
+    
+    <div id="selectTripnoteForaddTripnoteDiv">
+    <!-- 팝업창 -->
+ 
+
+    <button id="addTripnoteListcancelBtn" onclick="selectTripnoteForaddTripnoteCancel()">
+        cancel
+    </button>
     </div>
     
     <div id="loginPage"> {% include 'durumiApp/loginPage.html' %} </div>
@@ -865,9 +862,8 @@
     }
 
     $(".midcat").click(function(){
-        var test = $(this).attr('id');
-        alert(test);
-        locationSearchtest(test);
+        var code = $(this).attr('id');
+        locationSearchtest(code);
   
     });
 
@@ -878,9 +874,7 @@
     function locationSearchtest(code){
         // getLocation();
         loctest()
-        alert(code);
         var formData = $("#searchForm").serialize()+"&gpsLoc="+$("#gpsLoc").text()+"&code="+code;
-        
         $.ajax
         ({
             cache: false,
