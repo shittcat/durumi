@@ -43,7 +43,26 @@ def signup(request):
             "result" : "이미 존재하는 아이디입니다."
         }
         return HttpResponse(json.dumps(context),content_type="application/json")
+    elif len(data['pw']) < 8:
+        context = {
+            "result" : "비밀번호는 8글자 이상이어야 합니다."
+        }
+        return HttpResponse(json.dumps(context),content_type="application/json")
+    elif data['pw'].isdigit():
+        context = {
+            "result" : "문자를 포함해주시기 바랍니다."
+        }
+        return HttpResponse(json.dumps(context),content_type="application/json")
     else :
+        
+        """
+         elif '@' not in data['email']:
+        context = {
+            "result" : "올바른 이메일 형식이 아닙니다."
+        }
+        return HttpResponse(json.dumps(context),content_type="application/json")\
+         """
+
         #bcrypt는 bytes형식만 사용
         #입력받은 str 형식의 PW를 bytes형식으로 인코딩
         input_pw = data['pw'].encode('utf-8')
@@ -58,6 +77,7 @@ def signup(request):
             userId = data['id'] , 
             userPw = decoded_pw,
             userSalt = decoded_salt,
+            #userEmail = data['email'] ,
             introduce = data['introduce'] ,
            # linkId = "none" ,
         ).save()
