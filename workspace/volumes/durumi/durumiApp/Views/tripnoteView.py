@@ -139,7 +139,9 @@ def selectTripnote(request):
     try:
         # req = json.loads(request.body)
         # name = req['name']
-        name = request.POST.get("name", "")
+        tripnoteName = request.POST.get("name", "")
+        userId = request.session['userId']
+        user = User.objects.filter(userId=userId)[0]
         # name = request.POST["name"]
         # userId = request.session["userId"]
         # return render(request, 'durumiApp/test.html', {"name": "mmmmmmmmmm"})
@@ -153,49 +155,48 @@ def selectTripnote(request):
         DurumiCat(durumiDesc="관광지", iconAddr="/static/image/icons/13.png").save()
         # tripNote = ReadTripnoteFromDB(userId=userId, name=name)
 
-        tripNotes = Tripnote.objects.filter(name=name)
+        tripNote = Tripnote.objects.filter(name=tripnoteName, userId=user)[0]
+
         retItems = {}
 
         i = 0
         dests = []
         cats = []
         codes = []
-        for tripNote in tripNotes:
-            # dests_codes = tripNote.dest.split('~')
-            dests = tripNote.dest.split('~')
-            cats = tripNote.cat.split('~')
+        # dests_codes = tripNote.dest.split('~')
+        dests = tripNote.dest.split('~')
+        cats = tripNote.cat.split('~')
 
-            for dest,   cat in zip(dests,   cats):
-                DurumiCat(durumiDesc=cat).save()
-                category = []
+        for dest,   cat in zip(dests,   cats):
+            DurumiCat(durumiDesc=cat).save()
+            category = []
 
-                category = DurumiCat.objects.filter(durumiDesc=cat)
+            category = DurumiCat.objects.filter(durumiDesc=cat)
 
-                for c in category:
-                    cat_ = c.iconAddr
+            for c in category:
+                cat_ = c.iconAddr
 
-                    d = dest.split(':')
-                    dest_ = d[0]
-                    code_ = d[1]
-                # cat = "/static/image/icons/13.png"
-                # 여기 윗부분 카테고리 아이콘 하는 방식에 따라 수정해야함
-                place = json.loads(sa.codeFindAPI(code_)['item0'])
+                d = dest.split(':')
+                dest_ = d[0]
+                code_ = d[1]
+            # cat = "/static/image/icons/13.png"
+            # 여기 윗부분 카테고리 아이콘 하는 방식에 따라 수정해야함
+            place = json.loads(sa.codeFindAPI(code_)['item0'])
 
-                item = {}
+            item = {}
 
-                item['cat'] = cat_
-                item['dest'] = dest_
-                item['code'] = code_
-                item['mapx'] = str(place['mapx'])
-                item['mapy'] = str(place['mapy'])
-                item['place'] = place
-                retItems['TripnotePlace'+str(i)] = item
-                i += 1
+            item['cat'] = cat_
+            item['dest'] = dest_
+            item['code'] = code_
+            item['mapx'] = str(place['mapx'])
+            item['mapy'] = str(place['mapy'])
+            item['place'] = place
+            retItems['TripnotePlace'+str(i)] = item
+            i += 1
 
         context = {
             "Test": request.POST.get("name", ""),
             "result": retItems,
-            "TTTT": name,
             "items": item
         }
         return HttpResponse(json.dumps(context), content_type="application/json")
