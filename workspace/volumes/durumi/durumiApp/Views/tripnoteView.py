@@ -140,6 +140,8 @@ def selectTripnote(request):
         # req = json.loads(request.body)
         # name = req['name']
         name = request.POST.get("name", "")
+        userId = request.session['userId']
+        user = User.objects.filter(userId=userId)
         # name = request.POST["name"]
         # userId = request.session["userId"]
         # return render(request, 'durumiApp/test.html', {"name": "mmmmmmmmmm"})
@@ -153,7 +155,7 @@ def selectTripnote(request):
         DurumiCat(durumiDesc="관광지", iconAddr="/static/image/icons/13.png").save()
         # tripNote = ReadTripnoteFromDB(userId=userId, name=name)
 
-        tripNotes = Tripnote.objects.filter(name=name)
+        tripNotes = Tripnote.objects.filter(name=name, userId=user)
         retItems = {}
 
         i = 0
