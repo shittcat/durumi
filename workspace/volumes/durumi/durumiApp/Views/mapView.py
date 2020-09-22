@@ -4,14 +4,14 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from ..apicodes import searchAPI as sa
 from ..Models.UserModel import User
+from ..Models import MapModel
+from . import appkey
 import simplejson as json
 import os
 import sys
 
 # 상위폴더의 파일을 import 하기 위해 상위폴더의 Path를 등록해줌
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
-from ..Models import MapModel
 
 def mapView(request):  # 맵 템플릿 연결
     template_name = 'durumiApp/Map.html'
