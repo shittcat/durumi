@@ -44,15 +44,22 @@ def signup(request):
         }
         return HttpResponse(json.dumps(context),content_type="application/json")
     else :
-        encodedPw = data['pw'].encode('utf-8')
+        #bcrypt는 bytes형식만 사용
+        #입력받은 str 형식의 PW를 bytes형식으로 인코딩
+        input_pw = data['pw'].encode('utf-8')
         salt = bcrypt.gensalt()
-        hashedPw = bcrypt.hashpw(encodedPw, salt)
+        hashed_pw = bcrypt.hashpw(input_pw, salt)
+
+        #DB저장을 위해 bytes->str 형변환
+        decoded_salt = salt.decode('utf-8')
+        decoded_pw = hashed_pw.decode('utf-8')
+
         User(
             userId = data['id'] , 
-            userPw = hashedPw,
-            userSalt = salt,
+            userPw = decoded_pw,
+            userSalt = decoded_salt,
             introduce = data['introduce'] ,
-            linkId = "none" ,
+           # linkId = "none" ,
         ).save()
         context = {
             "result" : "회원가입 성공"
@@ -76,9 +83,18 @@ def loginCheck(request):
     
     if User.objects.filter(userId= data['id']).exists():
         result = User.objects.filter(userId=inputId)[0] #userId로 검색한 첫 번째 튜플
-        new_salt = result.userSalt
-        inputPW = bcrypt.hashpw(inputPW, new_salt)
-        if( (inputId == result.userId) and (inputPW == result.userPw)):
+        
+        #DB에서 가져온 소금값을 str에서 bytes로 형변환
+        encoded_salt = result.userSalt.encode('utf-8')
+
+        #입력받은 PW를 bytes형식으로 바꾸고 해싱
+        encoded_pw = inputPW.encode('utf-8')
+        inputPW = bcrypt.hashpw(encoded_pw, encoded_salt)
+
+        #DB에서 가져온 해싱된 PW를 str에서 bytes로 형변환
+        userPw = result.userPw.encode('utf-8')
+
+        if( (inputId == result.userId) and (inputPW == userPw)):
             request.session['loginOk'] = True
             requset.session['userId'] = inputId
             context = {

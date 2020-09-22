@@ -1,11 +1,9 @@
 var GlobalTripnoteList;
 var GlobalTripnote;
 
-function addTripNote() {
-  
-}
+function addTripNote() {}
 
-function selectPlace(item) {
+function selectTripnotePlace(item) {
   //지역 선택 시 화면 전환 함수
   place = GlobalTripnote[item];
   console.log(place.mapy, place.mapx);
@@ -65,7 +63,7 @@ function showTripnote(jdata) {
     var Ddata =
       "<div id =" +
       List[item].code +
-      " class='items' onclick='selectPlace(\"" +
+      " class='items' onclick='selectTripnotePlace(\"" +
       item +
       "\")'>" +
       List[item].dest +
