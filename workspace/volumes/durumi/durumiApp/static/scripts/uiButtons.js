@@ -1,10 +1,10 @@
-// UI 버튼 관련 스크립트 
+// UI 버튼 관련 스크립트
 
-function closeMenu(){
-    $("#popup_mask").css("display","none"); //팝업창 뒷배경 display none
-    $("#menuDiv").css("left","140vw");
-    $("#openMenu").css("left","88vw");
-    checkMenu = checkMenu * -1;
+function closeMenu() {
+  $("#popup_mask").css("display", "none"); //팝업창 뒷배경 display none
+  $("#menuDiv").css("left", "140vw");
+  $("#openMenu").css("left", "88vw");
+  checkMenu = checkMenu * -1;
 }
 
 $("#popup_mask").click(function(){

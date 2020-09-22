@@ -68,12 +68,28 @@
         <div id="config" class="openView menuSel">설정</div>
         
     </div>
+    {% endif %}
+  </div>
+  <br />
+  {% if request.session.loginOk == True %}
+  <div id="logOut">로그아웃</div>
+  <div id="userContents" class="menuComponent">
+    <div id="viewMyNotes" class="openView">여행노트</div>
+    <div id="viewAcv" class="openView">도전과제</div>
+    <div id="viewCom" class="openView">내 리뷰</div>
+  </div>
 
+  {% endif %}
+  <div id="appEtc" class="menuComponent">
+    <div id="viewNotice" class="openView">공지사항</div>
+    <div id="viewSC" class="openView">고객센터</div>
+    <div id="config" class="openView">설정</div>
+  </div>
 
-    <script type="text/javascript">
-    function openPage(pageName){
-        $("#viewDiv").css("display","block");
-        $("#viewDiv").load("/durumiApp/viewPage/"+pageName);
+  <script type="text/javascript">
+    function openPage(pageName) {
+      $("#viewDiv").css("display", "block");
+      $("#viewDiv").load("/durumiApp/viewPage/" + pageName);
     }
     function goLogout(){
         $.ajax({
@@ -94,4 +110,3 @@
     
     
 </html>
-

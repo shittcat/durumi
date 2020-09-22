@@ -1,10 +1,26 @@
 var GlobalTripnoteList;
 var GlobalTripnote;
-
+var GlobalselctTripnoteForaddTripnoteList;
 function addTripnoteListCancel() {
   $("#addTripnoteListDiv").css("display", "none");
 }
-
+function selectTripnoteForaddTripnoteOpen() {
+  $("#selectTripnoteForaddTripnoteDiv").css({
+    top:
+      ($(window).height() -
+        $("#selectTripnoteForaddTripnoteDiv").outerHeight()) /
+        2 +
+      $(window).scrollTop() +
+      "px",
+    left:
+      ($(window).width() - $("#selectTripnoteForaddTripnoteDiv").outerWidth()) /
+        2 +
+      $(window).scrollLeft() +
+      "px",
+    //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+  });
+  $("#selectTripnoteForaddTripnoteDiv").css("display", "block");
+}
 function addTripNoteListOpen() {
   console.log("addTripNoteList");
 
@@ -45,7 +61,7 @@ function showTripnoteList(jdata) {
   for (var item in jdata) {
     //console.log(List[item]);
     var Ddata =
-      "<div id =\"" +
+      '<div id ="' +
       List[item] +
       "\" class='items' onclick='selectTripnote(\"" +
       List[item] +
@@ -75,7 +91,18 @@ function EmptyTripnote() {
     hideOverlays(map);
   }
 }
-
+function EmptyselectTripnoteForaddTripnote() {
+  for (var Tripnote in GlobalselctTripnoteForaddTripnoteList) {
+    console.log(GlobalselctTripnoteForaddTripnoteList[Tripnote]);
+    if (
+      document.getElementById(GlobalselctTripnoteForaddTripnoteList[Tripnote])
+    ) {
+      document
+        .getElementById(GlobalselctTripnoteForaddTripnoteList[Tripnote])
+        .remove();
+    }
+  }
+}
 function showTripnote(jdata) {
   GlobalTripnote = jdata;
   List = jdata;
@@ -104,4 +131,35 @@ function showTripnote(jdata) {
 
     SetMarkerTripnote(List[item]);
   }
+}
+
+function showselectTripnoteForaddTripnote(jdata, contentid) {
+  GlobalselctTripnoteForaddTripnoteList = jdata;
+  List = jdata;
+  console.log(jdata);
+  EmptyselectTripnoteForaddTripnote();
+
+  for (var item in jdata) {
+    //console.log(List[item]);
+    var Ddata =
+      '<div id ="' +
+      List[item] +
+      "\" class='items' onclick=\"addTripnote('" +
+      List[item] +
+      "'," +
+      contentid +
+      ')">' +
+      List[item] +
+      "</div>";
+
+    $("#selectTripnoteForaddTripnoteDiv").html(
+      $("#selectTripnoteForaddTripnoteDiv").html() + Ddata
+    );
+  }
+
+  selectTripnoteForaddTripnoteOpen();
+}
+
+function selectTripnoteForaddTripnoteCancel() {
+  $("#selectTripnoteForaddTripnoteDiv").css("display", "none");
 }

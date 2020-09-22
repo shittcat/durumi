@@ -1,11 +1,11 @@
 # docker build --no-cache --network=host -t durumi .
 # 이후 : docker-compose up
-# 방화벽 설정으로 실행 안될때 iptables 초기화 
+# 방화벽 설정으로 실행 안될때 iptables 초기화
 # sudo iptables -t filter -F &&
 # sudo iptables -t filter -X
 # systemctl restart docker
 
-# sudo iptables -t filter -F && sudo iptables -t filter -X && sudo systemctl restart docker 
+# sudo iptables -t filter -F && sudo iptables -t filter -X && sudo systemctl restart docker
 
 version: "2"
 
@@ -27,7 +27,7 @@ services:
       - "8000"
     # restart : always
     # depends_on :
-    #   - mysql 
+    #   - mysql
   nginx:
     image: nginx
     container_name: nginx_service
@@ -41,11 +41,11 @@ services:
   mysql:
     image: mysql
     container_name: mysql_service
-    env_file :
+    env_file:
       - .env
     volumes:
       - ../volumes-mysql/mysql/:/var/lib/mysql/
-    environment: 
+    environment:
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${DB_DATABASE}"
       MYSQL_USER: "${DB_USER}"

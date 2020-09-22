@@ -14,7 +14,7 @@ class User(models.Model):
     linkId = models.CharField(max_length=20, blank=True, unique=True)
 
     def __str__(self):
-        return self.userid
+        return self.userId
 
 
 "관광타입 ID"

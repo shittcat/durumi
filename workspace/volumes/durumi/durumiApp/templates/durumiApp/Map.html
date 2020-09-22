@@ -2,7 +2,7 @@
 <html>
     <head>
         
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83bbe8eebf0695e3a6a3ef988fe26092"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         
         <meta charset = "utf-8" />
@@ -260,7 +260,25 @@
             -webkit-border-bottom-right-radius: 20px;
         }
 
-
+        #selectTripnoteForaddTripnoteDiv {  
+        	top : 20vw;
+        	position: absolute;
+        	background: white;
+        	width: 80vw;
+        	height: 80vh;
+        	display: none; 
+        	z-index : 4;
+        	
+        	-moz-border-radius-topleft : 20px;  
+        	-moz-border-radius-topright: 20px;  
+        	-moz-border-radius-bottomleft: 20px;  
+        	-moz-border-radius-bottomright: 20px;  
+        	
+        	-webkit-border-top-left-radius: 20px;  
+        	-webkit-border-top-right-radius: 20px;  
+        	-webkit-border-bottom-left-radius: 20px;  
+        	-webkit-border-bottom-right-radius: 20px;  
+        }
         
         /*팝업 리스트 css */
         div.items{ 
@@ -464,6 +482,8 @@
             border-radius : 3vw;
         }
         
+
+
         </style>
         
     </head>
@@ -500,7 +520,7 @@
         <button id="popCloseBtn">close</button>
     </div>
 
-    
+    <!--트립노트 추가를 위한 팝업창-->
     <div id="addTripnoteListDiv">
     <!-- 팝업창 -->
     <input
@@ -515,6 +535,17 @@
 
     <button id="addTripnoteListBtn" onclick="addTripnoteList()">OK</button>
     <button id="addTripnoteListcancelBtn" onclick="addTripnoteListCancel()">
+        cancel
+    </button>
+    </div>
+
+    <!--트립노트에 장소 추가시 트립노트를 선택하기 위한 팝업창-->
+    
+    <div id="selectTripnoteForaddTripnoteDiv">
+    <!-- 팝업창 -->
+ 
+
+    <button id="addTripnoteListcancelBtn" onclick="selectTripnoteForaddTripnoteCancel()">
         cancel
     </button>
     </div>
@@ -888,12 +919,18 @@ function openTripNote(){
         $("#catDiv").css("top","10vw");
     }
     else if(checkNote == -1){//노트 내려와 있는 상태 
-        appearTripnote();
-        $("#noteDiv").css("display","block"); //팝업창 display block
-        $("#noteDiv").css("top","70vh");
-        $("#openNote").css("top","68vh");
-        $("#searchDiv").css("top","-10vh");
-        $("#catDiv").css("top","-10vw");
+
+        {% if request.session.loginOk != True %}
+            openLoginPage();
+        {% else %}
+            appearTripnote();
+            $("#noteDiv").css("display","block"); //팝업창 display block
+            $("#noteDiv").css("top","70vh");
+            $("#openNote").css("top","68vh");
+            $("#searchDiv").css("top","-10vh");
+            $("#catDiv").css("top","-10vw");
+        {% endif %}
+    
     }
     //다른 ui 숨기기
     checkNote = checkNote * -1; 
@@ -985,7 +1022,7 @@ function SetMarker(inum){
 
         mtitle += "<div class=\"placeType\"> "+list['cat3']+"</div>";
         mtitle += "<div class=\"addr1\">"+list['addr1']+"</div>  </div>";
-        mtitle += "<div class=\"addTripnote\" onclick=\"addTripnote("+list['contentid']+")\">거르미에 추가</div>"
+        mtitle += "<div class=\"addTripnote\" onclick=\"selectTripnoteForaddTripnote("+list['contentid']+")\">거르미에 추가</div>"
         
         tmpcont = tmpcont.replace(/placeContent/,mtitle);
         tmpcont = tmpcont.replace(/olnum/gi,idx.replace(/item/,''));
@@ -1000,10 +1037,38 @@ function SetMarker(inum){
 </script>
 
 <script>
-    function addTripnote(contentid){
-        console.log(contentid);
-        var reqData = {contentid : contentid}
+    function selectTripnoteForaddTripnote(contentid){
+        {% if request.session.loginOk != True %}
+            openLoginPage();
+        {% else %}
+            $.ajax({
+                cache:false,
+                url:"{% url 'durumiApp:selectTripnoteForaddTripnote' %}",
+                type:"POST",
+                success: function(data){
+                    alert("성공");
+                    var jdata = data["result"];
+                    console.log(jdata);
+                    showselectTripnoteForaddTripnote(jdata,contentid);
+                },
+                error: function(xhr,status,)
+                {
+                    alert("실패");
+                    alert(xhr+":"+status);
+                },
+            });
+        {% endif %}
 
+    }
+</script>
+<script>
+    function addTripnote(tripnoteName,contentid){
+        console.log(contentid);
+        console.log(tripnoteName);
+        var reqData = {
+            contentid : contentid,
+            tripnoteName : tripnoteName};
+        
         $.ajax({
             cache:false,
             url:"{% url 'durumiApp:addTripnote' %}",
@@ -1012,7 +1077,7 @@ function SetMarker(inum){
             success: function(data)
             {
                 alert("성공");
-                
+                selectTripnoteForaddTripnoteCancel();
             },
             error: function(xhr,status,)
             {
