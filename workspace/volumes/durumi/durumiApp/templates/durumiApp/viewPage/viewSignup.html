@@ -101,15 +101,26 @@
                     <input type="password" name="pwcheck" placeholder="비밀번호확인" class="accInput"></input>
                 </div> <br/>
                 <div class="inputRow">
-                    <input type="text" name="" placeholder="이메일" class="accInput"></input>
+                    <input type="text" name="email" placeholder="이메일" class="accInput"></input>
                 </div> <br/>
-                <input type="submit" value="여행거르미 시작하기" id="signSubmit"> <br/>
+                 <div id="errorStr"></div>
+                 <div id="signSubmit" onclick="goSignup()">여행거르미 시작하기</div>
                 <br/>
             </form>
         </div>
     </body>   
     
     <script>
+        document.addEventListener('keydown', function(event) 
+        {
+            if ((event.keyCode === 13))
+            {
+                event.preventDefault();
+                goLogin();
+            };
+        }, true);   
+        
+    
         $('#signupForm input').on('focus',function(event){
             $(event.target).closest('.inputRow').css('border','solid 1px #2196F3')
         });
@@ -118,8 +129,10 @@
             $(event.target).closest('.inputRow').css('border','solid 1px #bababa')
         });
     
-        $('#signupForm').on('submit',function(event){
-           var formData = $('#signupForm').serialize();
+        function goSignup(){
+            var formData = $('#signupForm').serialize();
+            if($('pw'))
+            
             $.ajax({
                 cache : false,
                 url : "{% url 'durumiApp:signup' %}" ,
@@ -127,14 +140,17 @@
                 data : formData,
                 success : function(data){
                     var res = data['result']
-                    alert(res);
+                    if(res == "ok") 
+                        {location.reload();}
+                    else
+                        $('#errorStr').html(res);
                 },
                 error : function(xhr,status,)
                 {
                     alert("통신 실패");
                 },
             });
-        });
+        }
         
     </script>
 {% endblock %}

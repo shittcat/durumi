@@ -26,41 +26,43 @@ def signup(request):
             "result" : "비밀번호는 8글자 이상이어야 합니다."
         }
         return HttpResponse(json.dumps(context),content_type="application/json")
-    elif data['pw'].isdigit():
+    elif data['pw'] != data['pwcheck'] :
         context = {
-            "result" : "문자를 포함해주시기 바랍니다."
+            "result" : "비밀번호가 일치하지 않습니다"
         }
         return HttpResponse(json.dumps(context),content_type="application/json")
-    else :
-        
-        """
-         elif '@' not in data['email']:
+    elif data['pw'].isdigit():
+        context = {
+            "result" : "비밀번호에 문자만 포함해주시기 바랍니다."
+        }
+        return HttpResponse(json.dumps(context),content_type="application/json")
+    elif '@' not in data['email']:
         context = {
             "result" : "올바른 이메일 형식이 아닙니다."
         }
         return HttpResponse(json.dumps(context),content_type="application/json")\
-         """
+        
+    #bcrypt는 bytes형식만 사용
+    #입력받은 str 형식의 PW를 bytes형식으로 인코딩
+    input_pw = data['pw'].encode('utf-8')
+    salt = bcrypt.gensalt()
+    hashed_pw = bcrypt.hashpw(input_pw, salt)
 
-        #bcrypt는 bytes형식만 사용
-        #입력받은 str 형식의 PW를 bytes형식으로 인코딩
-        input_pw = data['pw'].encode('utf-8')
-        salt = bcrypt.gensalt()
-        hashed_pw = bcrypt.hashpw(input_pw, salt)
+    # DB저장을 위해 bytes->str 형변환
+    decoded_salt = salt.decode('utf-8')
+    decoded_pw = hashed_pw.decode('utf-8')
 
-        # DB저장을 위해 bytes->str 형변환
-        decoded_salt = salt.decode('utf-8')
-        decoded_pw = hashed_pw.decode('utf-8')
-
-        User(
-            userId = data['id'] , 
-            userPw = decoded_pw,
-            userSalt = decoded_salt,
-            linkId = data['id']
-        ).save()
-        context = {
-            "result": "회원가입 성공"
-        }
-        return HttpResponse(json.dumps(context), content_type="application/json")
+    User(
+        userId = data['id'] , 
+        userPw = decoded_pw,
+        userSalt = decoded_salt,
+        linkId = data['id'],
+        userMail = data['email'],
+    ).save()
+    context = {
+        "result": "ok"
+    }
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 
 @csrf_exempt
