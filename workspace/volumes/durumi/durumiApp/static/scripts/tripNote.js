@@ -1,7 +1,27 @@
 var GlobalTripnoteList;
 var GlobalTripnote;
 
-function addTripNote() {}
+function addTripnoteListCancel() {
+  $("#addTripnoteListDiv").css("display", "none");
+}
+
+function addTripNoteListOpen() {
+  console.log("addTripNoteList");
+
+  $("#addTripnoteListDiv").css({
+    top:
+      ($(window).height() - $("#addTripnoteListDiv").outerHeight()) / 2 +
+      $(window).scrollTop() +
+      "px",
+    left:
+      ($(window).width() - $("#addTripnoteListDiv").outerWidth()) / 2 +
+      $(window).scrollLeft() +
+      "px",
+    //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+  });
+
+  $("#addTripnoteListDiv").css("display", "block");
+}
 
 function selectTripnotePlace(item) {
   //지역 선택 시 화면 전환 함수
@@ -17,14 +37,17 @@ function showTripnoteList(jdata) {
   GlobalTripnoteList = jdata;
   List = jdata;
   console.log(jdata);
-  EmptyTripnoteList();
+  $("#tripnoteBackBtn").css("display", "none");
+  $("#addTripNoteListBtn").css("display", "inline");
+
+  EmptyTripnoteList(List);
   EmptyTripnote();
   for (var item in jdata) {
-    console.log(List[item]);
+    //console.log(List[item]);
     var Ddata =
-      "<div id =" +
+      "<div id =\"" +
       List[item] +
-      " class='items' onclick='selectTripnote(\"" +
+      "\" class='items' onclick='selectTripnote(\"" +
       List[item] +
       "\")'>" +
       List[item] +
@@ -34,10 +57,13 @@ function showTripnoteList(jdata) {
   }
 }
 function EmptyTripnoteList() {
+  console.log(GlobalTripnoteList);
   for (var TripnoteList in GlobalTripnoteList) {
     console.log(GlobalTripnoteList[TripnoteList]);
-    if (document.getElementById(GlobalTripnoteList[TripnoteList]) != null)
+    if (document.getElementById(GlobalTripnoteList[TripnoteList])) {
+      console.log(GlobalTripnoteList[TripnoteList] + " is deleted");
       document.getElementById(GlobalTripnoteList[TripnoteList]).remove();
+    }
   }
 }
 function EmptyTripnote() {
@@ -56,6 +82,8 @@ function showTripnote(jdata) {
   console.log(jdata);
   EmptyTripnote();
   EmptyTripnoteList();
+  $("#addTripNoteListBtn").css("display", "none");
+  $("#tripnoteBackBtn").css("display", "inline");
 
   for (var item in jdata) {
     console.log(List[item].iconAddr);
@@ -75,6 +103,5 @@ function showTripnote(jdata) {
     console.log(List[item]);
 
     SetMarkerTripnote(List[item]);
-    //SetMarkerTripnote(33.450701, 126.570667);
   }
 }
