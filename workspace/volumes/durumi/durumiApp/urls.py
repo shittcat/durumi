@@ -18,7 +18,7 @@ urlpatterns = [
     path("logout", accountView.logOut, name="logOut"),
     path("selectTripnote", tripnoteView.selectTripnote, name="selectTripnote"),
     path("tripnote", tripnoteView.tripnoteView, name="tripnote"),
-    path("addTripnoteList", tripnoteView.addTripnoteList, name="addTripnoteList"),
+    path("newTripnoteList", tripnoteView.addTripnoteList, name="newTripnoteList"),
     path("addTripnote", tripnoteView.addTripnote, name="addTripnote"),
     path("selectTripnoteForaddTripnote", tripnoteView.selectTripnoteForaddTripnote,
          name="selectTripnoteForaddTripnote"),

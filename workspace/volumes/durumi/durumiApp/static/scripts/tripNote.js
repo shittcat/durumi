@@ -21,23 +21,11 @@ function selectTripnoteForaddTripnoteOpen() {
   });
   $("#selectTripnoteForaddTripnoteDiv").css("display", "block");
 }
-function addTripNoteListOpen() {
-  console.log("addTripNoteList");
-
-  $("#addTripnoteListDiv").css({
-    top:
-      ($(window).height() - $("#addTripnoteListDiv").outerHeight()) / 2 +
-      $(window).scrollTop() +
-      "px",
-    left:
-      ($(window).width() - $("#addTripnoteListDiv").outerWidth()) / 2 +
-      $(window).scrollLeft() +
-      "px",
-    //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-  });
-
-  $("#addTripnoteListDiv").css("display", "block");
-}
+// function addTripNoteListOpen() {
+//     $("#popup_mask").css("display","block");
+//     $("#addTripnoteListDiv").css("display","block");
+//     $("#addTripnoteListDiv").css("top","20vh");
+// }
 
 function selectTripnotePlace(item) {
   //지역 선택 시 화면 전환 함수
@@ -63,7 +51,7 @@ function showTripnoteList(jdata) {
     var Ddata =
       '<div id ="' +
       List[item] +
-      "\" class='items' onclick='selectTripnote(\"" +
+      "\" class='tripNoteList' onclick='selectTripnote(\"" +
       List[item] +
       "\")'>" +
       List[item] +
@@ -118,7 +106,7 @@ function showTripnote(jdata) {
     var Ddata =
       "<div id =" +
       List[item].code +
-      " class='items' onclick='selectTripnotePlace(\"" +
+      " class='tripNoteItems' onclick='selectTripnotePlace(\"" +
       item +
       "\")'>" +
       List[item].dest +
@@ -144,7 +132,7 @@ function showselectTripnoteForaddTripnote(jdata, contentid) {
     var Ddata =
       '<div id ="' +
       List[item] +
-      "\" class='items' onclick=\"addTripnote('" +
+      "\" class='tripNoteList' onclick=\"addTripnote('" +
       List[item] +
       "'," +
       contentid +

@@ -4,7 +4,7 @@ function closeMenu() {
   $("#popup_mask").css("display", "none"); //팝업창 뒷배경 display none
   $("#menuDiv").css("left", "140vw");
   $("#openMenu").css("left", "88vw");
-  checkMenu = checkMenu * -1;
+  checkMenu = -1;
 }
 
 $("#popup_mask").click(function(){
@@ -12,7 +12,6 @@ $("#popup_mask").click(function(){
         closeMenu();
     }
     if( checkLoginPage == 1){ //로그인페이지 닫기 
-        checkLoginPage = -1
         closeLoginPage();
     }
 });

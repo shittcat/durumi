@@ -240,14 +240,19 @@
         
         /* 트립노트추가 css */
         
-        #addTripnoteListDiv {
-            top: 20vw;
-            position: absolute;
-            background: white;
-            width: 60vw;
-            height: 20vh;
-            display: none;
-            z-index: 4;
+        #newTripnoteListDiv {
+            text-align : center;
+            display : block;
+            position : absolute ;
+            width : 90vw;
+            height : 15vh;
+            font-size : 1.25em;
+            transition : top 0.8s;
+            
+            top : 120vh;
+            margin : 0 5vw;
+            z-index : 4;
+            background : white;
 
             -moz-border-radius-topleft: 20px;
             -moz-border-radius-topright: 20px;
@@ -259,7 +264,44 @@
             -webkit-border-bottom-left-radius: 20px;
             -webkit-border-bottom-right-radius: 20px;
         }
-
+        
+        #newTripnoteListDiv .inputRow{
+            width: 80%;
+            height: 35%;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 2%;
+            border: solid 1px #bababa;
+            background: white;
+            
+        	-moz-border-radius-topleft : 10px;  
+            -moz-border-radius-topright: 10px;  
+            -moz-border-radius-bottomleft: 10px;  
+            -moz-border-radius-bottomright: 10px;  
+            
+            -webkit-border-top-left-radius: 10px;  
+            -webkit-border-top-right-radius: 10px;  
+            -webkit-border-bottom-left-radius: 10px;  
+            -webkit-border-bottom-right-radius: 10px; 
+        }
+        #newTripnoteListDiv #errormsg{
+            font-size : 0.75em;
+        }
+        
+        #newTripnoteListDiv #btnlist{
+            float : left;
+            font-size : 0.75em;
+        }
+        
+        #TripnoteListNameBox{
+            width:70vw;
+            display : inline-block;
+            height: 7vw;
+            margin : 1vh 0 1vh 0 ;
+            border : none;
+            outline-style : none;
+        }
+        
         #selectTripnoteForaddTripnoteDiv {  
         	top : 20vw;
         	position: absolute;
@@ -293,6 +335,8 @@
             font-size : 16px;
             font-weight : bold;
         }
+        
+
         
         /*지도에 표시될 마커*/
         .itemOverlays{
@@ -667,33 +711,26 @@
     </div>
     
     <!--트립노트 추가를 위한 팝업창-->
-    <div id="addTripnoteListDiv">
-    <!-- 팝업창 -->
-    <input
-        type="text"
-        name="TripnoteListNameBox"
-        placeholder="트립노트의 이름을 입력하세요"
-        id="TripnoteListNameBox"
-    />
-    <BR><BR>
-
-
-
-    <button id="addTripnoteListBtn" onclick="addTripnoteList()">OK</button>
-    <button id="addTripnoteListcancelBtn" onclick="addTripnoteListCancel()">
-        cancel
-    </button>
+    <div id="newTripnoteListDiv">
+        <!-- 팝업창 -->
+        <div class="inputRow">
+            <input type="text" name="TripnoteListNameBox" placeholder="새 거르미의 이름을 입력하세요"
+                id="TripnoteListNameBox" />
+        </div>
+        <div id="errormsg"></div>
+        <div id="btnDiv" style="width:50%;margin:0 auto;">
+            <div id="btnlist" onclick="newTripnoteList()">생성하기</div>
+            <div id="btnlist" onclick="newTripnoteListCancel()" style="float:right;"> 취소 </div>
+        </div>
     </div>
 
     <!--트립노트에 장소 추가시 트립노트를 선택하기 위한 팝업창-->
     
     <div id="selectTripnoteForaddTripnoteDiv">
-    <!-- 팝업창 -->
- 
-
-    <button id="addTripnoteListcancelBtn" onclick="selectTripnoteForaddTripnoteCancel()">
-        cancel
-    </button>
+        <!-- 팝업창 -->
+        <button id="addTripnoteListcancelBtn" onclick="selectTripnoteForaddTripnoteCancel()">
+            cancel
+        </button>
     </div>
     
     <div id="loginPage"> {% include 'durumiApp/loginPage.html' %} </div>
@@ -728,6 +765,7 @@
         SaveDiv = $("#popupDiv").html();
         checkNote = -1 ; //tripnote 올라왔는지 내려왔는지 체크 
         checkMenu = -1 ; //menu
+        checkNewList = -1;
         viewMode = 1 ; //place
         checkLoginPage = -1;
         searchFocus = -1;
@@ -749,6 +787,27 @@
         $('#loading').remove();
     });
     </script>
+    <script>
+        $('#newTripnoteListDiv input').on('focus',function(event){
+            $(event.target).closest('.inputRow').css('border','solid 1px #2196F3')
+        });
+        
+        $('#newTripnoteListDiv input').on('focusout',function(event){
+            $(event.target).closest('.inputRow').css('border','solid 1px #bababa')
+        });
+    
+        function newTripnoteListCancel() {
+            $("#popup_mask").css("display","none");
+            $("#newTripnoteListDiv").css("top","120vh");
+        }
+        
+        function openNewTripNoteList() {
+            $("#popup_mask").css("display","block");
+            $("#newTripnoteListDiv").css("display","block");
+            $("#newTripnoteListDiv").css("top","40vh");
+        }
+    </script>
+    
     
     <script>
         function openMenu(){
@@ -913,7 +972,6 @@ function openTripNote(){
         $("#catDiv").css("top","10vw");
     }
     else if(checkNote == -1){//노트 내려와 있는 상태 
-
         {% if request.session.loginOk != True %}
             openLoginPage();
         {% else %}
@@ -1084,27 +1142,31 @@ function SetMarker(inum){
 </script>
 
 <script>
-    function addTripnoteList(){
-        var formData = $("#TripnoteListNameBox").serialize();
-
-        $.ajax({
-            cache: false,
-            url: "{% url 'durumiApp:addTripnoteList' %}",
-            data: formData,
-            type:"POST",
-            success: function(data)
-            {
-                alert("성공");
-                appearTripnote();
-                addTripnoteListCancel();
-            },
-            error : function(xhr, status,data)
-            {
-                alert("실패");
-                alert(xhr + ":" + status);
-            },
-
-        });
+    function newTripnoteList(){
+        if( $("#TripnoteListNameBox").val() == "")
+            $('#newTripnoteListDiv #errormsg').html('올바르지 않은 이름입니다.')
+        else {
+            var formData = $("#TripnoteListNameBox").serialize();
+    
+            $.ajax({
+                cache: false,
+                url: "{% url 'durumiApp:newTripnoteList' %}",
+                data: formData,
+                type:"POST",
+                success: function(data)
+                {
+                    alert("성공");
+                    appearTripnote();
+                    newTripnoteListCancel();
+                },
+                error : function(xhr, status,data)
+                {
+                    alert("실패");
+                    alert(xhr + ":" + status);
+                },
+    
+            });
+        }
     }
 
 </script>
