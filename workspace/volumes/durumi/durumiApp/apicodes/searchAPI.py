@@ -3,7 +3,10 @@ from urllib.parse import urlencode, quote_plus
 from urllib.request import urlopen, Request
 from .apikey import *  # if using on django , should using .apikey instead apikey
 import json
+from haversine import haversine
 
+global PI
+PI = 3.14159265358979323846
 
 def keywordFindAPI(inputKeyword):
     url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword'
@@ -127,6 +130,32 @@ def locationFindAPI(gpsLoc, code):
                 i += 1
                 #make dict_items type Objects to list type objects
     return retItems #return datas to json data
+
+def toiletFind(gpsLoc):
+    gpsLoc = gpsLoc.split(":")
+    start = (float(gpsLoc[1]), float(gpsLoc[0]))
+    retItems = {}
+    i = 0
+    with open("/home/durumi/durumiApp/apicodes/toilet.json", "rt", encoding='UTF8') as json_file:
+        json_data = json.load(json_file)
+        
+        
+        for data in json_data["records"]:
+            try:
+                lon_data = float(data["경도"])
+                lat_data = float(data["위도"])
+                goal = (lat_data, lon_data)
+                if lat_data == "" or lon_data == "":
+                    continue
+                if haversine(start, goal, unit = 'km') < float(3):
+                    data["title"] = data["화장실명"]
+                    data["mapx"] = data["경도"]
+                    data["mapy"] = data["위도"]
+                    retItems['item'+str(i)] = ( json.dumps(data,ensure_ascii=False) )
+                    i += 1
+            except:
+                continue
+    return retItems
 
 if __name__ == "__main__":
     gpsLoc = "126.804388:37.485773"

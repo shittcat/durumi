@@ -90,7 +90,7 @@ function hideMarkers(map) {
 }
 
 function hideOverlays(map) {
-  for (var i = 0; i < markers.length; i++) {
+  for (var i = 0; i < overlays.length; i++) {
     overlays[i].setMap(null);
   }
 }
