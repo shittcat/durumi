@@ -1,10 +1,10 @@
-// UI 버튼 관련 스크립트 
+// UI 버튼 관련 스크립트
 
-function closeMenu(){
-    $("#popup_mask").css("display","none"); //팝업창 뒷배경 display none
-    $("#menuDiv").css("left","140vw");
-    $("#openMenu").css("left","88vw");
-    checkMenu = checkMenu * -1;
+function closeMenu() {
+  $("#popup_mask").css("display", "none"); //팝업창 뒷배경 display none
+  $("#menuDiv").css("left", "140vw");
+  $("#openMenu").css("left", "88vw");
+  checkMenu = -1;
 }
 
 $("#popup_mask").click(function(){
@@ -16,16 +16,18 @@ $("#popup_mask").click(function(){
     }
 });
 
-$("#goLoginPage").on('click',function(event){ //로그인 페이지 열기
+
+function openLoginPage(){
     closeMenu();
     $("#popup_mask").css("display","block");
     $("#loginPage").css("display","block");
     $("#loginPage").css("top","20vh");
-    checkLoginPage *= -1;
-});
+    checkLoginPage = 1;
+    
+}
 
 function closeLoginPage(){
     $("#popup_mask").css("display","none");
     $("#loginPage").css("top","120vh");
-    checkLoginPage *= -1;
+    checkLoginPage = -1;
 }

@@ -2,7 +2,7 @@
 <html>
     <head>
         
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83bbe8eebf0695e3a6a3ef988fe26092"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         
         <meta charset = "utf-8" />
@@ -106,8 +106,6 @@
             /*position : relative;*/
             max-width: 100%; 
             width:auto; height:auto;
-            /*margin: 1vw;*/
-            /*top:0; bottom:0; left:0; right:0;*/
             border-radius : 1vw;
         }
 
@@ -115,9 +113,16 @@
         #openMenu{
             display : table-cell;
             z-index:2;
-            width : 3vw;
-            background:white;
+            width : 7vw; height: 7vw;
             transition : left 0.5s, top 1s;
+            
+        }
+        
+        #openMenu img{
+            max-height: 100%; 
+            width:auto; height:auto;
+            vertical-align : sub;
+            margin-bottom : 1vw;
         }
 
         /*메인페이지 표시될 지도*/
@@ -161,7 +166,7 @@
             position : relative;
             width : 100vw;
             height : 100vh;
-            background : skyblue;
+            background : white;
             display : none;
             z-index : 5 ;
         }                
@@ -233,6 +238,89 @@
             z-index : 3;
         }
         
+        /* 트립노트추가 css */
+        
+        #newTripnoteListDiv {
+            text-align : center;
+            display : block;
+            position : absolute ;
+            width : 90vw;
+            height : 15vh;
+            font-size : 1.25em;
+            transition : top 0.8s;
+            
+            top : 120vh;
+            margin : 0 5vw;
+            z-index : 4;
+            background : white;
+
+            -moz-border-radius-topleft: 20px;
+            -moz-border-radius-topright: 20px;
+            -moz-border-radius-bottomleft: 20px;
+            -moz-border-radius-bottomright: 20px;
+
+            -webkit-border-top-left-radius: 20px;
+            -webkit-border-top-right-radius: 20px;
+            -webkit-border-bottom-left-radius: 20px;
+            -webkit-border-bottom-right-radius: 20px;
+        }
+        
+        #newTripnoteListDiv .inputRow{
+            width: 80%;
+            height: 35%;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 2%;
+            border: solid 1px #bababa;
+            background: white;
+            
+        	-moz-border-radius-topleft : 10px;  
+            -moz-border-radius-topright: 10px;  
+            -moz-border-radius-bottomleft: 10px;  
+            -moz-border-radius-bottomright: 10px;  
+            
+            -webkit-border-top-left-radius: 10px;  
+            -webkit-border-top-right-radius: 10px;  
+            -webkit-border-bottom-left-radius: 10px;  
+            -webkit-border-bottom-right-radius: 10px; 
+        }
+        #newTripnoteListDiv #errormsg{
+            font-size : 0.75em;
+        }
+        
+        #newTripnoteListDiv #btnlist{
+            float : left;
+            font-size : 0.75em;
+        }
+        
+        #TripnoteListNameBox{
+            width:70vw;
+            display : inline-block;
+            height: 7vw;
+            margin : 1vh 0 1vh 0 ;
+            border : none;
+            outline-style : none;
+        }
+        
+        #selectTripnoteForaddTripnoteDiv {  
+        	top : 20vw;
+        	position: absolute;
+        	background: white;
+        	width: 80vw;
+        	height: 80vh;
+        	display: none; 
+        	z-index : 4;
+        	
+        	-moz-border-radius-topleft : 20px;  
+        	-moz-border-radius-topright: 20px;  
+        	-moz-border-radius-bottomleft: 20px;  
+        	-moz-border-radius-bottomright: 20px;  
+        	
+        	-webkit-border-top-left-radius: 20px;  
+        	-webkit-border-top-right-radius: 20px;  
+        	-webkit-border-bottom-left-radius: 20px;  
+        	-webkit-border-bottom-right-radius: 20px;  
+        }
         
         /*팝업 리스트 css */
         div.items{ 
@@ -248,6 +336,8 @@
             font-weight : bold;
         }
         
+
+        
         /*지도에 표시될 마커*/
         .itemOverlays{
             position : relative;
@@ -255,7 +345,7 @@
             backface-visibility: hidden;
             transform-style: preserve-3d;
             transition: 0.5s;
-            bottom : 20vw;
+            bottom : 28vw;
         }
         
         .itemOverlays:after{
@@ -312,7 +402,7 @@
             font-weight : bold;
         }
         
-        .itemOverlays.place .addTripNote{
+        .itemOverlays.place .addTripnote{
             background : #2196F3;
             color : white;
             font-weight : bold;
@@ -351,7 +441,7 @@
         /*catDiv.css*/    
             #catDiv{
             position : relative;
-            margin-top : 2vh;
+            margin-top : 3vh;
             top : 10vw ;
             left : 5vw ;
             width : 90vw;
@@ -435,7 +525,7 @@
             top:0; bottom:0; left:0; right:0;
             border-radius : 3vw;
         }
-        
+
         </style>
         
     </head>
@@ -465,7 +555,9 @@
     </style>
 <body scroll="overflow-x: hidden">
     
-    <div id="loading"><img id="loading-image" src='{% static "image/loading.gif" %}' alt="Loading." /></div>
+    <div id="loading">
+        <img id="loading-image" src='{% static "image/loading.gif" %}' alt="Loading." />
+    </div>
     
     
     <div id="popupDiv"> <!-- 팝업창 -->
@@ -475,7 +567,6 @@
     <div id="popup_mask"></div>
     <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
 
-    <!-- Map이 들어갈 위치를 정해주는 태그-->
     <!-- Map이 들어갈 위치를 정해주는 태그-->
     <div id = "map">
     </div>
@@ -494,7 +585,9 @@
             <input type=button id="search" value="확인" style="display:none;">
         </form>
         <input type=hidden id="gpsLoc" name="gpsLoc">
-        <div id ="openMenu" onclick='openMenu()'>openmenu</div> 
+        <div id ="openMenu" onclick='openMenu()'>
+            <img src = '{% static "image/menu2.png" %}'>
+        </div> 
     </div>
     
     <!-- div 태그 선언 영역 -->
@@ -604,29 +697,6 @@
         </div>
       </div>
 
-      <div id="larCat0" class="midCatDiv main">
-        <div class="midCat swiper-slide">0</div>
-        <div class="midCat swiper-slide">0</div>
-        <div class="midCat swiper-slide">0</div>
-      </div>
-
-      <div id="larCat1" class="midCatDiv other">
-        <div class="midCat swiper-slide">1</div>
-        <div class="midCat swiper-slide">1</div>
-        <div class="midCat swiper-slide">1</div>
-      </div>
-
-      <div id="larCat2" class="midCatDiv other">
-        <div class="midCat swiper-slide">2</div>
-        <div class="midCat swiper-slide">2</div>
-        <div class="midCat swiper-slide">2</div>
-      </div>
-
-      <div id="larCat3" class="midCatDiv other">
-        <div class="midCat swiper-slide">3</div>
-        <div class="midCat swiper-slide">3</div>
-        <div class="midCat swiper-slide">3</div>
-      </div>
     </div>
 
     <div class="itemOverlays">
@@ -640,6 +710,29 @@
       </div>
     </div>
     
+    <!--트립노트 추가를 위한 팝업창-->
+    <div id="newTripnoteListDiv">
+        <!-- 팝업창 -->
+        <div class="inputRow">
+            <input type="text" name="TripnoteListNameBox" placeholder="새 거르미의 이름을 입력하세요"
+                id="TripnoteListNameBox" />
+        </div>
+        <div id="errormsg"></div>
+        <div id="btnDiv" style="width:50%;margin:0 auto;">
+            <div id="btnlist" onclick="newTripnoteList()">생성하기</div>
+            <div id="btnlist" onclick="newTripnoteListCancel()" style="float:right;"> 취소 </div>
+        </div>
+    </div>
+
+    <!--트립노트에 장소 추가시 트립노트를 선택하기 위한 팝업창-->
+    
+    <div id="selectTripnoteForaddTripnoteDiv">
+        <!-- 팝업창 -->
+        <button id="addTripnoteListcancelBtn" onclick="selectTripnoteForaddTripnoteCancel()">
+            cancel
+        </button>
+    </div>
+    
     <div id="loginPage"> {% include 'durumiApp/loginPage.html' %} </div>
 </body>    
     <script src="{% static 'scripts/searchList.js' %}"></script>
@@ -647,7 +740,8 @@
     <script src="{% static 'scripts/itemOverlays.js' %}"></script>
     <script src="{% static 'scripts/catDiv.js' %}"></script>
     <script src="{% static 'scripts/swiper-bundle.min.js' %}"></script>
-    
+    <script src="{% static 'scripts/tripNote.js' %}"></script>
+
     
     <!-- Initialize Swiper -->
     <script>
@@ -671,6 +765,7 @@
         SaveDiv = $("#popupDiv").html();
         checkNote = -1 ; //tripnote 올라왔는지 내려왔는지 체크 
         checkMenu = -1 ; //menu
+        checkNewList = -1;
         viewMode = 1 ; //place
         checkLoginPage = -1;
         searchFocus = -1;
@@ -692,6 +787,27 @@
         $('#loading').remove();
     });
     </script>
+    <script>
+        $('#newTripnoteListDiv input').on('focus',function(event){
+            $(event.target).closest('.inputRow').css('border','solid 1px #2196F3')
+        });
+        
+        $('#newTripnoteListDiv input').on('focusout',function(event){
+            $(event.target).closest('.inputRow').css('border','solid 1px #bababa')
+        });
+    
+        function newTripnoteListCancel() {
+            $("#popup_mask").css("display","none");
+            $("#newTripnoteListDiv").css("top","120vh");
+        }
+        
+        function openNewTripNoteList() {
+            $("#popup_mask").css("display","block");
+            $("#newTripnoteListDiv").css("display","block");
+            $("#newTripnoteListDiv").css("top","40vh");
+        }
+    </script>
+    
     
     <script>
         function openMenu(){
@@ -805,9 +921,8 @@
     }
 
     $(".midcat").click(function(){
-        var test = $(this).attr('id');
-        alert(test);
-        locationSearchtest(test);
+        var code = $(this).attr('id');
+        locationSearchtest(code);
   
     });
 
@@ -818,9 +933,7 @@
     function locationSearchtest(code){
         // getLocation();
         loctest()
-        alert(code);
         var formData = $("#searchForm").serialize()+"&gpsLoc="+$("#gpsLoc").text()+"&code="+code;
-        
         $.ajax
         ({
             cache: false,
@@ -859,12 +972,17 @@ function openTripNote(){
         $("#catDiv").css("top","10vw");
     }
     else if(checkNote == -1){//노트 내려와 있는 상태 
-        appearTripnote();
-        $("#noteDiv").css("display","block"); //팝업창 display block
-        $("#noteDiv").css("top","70vh");
-        $("#openNote").css("top","68vh");
-        $("#searchDiv").css("top","-10vh");
-        $("#catDiv").css("top","-10vw");
+        {% if request.session.loginOk != True %}
+            openLoginPage();
+        {% else %}
+            appearTripnote();
+            $("#noteDiv").css("display","block"); //팝업창 display block
+            $("#noteDiv").css("top","70vh");
+            $("#openNote").css("top","68vh");
+            $("#searchDiv").css("top","-10vh");
+            $("#catDiv").css("top","-10vw");
+        {% endif %}
+    
     }
     //다른 ui 숨기기
     checkNote = checkNote * -1; 
@@ -956,7 +1074,7 @@ function SetMarker(inum){
 
         mtitle += "<div class=\"placeType\"> "+list['cat3']+"</div>";
         mtitle += "<div class=\"addr1\">"+list['addr1']+"</div>  </div>";
-        mtitle += "<div class=\"addTripNote\" onclick=\"addTripNote("+list['contentid']+")\">거르미에 추가</div>"
+        mtitle += "<div class=\"addTripnote\" onclick=\"selectTripnoteForaddTripnote("+list['contentid']+")\">거르미에 추가</div>"
         
         tmpcont = tmpcont.replace(/placeContent/,mtitle);
         tmpcont = tmpcont.replace(/olnum/gi,idx.replace(/item/,''));
@@ -970,6 +1088,88 @@ function SetMarker(inum){
     
 </script>
 
+<script>
+    function selectTripnoteForaddTripnote(contentid){
+        {% if request.session.loginOk != True %}
+            openLoginPage();
+        {% else %}
+            $.ajax({
+                cache:false,
+                url:"{% url 'durumiApp:selectTripnoteForaddTripnote' %}",
+                type:"POST",
+                success: function(data){
+                    alert("성공");
+                    var jdata = data["result"];
+                    console.log(jdata);
+                    showselectTripnoteForaddTripnote(jdata,contentid);
+                },
+                error: function(xhr,status,)
+                {
+                    alert("실패");
+                    alert(xhr+":"+status);
+                },
+            });
+        {% endif %}
+
+    }
+</script>
+<script>
+    function addTripnote(tripnoteName,contentid){
+        console.log(contentid);
+        console.log(tripnoteName);
+        var reqData = {
+            contentid : contentid,
+            tripnoteName : tripnoteName};
+        
+        $.ajax({
+            cache:false,
+            url:"{% url 'durumiApp:addTripnote' %}",
+            data: reqData,
+            type:"POST",
+            success: function(data)
+            {
+                alert("성공");
+                selectTripnoteForaddTripnoteCancel();
+            },
+            error: function(xhr,status,)
+            {
+                alert("실패");
+                alert(xhr + ":"+status);
+            },
+
+        });
+    }
+</script>
+
+<script>
+    function newTripnoteList(){
+        if( $("#TripnoteListNameBox").val() == "")
+            $('#newTripnoteListDiv #errormsg').html('올바르지 않은 이름입니다.')
+        else {
+            var formData = $("#TripnoteListNameBox").serialize();
+    
+            $.ajax({
+                cache: false,
+                url: "{% url 'durumiApp:newTripnoteList' %}",
+                data: formData,
+                type:"POST",
+                success: function(data)
+                {
+                    alert("성공");
+                    appearTripnote();
+                    newTripnoteListCancel();
+                },
+                error : function(xhr, status,data)
+                {
+                    alert("실패");
+                    alert(xhr + ":" + status);
+                },
+    
+            });
+        }
+    }
+
+</script>
 
 
 </html>

@@ -1,27 +1,64 @@
-{% csrf_token %}
+{% csrf_token %} {% load static %}
 
-<!--this is tripnote : {{ test }} -->
-<div id="tripnoteDiv">
-  <!-- 팝업창 -->
-  <button id="addTripNoteListBtn" onclick="addTripNote()">add</button>
-  <button id="tripnoteBackBtn" onclick="appearTripnote()">back</button>
-  <button id="tripnoteModifyBtn">Modify</button>
-  <button id="tripnoteCloseBtn" onclick="openTripNote()">close</button>
-</div>
-{% load static %}
+
+<head>
+  <style type="text/css">
+  .tripNoteList{
+      text-align : center;
+      font-size : 14px;
+      padding :3vw 5vh ;
+      border-bottom : 1.5px solid grey;
+  }
+  
+  .tripNoteItems{
+      text-align : center;
+      font-size : 14px;
+      padding :3vw 5vh ;
+      border-bottom : 1.5px solid grey;
+  }
+  
+  .tripNoteInfoDiv{
+    display : none;
+    color: grey;
+    margin: 1vh 0 1vh 1vw;
+  }
+  </style>
+  
+    
+</head>
+
+
 
 <script src="{% static 'scripts/tripNote.js' %}"></script>
 <script src="{% static 'scripts/itemOverlays.js' %}"></script>
 
+<!--this is tripnote : {{ test }} -->
+<div style="overflow-y: scroll" id="tripnoteDiv">
+  <!-- 팝업창 -->
+  <button id="addTripNoteListBtn" onclick="openNewTripNoteList()">add</button>
+  <button id="tripnoteBackBtn" onclick="appearTripnote()">back</button>
+  <button id="tripnoteModifyBtn">Modify</button>
+  <button id="tripnoteCloseBtn" onclick="openTripNote()">close</button>
+  <div class="tripNoteInfoDiv" id="showTripNoteListDiv">
+    나의 여행 거르미 목록
+  </div>
+  <div class="tripNoteInfoDiv" id="showTripNoteItemsDiv">
+    <div id="tripNoteListName"></div>
+  </div>
+  
+</div>
+
 <script>
+
   function appearTripnote() {
+    $('#showTripNoteItemsDiv').css('display','none');
+    $('#showTripNoteListDiv').css('display','block');
     $.ajax({
       cache: false,
       url: "{% url 'durumiApp:tripnote' %}",
 
       type: "POST",
       success: function (data) {
-        alert("성공");
         var jdata = data["result"];
         console.log(jdata);
         showTripnoteList(jdata);
@@ -36,6 +73,9 @@
 
 <script>
   function selectTripnote(name) {
+    $('#showTripNoteListDiv').css('display','none');
+    $('#showTripNoteItemsDiv').css('display','block');
+    $('#tripNoteListName').text(name)
     //reqData = JSON.stringify(name);
     reqData = name;
     data = { name: reqData };
@@ -46,7 +86,6 @@
       data: data,
       type: "POST",
       success: function (data) {
-        alert("성공");
         var jdata = data["result"];
         console.log(data);
         showTripnote(jdata);
