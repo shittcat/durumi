@@ -131,3 +131,12 @@ MEDIAFILES_DIR = [
     '/durumiApp/media/'
 ]
 MEDIA_ROOT = os.path.join(ROOT_DIR, ".media_root")
+
+#About Mail
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "durumiApp@gmail.com"
+EMAIL_HOST_PASSWORD = "enfnaleoqkr!#$@"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

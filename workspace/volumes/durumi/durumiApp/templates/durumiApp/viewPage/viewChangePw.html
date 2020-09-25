@@ -1,0 +1,56 @@
+{% extends 'durumiApp/viewPage/viewBase.html' %}
+
+{% block pageName %}
+    비밀번호 변경
+{% endblock%}
+
+
+{% block pageContent %}
+    <body>
+        <div id="changePWContainer">
+            <form id="changeForm" method="post">
+                {% csrf_token %}
+                <br/>아이디: {{ request.session.userId }}<br/>
+                <br/>
+                <div class="inputRow">
+                    비밀번호: 
+                    <input type="password" name="pw" placeholder="비밀번호" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    비밀번호 확인: 
+                    <input type="password" name="pwcheck" placeholder="비밀번호 확인" class="accInput"></input>
+                </div> <br/>
+                <div id="errorStr"></div>
+                <div id="changeSubmit" onclick="goChangePw()">비밀번호 변경</div>
+                <br/>
+            </form>
+        </div>
+    </body>     
+
+    <script>
+        function goChangePw(){
+            var formData = $('#changeForm').serialize();
+            
+            $.ajax({
+                cache : false,
+                url : "{% url 'durumiApp:changePw' %}" ,
+                type : 'POST',
+                data : formData,
+                success : function(data){
+                    var res = data['result']
+                    if(res == "ok") 
+                    {
+                        alert('비밀번호를 변경했습니다.');
+                        closeView();
+                    }
+                    else
+                        $('#errorStr').html(res);
+                },
+                error : function(xhr,status,)
+                {
+                    alert("통신 실패");
+                },
+            });
+        }
+    </script>
+{% endblock %}

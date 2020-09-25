@@ -6,5 +6,56 @@
 
 
 {% block pageContent %}
-    this is view Bases's block contents.
+    <body>
+        <div id="findPWcontainer">
+            <form id="findForm">
+                {% csrf_token %}
+                비밀번호 찾기 <br/>
+                <div class="inputRow">
+                    <input type="text" name="id" placeholder="계정명" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    <input type="text" name="email" placeholder="메일주소" class="accInput"></input>
+                </div> <br/>
+                <div id="errorStr"></div>
+                <div id="findSubmit" onclick="goFindPW()">비밀번호 찾기</div>
+            </form>
+        </div>
+    </body>
+
+    <script>      
+        $('#findForm input').on('focus',function(event){
+            $(event.target).closest('.inputRow').css('border','solid 1px #2196F3')
+        });
+        
+        $('#findForm input').on('focusout',function(event){
+            $(event.target).closest('.inputRow').css('border','solid 1px #bababa')
+        });
+
+        function goFindPW(){
+            var formData = $('#findForm').serialize();
+            
+            $.ajax({
+                cache : false,
+                url : "{% url 'durumiApp:findPW' %}" ,
+                type : 'POST',
+                data : formData,
+                success : function(data){
+                    var res = data['result']
+                    if(res == "ok") 
+                    {
+                        alert('메일을 전송했습니다.');
+                        closeView();
+                    }
+                    else
+                        $('#errorStr').html(res);
+                },
+                error : function(xhr,status,)
+                {
+                    alert("통신 실패");
+                },
+            });
+        }
+    </script>
 {% endblock %}
+
