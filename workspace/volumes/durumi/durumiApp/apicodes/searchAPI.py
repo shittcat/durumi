@@ -5,8 +5,6 @@ from .apikey import *  # if using on django , should using .apikey instead apike
 import json
 from haversine import haversine
 
-global PI
-PI = 3.14159265358979323846
 
 def keywordFindAPI(inputKeyword):
     url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword'
