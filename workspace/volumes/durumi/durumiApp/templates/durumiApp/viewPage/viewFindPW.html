@@ -14,7 +14,7 @@
                 {% csrf_token %}
                 비밀번호 찾기 <br/>
                 <div class="inputRow">
-                    <input type="text" name="id" placeholder="계정명" class="accInput"></input>
+                    <input type="text" name="id" id="inputFindPw" placeholder="계정명" class="accInput"></input>
                 </div> <br/>
                 <div class="inputRow">
                     <input type="text" name="email" placeholder="메일주소" class="accInput"></input>
@@ -29,7 +29,7 @@
     
         document.addEventListener('keydown', function(event) 
         {
-            if ((event.keyCode === 13) && (checkPage == 1))
+            if ((event.keyCode === 13) && (checkPage == 1) && ($("#inputFindPw").val()))
             {
                 event.preventDefault();
                 goFindPW();

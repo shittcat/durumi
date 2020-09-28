@@ -17,7 +17,7 @@
                 <br/>함께 걸어가는 여행의 동반자 <br/>여행 거르미에 오신것을 환영합니다! <br/>
                 <br/>
                 <div class="inputRow">
-                    <input type="text" name="id" placeholder="아이디" class="accInput"></input>
+                    <input type="text" id="inputSignup" name="id" placeholder="아이디" class="accInput"></input>
                 </div> * 영문자 숫자만 가능합니다. 
                 <div class="inputRow">
                     <input type="password" name="pw" placeholder="비밀번호" class="accInput"></input>
@@ -38,7 +38,7 @@
     <script>
         document.addEventListener('keydown', function(event) 
         {
-            if ((event.keyCode === 13) && (checkPage == 1))
+            if ((event.keyCode === 13) && (checkPage == 1) && ($("#inputSignup").val()) )
             {
                 event.preventDefault();
                 goSignup();
@@ -60,7 +60,7 @@
             
             $.ajax({
                 cache : false,
-                url : "{% url 'durumiApp:accountPage' pageName='signUp' %}" ,
+                url : "{% url 'durumiApp:accountPage' pageName='signup' %}" ,
                 type : 'POST',
                 data : formData,
                 success : function(data){
