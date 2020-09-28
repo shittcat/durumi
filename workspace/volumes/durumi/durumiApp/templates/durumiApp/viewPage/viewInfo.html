@@ -7,22 +7,20 @@
 
 {% block pageContent %}
     <body>
-        <div id="changeContainer">
-            <form id="changeForm" method="post">
+        <div id="inputContainer">
+            <form id="inputForm" method="post">
                 {% csrf_token %}
                 <br/>아무것도 입력하지 않을 시 정보가 변경되지 않고 유지됩니다.<br/>
                 <br/>아이디: {{ request.session.userId }}<br/>
                 <br/>
                 <div class="inputRow">
-                    이메일: 
-                    <input type="email" name="email" placeholder="이메일" class="accInput"></input>
+                    <input type="email" id="inputChangeInfo" name="email" placeholder="이메일" class="accInput"></input>
                 </div> <br/>
                 <div class="inputRow">
-                    자기소개: 
                     <input type="text" name="introduce" placeholder="자기소개" class="accInput"></input>
                 </div> <br/>
                 <div id="errorStr"></div>
-                <div id="changeSubmit" onclick="goChangeInfo()">정보 변경</div>
+                <div id="inputSubmit" onclick="goChangeInfo()">정보 변경</div>
                 <br/>
             </form>
         </div>
@@ -33,7 +31,7 @@
         $(document).ready(function(){
             $.ajax({
             cache : false,
-            url : "{% url 'durumiApp:loadInfo' %}" ,
+            url : "{% url 'durumiApp:accountPage' pageName='loadInfo' %}" ,
             type : 'POST',
             //data : "",
             success : function(data){
@@ -47,13 +45,23 @@
             }
             });
         })
+        document.addEventListener('keydown', function(event) 
+        {
+            if ((event.keyCode === 13) && (checkPage == 1) && ($("#inputChangeInfo").val())) //이 페이지를 사용중인지 체크 
+            {
+                event.preventDefault();
+                goChangeInfo();
+            };
+        }, true);   
+
+
 
         function goChangeInfo(){
-            var formData = $('#changeForm').serialize();
+            var formData = $('#inputForm').serialize();
             
             $.ajax({
                 cache : false,
-                url : "{% url 'durumiApp:changeInfo' %}" ,
+                url : "{% url 'durumiApp:accountPage' pageName='changeInfo' %}" ,
                 type : 'POST',
                 data : formData,
                 success : function(data){

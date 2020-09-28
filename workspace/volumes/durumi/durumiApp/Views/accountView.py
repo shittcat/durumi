@@ -17,6 +17,11 @@ import random
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 @csrf_exempt
+def select(request,pageName):
+    return globals()[pageName](request)
+
+
+@csrf_exempt
 def signup(request):
     template_name = 'durumiApp/viewpage/viewSignup.html'
     data = request.POST

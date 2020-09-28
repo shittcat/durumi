@@ -7,87 +7,12 @@
 
 
 {% block pageContent %}
-    <style>
-    
-    body{
-        position : fixed;
-    }
-    
-    #logo{
-        width : 50vw;
-    }
-    
-    #signupContainer{
-        left: 5vw;
-        position: fixed;
-        width: 90vw;
-        height: 55vh;
-        margin-top: 8vh;
-        padding-bottom : 3vh;
-        background: white;
-        border-color: #626263;
-        border: solid thin #c0c0c0;
-        border-radius: 15px;
-    }
-    
-    #signupForm{
-        width : 80vw;
-        margin : 0 auto;
-        text-align : center;
-    }
-    
-    
-    #signupForm input{
-        font-size : 1.25em;
-        border : none;
-        outline-style : none;
-    }
-    
-    #signupForm .inputRow{
-        position: relative;
-        padding: 1vh 1vw 1vh 1vw;
-        border: solid 1px #bababa;
-        background: white;
-        
-    	-moz-border-radius-topleft : 10px;  
-        -moz-border-radius-topright: 10px;  
-        -moz-border-radius-bottomleft: 10px;  
-        -moz-border-radius-bottomright: 10px;  
-        
-        -webkit-border-top-left-radius: 10px;  
-        -webkit-border-top-right-radius: 10px;  
-        -webkit-border-bottom-left-radius: 10px;  
-        -webkit-border-bottom-right-radius: 10px; 
-    }
-    
-    #signupForm #signSubmit{
-        background : #2196F3;
-        color : white;
-        font-weight : bold;
-        font-size : 1.2em;
-        width : 80vw;
-        height : 5vh%;
-        margin: 0 auto;
-        padding-top : 1vw;
-        text-align: center;
-        border-radius: 2vw;
-        margin-bottom:1vw;
-    }
-    
-    #pageFooter{
-        background : #f5f6f8;
-        position : absolute;
-        top : 90vh;
-        height: 10vh;
-        width : 100vw;
-    }
-    
-    </style>
+    <!-- using pageView.css -->
     
     
     <body>
-        <div id="signupContainer">
-            <form id="signupForm" method="post">
+        <div id="inputContainer">
+            <form id="inputForm" method="post">
                 {% csrf_token %}
                 <br/>함께 걸어가는 여행의 동반자 <br/>여행 거르미에 오신것을 환영합니다! <br/>
                 <br/>
@@ -104,7 +29,7 @@
                     <input type="text" name="email" placeholder="이메일" class="accInput"></input>
                 </div> <br/>
                  <div id="errorStr"></div>
-                 <div id="signSubmit" onclick="goSignup()">여행거르미 시작하기</div>
+                 <div id="inputSubmit" onclick="goSignup()">여행거르미 시작하기</div>
                 <br/>
             </form>
         </div>
@@ -113,29 +38,29 @@
     <script>
         document.addEventListener('keydown', function(event) 
         {
-            if ((event.keyCode === 13))
+            if ((event.keyCode === 13) && (checkPage == 1))
             {
                 event.preventDefault();
-                goLogin();
+                goSignup();
             };
         }, true);   
         
     
-        $('#signupForm input').on('focus',function(event){
+        $('#inputForm input').on('focus',function(event){
             $(event.target).closest('.inputRow').css('border','solid 1px #2196F3')
         });
         
-        $('#signupForm input').on('focusout',function(event){
+        $('#inputForm input').on('focusout',function(event){
             $(event.target).closest('.inputRow').css('border','solid 1px #bababa')
         });
     
         function goSignup(){
-            var formData = $('#signupForm').serialize();
+            var formData = $('#inputForm').serialize();
             if($('pw'))
             
             $.ajax({
                 cache : false,
-                url : "{% url 'durumiApp:signup' %}" ,
+                url : "{% url 'durumiApp:accountPage' pageName='signUp' %}" ,
                 type : 'POST',
                 data : formData,
                 success : function(data){
