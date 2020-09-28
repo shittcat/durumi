@@ -1,7 +1,8 @@
 // 지도 오버레이 마커/뷰 관련 스크립트
 
-var imageSrc =
-  "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+var marker_basic = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+var photo_basic = "/static/image/photo/photo_basic.png";
 
 // function SetMarker(inum){
 //     var list = $.parseJSON(GlobalList[inum]);
@@ -90,7 +91,7 @@ function hideMarkers(map) {
 }
 
 function hideOverlays(map) {
-  for (var i = 0; i < markers.length; i++) {
+  for (var i = 0; i < overlays.length; i++) {
     overlays[i].setMap(null);
   }
 }

@@ -15,6 +15,7 @@ RUN pip3 install django
 RUN pip3 install gunicorn
 RUN pip3 install bcrypt
 RUN pip3 install simplejson
+RUN pip3 install haversine 
 
 RUN apt-get install -y libmysqlclient-dev
 RUN pip3 install mysqlclient
