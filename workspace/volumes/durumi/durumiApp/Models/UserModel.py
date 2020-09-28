@@ -11,7 +11,10 @@ class User(models.Model):
     userPw = models.CharField(max_length=500)
     userSalt = models.CharField(max_length=100)
     userMail = models.EmailField(max_length=120)
+    userLv = models.IntegerField(default="1", null=False)
+    userExp = models.IntegerField(default="0", null=False)
     introduce = models.CharField(max_length=150, default="자기소개")
+    profileImg = models.CharField(max_length=20, default="usericon1", null=False)
     linkId = models.CharField(max_length=20, blank=True, unique=True)
 
     def __str__(self):

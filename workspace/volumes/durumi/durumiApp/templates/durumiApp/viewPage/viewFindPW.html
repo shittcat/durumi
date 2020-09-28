@@ -1,10 +1,73 @@
 {% extends 'durumiApp/viewPage/viewBase.html' %}
-
+{% load static %}
 {% block pageName %}
-    viewFindPW
+    <img src='{% static "image/logo_full.png" %}' id="logo">
 {% endblock%}
 
 
 {% block pageContent %}
-    this is view Bases's block contents.
+    <!-- using pageView.css -->
+    
+    <body>
+        <div id="inputcontainer">
+            <form id="inputForm">
+                {% csrf_token %}
+                비밀번호 찾기 <br/>
+                <div class="inputRow">
+                    <input type="text" name="id" placeholder="계정명" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    <input type="text" name="email" placeholder="메일주소" class="accInput"></input>
+                </div> <br/>
+                <div id="errorStr"></div>
+                <div id="inputSubmit" onclick="goFindPW()">비밀번호 찾기</div>
+            </form>
+        </div>
+    </body>
+
+    <script>      
+    
+        document.addEventListener('keydown', function(event) 
+        {
+            if ((event.keyCode === 13) && (checkPage == 1))
+            {
+                event.preventDefault();
+                goFindPW();
+            };
+        }, true);   
+    
+        $('#inputForm input').on('focus',function(event){
+            $(event.target).closest('.inputRow').css('border','solid 1px #2196F3')
+        });
+        
+        $('#inputForm input').on('focusout',function(event){
+            $(event.target).closest('.inputRow').css('border','solid 1px #bababa')
+        });
+
+        function goFindPW(){
+            var formData = $('#inputForm').serialize();
+            
+            $.ajax({
+                cache : false,
+                url : "{% url 'durumiApp:accountPage' pageName='findPW' %}" ,
+                type : 'POST',
+                data : formData,
+                success : function(data){
+                    var res = data['result']
+                    if(res == "ok") 
+                    {
+                        alert('메일을 전송했습니다.');
+                        closeView();
+                    }
+                    else
+                        $('#errorStr').html(res);
+                },
+                error : function(xhr,status,)
+                {
+                    alert("통신 실패");
+                },
+            });
+        }
+    </script>
 {% endblock %}
+

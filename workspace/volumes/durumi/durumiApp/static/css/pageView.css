@@ -1,0 +1,72 @@
+body{
+    position : fixed;
+}
+
+#logo{
+    width : 50vw;
+}
+
+#inputContainer{
+    left: 5vw;
+    position: fixed;
+    width: 90vw;
+    height: 55vh;
+    margin-top: 8vh;
+    padding-bottom : 3vh;
+    background: white;
+    border-color: #626263;
+    border: solid thin #c0c0c0;
+    border-radius: 15px;
+}
+
+#inputForm{
+    width : 80vw;
+    margin : 0 auto;
+    text-align : center;
+}
+
+
+#inputForm input{
+    font-size : 1.25em;
+    border : none;
+    outline-style : none;
+}
+
+#inputForm .inputRow{
+    position: relative;
+    padding: 1vh 1vw 1vh 1vw;
+    border: solid 1px #bababa;
+    background: white;
+    
+	-moz-border-radius-topleft : 10px;  
+    -moz-border-radius-topright: 10px;  
+    -moz-border-radius-bottomleft: 10px;  
+    -moz-border-radius-bottomright: 10px;  
+    
+    -webkit-border-top-left-radius: 10px;  
+    -webkit-border-top-right-radius: 10px;  
+    -webkit-border-bottom-left-radius: 10px;  
+    -webkit-border-bottom-right-radius: 10px; 
+}
+
+#inputForm #inputSubmit{
+    background : #2196F3;
+    color : white;
+    font-weight : bold;
+    font-size : 1.2em;
+    width : 80vw;
+    height : 5vh%;
+    margin: 0 auto;
+    padding-top : 1vw;
+    text-align: center;
+    border-radius: 2vw;
+    margin-bottom:1vw;
+}
+
+#pageFooter{
+    background : #f5f6f8;
+    position : absolute;
+    top : 90vh;
+    height: 10vh;
+    width : 100vw;
+}

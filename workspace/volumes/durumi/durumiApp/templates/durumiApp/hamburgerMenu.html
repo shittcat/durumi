@@ -67,24 +67,6 @@
     </div>
   
   <script type="text/javascript">
-    function openPage(pageName) {
-      $("#viewDiv").css("display", "block");
-      $("#viewDiv").load("/durumiApp/viewPage/" + pageName);
-    }
-    function goLogout(){
-        $.ajax({
-           cache : false,
-           url : "{% url 'durumiApp:logOut' %}" ,
-           type : 'POST',
-           data : "",
-           success : function(data){
-               alert("로그아웃 되었습니다");
-           },
-           error : function(data){
-               alert("통신 실패");
-           }
-        });
-        location.reload();
-    }
+
     </script>
 </html>

@@ -1,0 +1,63 @@
+{% extends 'durumiApp/viewPage/viewBase.html' %}
+
+{% block pageName %}
+    비밀번호 변경
+{% endblock%}
+
+
+{% block pageContent %}
+    <body>
+        <div id="inputContainer">
+            <form id="inputForm" method="post">
+                {% csrf_token %}
+                <br/>아이디: {{ request.session.userId }}<br/>
+                <br/>
+                <div class="inputRow">
+                    <input type="password" id="inputChangePw" name="pw" placeholder="비밀번호" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    <input type="password" name="pwcheck" placeholder="비밀번호 확인" class="accInput"></input>
+                </div> <br/>
+                <div id="errorStr"></div>
+                <div id="inputSubmit" onclick="goChangePw()">비밀번호 변경</div>
+                <br/>
+            </form>
+        </div>
+    </body>     
+
+    <script>
+            document.addEventListener('keydown', function(event) 
+        {
+            if ((event.keyCode === 13) && (checkPage == 1) && ($("#inputChangePw").val())) //이 페이지를 사용중인지 체크 
+            {
+                event.preventDefault();
+                goChangePw();
+            };
+        }, true);   
+    
+        function goChangePw(){
+            var formData = $('#inputForm').serialize();
+            
+            $.ajax({
+                cache : false,
+                url : "{% url 'durumiApp:accountPage' pageName='changePw' %}" ,
+                type : 'POST',
+                data : formData,
+                success : function(data){
+                    var res = data['result']
+                    if(res == "ok") 
+                    {
+                        alert('비밀번호를 변경했습니다.');
+                        closeView();
+                    }
+                    else
+                        $('#errorStr').html(res);
+                },
+                error : function(xhr,status,)
+                {
+                    alert("통신 실패");
+                },
+            });
+        }
+    </script>
+{% endblock %}

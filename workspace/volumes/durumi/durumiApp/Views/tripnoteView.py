@@ -17,6 +17,10 @@ import sys
 # 상위폴더의 파일을 import 하기 위해 상위폴더의 Path를 등록해줌
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
+@csrf_exempt
+def select(request,pageName):
+    return globals()[pageName](request)
+
 
 @csrf_exempt  # 보안문제로 적어줌
 def selectTripnoteForaddTripnote(request):

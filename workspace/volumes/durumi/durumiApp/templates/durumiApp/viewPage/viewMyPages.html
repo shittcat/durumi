@@ -1,0 +1,24 @@
+{% extends 'durumiApp/viewPage/viewBase.html' %}
+
+{% block pageName %}
+    My page
+{% endblock%}
+
+
+{% block pageContent %}
+    <body>
+        <div id="myPage" class="menuComponent">
+            <div id="viewInfo" class="menuSel" onclick="openPage('viewInfo')">내 정보 변경</div>
+            <div id="viewChangePw" class="menuSel" onclick="openPage('viewChangePw')">비밀번호 변경</div>
+        </div>
+    </body>
+    
+    <script type="text/javascript">
+        
+        function openPage(pageName) {
+            $("#viewDiv").css("display", "block");
+            $("#viewDiv").load("/durumiApp/viewPage/" + pageName);
+        }
+
+        </script>
+{% endblock %}

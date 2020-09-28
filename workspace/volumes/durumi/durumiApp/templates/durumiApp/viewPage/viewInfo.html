@@ -1,10 +1,84 @@
 {% extends 'durumiApp/viewPage/viewBase.html' %}
 
 {% block pageName %}
-    viewInfo
+    정보 변경
 {% endblock%}
 
 
 {% block pageContent %}
-    this is view Bases's block contents.
+    <body>
+        <div id="inputContainer">
+            <form id="inputForm" method="post">
+                {% csrf_token %}
+                <br/>아무것도 입력하지 않을 시 정보가 변경되지 않고 유지됩니다.<br/>
+                <br/>아이디: {{ request.session.userId }}<br/>
+                <br/>
+                <div class="inputRow">
+                    <input type="email" id="inputChangeInfo" name="email" placeholder="이메일" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    <input type="text" name="introduce" placeholder="자기소개" class="accInput"></input>
+                </div> <br/>
+                <div id="errorStr"></div>
+                <div id="inputSubmit" onclick="goChangeInfo()">정보 변경</div>
+                <br/>
+            </form>
+        </div>
+    </body>     
+
+    <script>
+        //타이밍 문제로 작동 안함
+        $(document).ready(function(){
+            $.ajax({
+            cache : false,
+            url : "{% url 'durumiApp:accountPage' pageName='loadInfo' %}" ,
+            type : 'POST',
+            //data : "",
+            success : function(data){
+                //alert("성공");
+                console.log(data)
+                document.getElementsByName("email").value = data["mail"];
+                document.getElementsByName("introduce").value = data["introduce"];
+            },
+            error : function(data){
+                alert("통신 실패");
+            }
+            });
+        })
+        document.addEventListener('keydown', function(event) 
+        {
+            if ((event.keyCode === 13) && (checkPage == 1) && ($("#inputChangeInfo").val())) //이 페이지를 사용중인지 체크 
+            {
+                event.preventDefault();
+                goChangeInfo();
+            };
+        }, true);   
+
+
+
+        function goChangeInfo(){
+            var formData = $('#inputForm').serialize();
+            
+            $.ajax({
+                cache : false,
+                url : "{% url 'durumiApp:accountPage' pageName='changeInfo' %}" ,
+                type : 'POST',
+                data : formData,
+                success : function(data){
+                    var res = data['result']
+                    if(res == "ok") 
+                    {
+                        alert('정보를 변경했습니다.');
+                        closeView();
+                    }
+                    else
+                        $('#errorStr').html(res);
+                },
+                error : function(xhr,status,)
+                {
+                    alert("통신 실패");
+                },
+            });
+        }
+    </script>
 {% endblock %}
