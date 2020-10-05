@@ -429,6 +429,11 @@
 
         }
         
+        .itemOverlays .off{
+            display : none;
+        }
+        
+        
         .swiper-container{
             width : 80vw;
         }
@@ -701,11 +706,11 @@
     </div>
 
     <div class="itemOverlays">
-      <div class="itemOverlays place noMark ">
+      <div class="itemOverlays place noMark off">
         <div class="close" onclick="closeOverlay(olnum)">닫기</div>
         <div class="contentDiv">placeContent</div>
       </div>
-      <div class="itemOverlays picture noMark ">
+      <div class="itemOverlays picture noMark off">
         <div class="close" onclick="closeOverlay(olnum)">닫기</div>
         <div class="contentDiv">pictureContent</div>
       </div>
@@ -1004,23 +1009,40 @@ function modeChange(){
     console.log(code);
     console.log(GlobalList);
     if(viewMode == 1){ //place -> picture 전환
-        $(".place").removeClass("setMark")
-        $(".place").addClass("noMark")
-        $(".picture").removeClass("noMark")
-        $(".picture").addClass("setMark")
+        $(".place").css("transform","rotateY(180deg)");
+        setTimeout(function() {
         
-        // $(".place").css("transform","rotateY(180deg)");
-        // $(".picture").css("transform","rotateY(0deg)");
+            $(".place").removeClass("setMark")
+            $(".place").addClass("noMark")
+            
+            $(".picture").removeClass("noMark")
+            $(".picture").addClass("setMark")
+            $(".picture").css("transform","rotateY(0deg)");
+            
+        }, 310);
+        
+       
+        
         $("#modeChange").html("<img src='/static/image/icons/place.png'>")
     }
     else if(viewMode == -1){ //picture -> place 전환 
-        $(".picture").removeClass("setMark")
-        $(".picture").addClass("noMark")
-        $(".place").removeClass("noMark")
-        $(".place").addClass("setMark")
+        $(".picture").css("transform","rotateY(180deg)");
         
-        // $(".place").css("transform","rotateY(0deg)");
-        // $(".picture").css("transform","rotateY(180deg)");
+        setTimeout(function() {
+            $(".picture").removeClass("setMark")
+            $(".picture").addClass("noMark")
+            
+            $(".place").removeClass("noMark")
+            $(".place").addClass("setMark")
+            $(".place").css("transform","rotateY(0deg)");
+        }, 310);
+        
+        
+        
+        $(".picture").css("transform","rotateY(180deg)");
+        
+        
+        
         $("#modeChange").html("<img src='/static/image/icons/picture.png'>")
         
     }
@@ -1126,19 +1148,18 @@ function SetMarker(inum, imageSrc){
         mtitle += "<div class=\"addTripnote\" onclick=\"addTripnote("+list['contentid']+")\">거르미에 추가</div>"
     
         tmpcont = tmpcont.replace(/placeContent/,mtitle);
+        tmpcont = tmpcont.replace(/off/,"");
         tmpcont = tmpcont.replace(/olnum/gi,idx.replace(/item/,''));  
         // tmpcont = tmpcont.replace(/place/,'place"'+divsize)
         // tmpcont = tmpcont.replace(/picture/,'picture"'+divsize)
         if(viewMode == 1){ //place view 일때
-            // alert("place")
             tmpcont = tmpcont.replace(/itemOverlays place noMark /gi,'itemOverlays place setMark ');
-            
+            tmpcont = tmpcont.replace(/itemOverlays picture setMark /gi,'itemOverlays picture noMark ');
         }
         else{ //picture 일때
-            // alert("picture")
+            tmpcont = tmpcont.replace(/itemOverlays place setMark /gi,'itemOverlays place noMark ');
             tmpcont = tmpcont.replace(/itemOverlays picture noMark /gi,'itemOverlays picture setMark ');
             
-            tmpcont = tmpcont.replace(/olnum/gi,idx.replace(/item/,''));
         }
         overlay.setContent(tmpcont);
         overlay.setMap(map);
