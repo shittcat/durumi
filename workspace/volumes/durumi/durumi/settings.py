@@ -28,10 +28,6 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 DEBUG = True
 
 ALLOWED_HOSTS = ["durumi", "localhost"]
-ALLOWED_HOSTS = ["durumi",
-                 "192.168.0.20"
-                 ]
-
 
 # Application definition
 
@@ -138,5 +134,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "durumiApp@gmail.com"
-EMAIL_HOST_PASSWORD = "enfnaleoqkr!#$@"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

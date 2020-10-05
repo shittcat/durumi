@@ -17,9 +17,5 @@ urlpatterns = [
     path("tripnotePage/<pageName>/",tripnoteView.select,name="tripnotePage"),
     path("selectTripnote", tripnoteView.selectTripnote, name="selectTripnote"),
     path("tripnote", tripnoteView.tripnoteView, name="tripnote"),
-    # path("addTripnoteList", tripnoteView.addTripnoteList, name="addTripnoteList"),
-    # path("addTripnote", tripnoteView.addTripnote, name="addTripnote"),
-    # path("selectTripnoteForaddTripnote", tripnoteView.selectTripnoteForaddTripnote,
-        #  name="selectTripnoteForaddTripnote"),
 
 ]
