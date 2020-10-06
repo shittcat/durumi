@@ -204,7 +204,9 @@
 
         /* 팝업창 css */
         #popupDiv {  
-        	top : 20vw;
+            overflow-x: hidden;
+        	top : 10vh;
+        	margin : 10vw 10vw;
         	position: absolute;
         	background: white;
         	width: 80vw;
@@ -326,6 +328,7 @@
             text-align : center;
             font-size : 14px;
             padding :3vw 5vh ;
+            height : 4vh;
             border-bottom : 1.5px solid skyblue;
         }
         div.items:hover {
@@ -439,9 +442,13 @@
         }
         
         .swiper-slide {
-            width:95%;
-            margin : 1vh 3vw 3vw 1vh;
+            width : auto;
         }
+        
+        /*.midCat .swiper-slide {*/
+        /*    width:95%;*/
+        /*    margin : 1vh 3vw 3vw 1vh;*/
+        /*}*/
     
     
         /*catDiv.css*/    
@@ -460,7 +467,6 @@
         .larCatDiv{ /*position 속성 선언되어있지 않으면 무조건 아래로 내려감.*/
             width : 15vw;
             height : 15vw;
-            
             margin : 1vw 1vw;
             padding : 1vw 1vw;
             transition : top 0.5s, visibility 0.5s ,opacity 0.5s;
@@ -473,7 +479,6 @@
         .larCatDiv.main{
             position : relative;
             left : -2vw;
-            
             z-index : 3;
             background : #2196F3;
             border-radius : 10vw;
@@ -514,7 +519,7 @@
         
         .midCat{
             width: 13vw; height: 13vw;
-            margin-top : 1vw;
+            margin : 1vh 3vw 3vw 1vh;
             float : left;
             box-shadow : 0 2px 5px #000;
             background : white;
@@ -566,8 +571,10 @@
     </div>
     
     
-    <div id="popupDiv"> <!-- 팝업창 -->
-        <button id="popCloseBtn">close</button>
+    <div id="popupDiv" class="swiper-container searchswiper"> <!-- 팝업창 -->
+        <!--<button id="popCloseBtn">close</button>-->
+        <div class='swiper-wrapper'>
+        </div>
     </div>
 
     <div id="popup_mask"></div>
@@ -762,6 +769,13 @@
         spaceBetween: 10,
         freeMode : true,
     });
+    
+    var searchswiper = new Swiper('.searchswiper', {
+        slidesPerView: 'auto',
+        direction: 'vertical',
+        freeMode: true,
+    });
+
     </script>
     
     <script> //페이지 로드시 초기화할 변수들 모음 
@@ -771,17 +785,17 @@
     var code = 0; // 카테고리별 코드 저장
 
     $(document).ready(function()  {
-        SaveDiv = $("#popupDiv").html();
         checkNote = -1 ; //tripnote 올라왔는지 내려왔는지 체크 
         checkMenu = -1 ; //menu
         checkNewList = -1; //newlist
         checkPage = -1 //viewPages
+        checkSearch = -1; //searchpage
         viewMode = 1 ; //place
         checkLoginPage = -1; //loginpage
         searchFocus = -1; //searchfocus
         
-        
-        $('#element').on('scroll touchmove mousewheel', function(event) { /*스크롤바 감추기 + 고정 */
+        $('#element').on('scroll touchmove mousewheel', function(event) { 
+            /*스크롤바 감추기 + 고정 */
             event.preventDefault();
             event.stopPropagation();
             return false;
@@ -1249,7 +1263,6 @@ function SetMarker(inum, imageSrc){
             });
         }
     }
-
 </script>
 
 
