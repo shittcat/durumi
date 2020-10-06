@@ -46,7 +46,7 @@ function keywordSearch(jdata){ //키워드 검색 함수
             SetMarker(item, photo_basic);
         }
         var Ddata = "<div id ="+item+" class='items swiper-slide' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
-        searchswiper.appendSlide(Ddata);
+        searchswiper.appendSlide(Ddata); //popupdiv 슬라이드에 item 데이터 추가  
     }
     checkSearch = 1;
     $("#popCloseBtn").click(function(event){
@@ -79,13 +79,11 @@ function locationSearch(jdata){ //현위치 기반 검색 함수
 
     markers = []; 
     overlays = [];
-        
-        
-    $("#popupDiv").html( //새로운 지역 검색시 팝업창 내용 초기화 
-        SaveDiv
-    );
-        
+      
     GlobalList = jdata;
+    
+    //새로운 지역 검색시 팝업창 내용 초기화 
+    searchswiper.removeAllSlides();
     
     for(var item in jdata){
         var list = $.parseJSON(jdata[item]);
@@ -99,11 +97,7 @@ function locationSearch(jdata){ //현위치 기반 검색 함수
         }
         var Ddata = "<div id ="+item+" class='items' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
             
-        $("#popupDiv").html(
-            $("#popupDiv").html()+Ddata
-        );    
-        console.log(item);
-        popUpClose();
+        searchswiper.appendSlide(Ddata);
     }
     // 현재위치 마커 설정
     lon = parseFloat(temp[0]);
