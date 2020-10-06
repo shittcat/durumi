@@ -14,6 +14,9 @@ $("#popup_mask").click(function(){
     if( checkLoginPage == 1){ //로그인페이지 닫기 
         closeLoginPage();
     }
+    if( checkSearch == 1){ //검색 결과 페이지 닫기 
+        closeSearchPage();
+    }
 });
 
 
@@ -29,5 +32,12 @@ function openLoginPage(){
 function closeLoginPage(){
     $("#popup_mask").css("display","none");
     $("#loginPage").css("top","120vh");
+    checkLoginPage = -1;
+}
+
+function closeSearchPage(){
+    searchswiper.removeAllSlides();
+    $("#popup_mask").css("display","none");
+    $("#popupDiv").css("display","none");
     checkLoginPage = -1;
 }

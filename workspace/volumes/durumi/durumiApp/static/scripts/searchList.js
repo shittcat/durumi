@@ -29,11 +29,11 @@ function keywordSearch(jdata){ //키워드 검색 함수
     markers = []; 
     overlays = [];
     
-    
-    $("#popupDiv").html( //새로운 지역 검색시 팝업창 내용 초기화 
-        SaveDiv
-    );
-    
+    $("#popup_mask").css("display","block"); //팝업 뒷배경 display block
+    $("#popupDiv").css("display","block"); //팝업창 display block
+    //새로운 지역 검색시 팝업창 내용 초기화 
+    searchswiper.removeAllSlides();
+   
     GlobalList = jdata;
     for(var item in jdata){
         var list = $.parseJSON(jdata[item]);
@@ -45,24 +45,10 @@ function keywordSearch(jdata){ //키워드 검색 함수
         {
             SetMarker(item, photo_basic);
         }
-
-        var Ddata = "<div id ="+item+" class='items' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
-        
-        $("#popupDiv").html(
-            $("#popupDiv").html()+Ddata
-        );    
-        console.log(item);
+        var Ddata = "<div id ="+item+" class='items swiper-slide' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
+        searchswiper.appendSlide(Ddata);
     }
-
-    $("#popupDiv").css({
-            "top": (($(window).height()-$("#popupDiv").outerHeight())/2+$(window).scrollTop())+"px",
-            "left": (($(window).width()-$("#popupDiv").outerWidth())/2+$(window).scrollLeft())+"px"
-            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-     }); 
-        
-    $("#popup_mask").css("display","block"); //팝업 뒷배경 display block
-    $("#popupDiv").css("display","block"); //팝업창 display block
-    
+    checkSearch = 1;
     $("#popCloseBtn").click(function(event){
         popUpClose(); 
     });
