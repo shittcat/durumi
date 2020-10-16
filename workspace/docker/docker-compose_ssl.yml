@@ -33,10 +33,21 @@ services:
     volumes:
       - ../volumes-nginx:/etc/nginx/conf.d
       - ../volumes/.static_root/:/static/
+      - ../volumes/certbot/conf:/etc/letsencrypt
+      - ../volumes/certbot/www:/var/www/certbot
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - durumi
+    command : "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  certbot:
+    image: certbot/certbot
+    container_name: certbot_service
+    volumes : 
+      - ../volumes/certbot/conf:/etc/letsencrypt
+      - ../volumes/certbot/www:/var/www/certbot
+    entrypoint : "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
   mysql:
     image: mysql
     container_name: mysql_service
