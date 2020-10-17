@@ -20,39 +20,39 @@ function popUpClose(){
     $("body").css("overflow","auto");//body 스크롤바 생성
 }
 
-function keywordSearch(jdata){ //키워드 검색 함수  
+// function keywordSearch(jdata){ //키워드 검색 함수  
 
-    //이전 검색결과의 마커랑 오버레이 전부 비우기 
-    hideOverlays();
-    hideMarkers();
+//     //이전 검색결과의 마커랑 오버레이 전부 비우기 
+//     hideOverlays();
+//     hideMarkers();
     
-    markers = []; 
-    overlays = [];
+//     markers = []; 
+//     overlays = [];
     
-    $("#popup_mask").css("display","block"); //팝업 뒷배경 display block
-    $("#popupDiv").css("display","block"); //팝업창 display block
-    //새로운 지역 검색시 팝업창 내용 초기화 
-    searchswiper.removeAllSlides();
+//     $("#popup_mask").css("display","block"); //팝업 뒷배경 display block
+//     $("#popupDiv").css("display","block"); //팝업창 display block
+//     //새로운 지역 검색시 팝업창 내용 초기화 
+//     searchswiper.removeAllSlides();
    
-    GlobalList = jdata;
-    for(var item in jdata){
-        var list = $.parseJSON(jdata[item]);
-        if(viewMode == 1)
-        {
-            SetMarker(item, marker_basic);
-        }
-        else
-        {
-            SetMarker(item, photo_basic);
-        }
-        var Ddata = "<div id ="+item+" class='items swiper-slide' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
-        searchswiper.appendSlide(Ddata); //popupdiv 슬라이드에 item 데이터 추가  
-    }
-    checkSearch = 1;
-    $("#popCloseBtn").click(function(event){
-        popUpClose(); 
-    });
-}
+//     GlobalList = jdata;
+//     for(var item in jdata){
+//         var list = $.parseJSON(jdata[item]);
+//         if(viewMode == 1)
+//         {
+//             SetMarker(item, marker_basic);
+//         }
+//         else
+//         {
+//             SetMarker(item, photo_basic);
+//         }
+//         var Ddata = "<div id ="+item+" class='items swiper-slide' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
+//         searchswiper.appendSlide(Ddata); //popupdiv 슬라이드에 item 데이터 추가  
+//     }
+//     checkSearch = 1;
+//     $("#popCloseBtn").click(function(event){
+//         popUpClose(); 
+//     });
+// }
 
 function locationSearch(jdata){ //현위치 기반 검색 함수  
         
