@@ -1,79 +1,163 @@
-/*검색 결과창 , view, 지도 마커 */
+/*overlays.css*/
 
-/* 팝업창 css */
-/*#popupDiv {  */
-/*	top : 20vw;*/
-/*	position: absolute;*/
-/*	background: white;*/
-/*	width: 80vw;*/
-/*	height: 80vh;*/
-/*	display: none; */
-/*	z-index : 4;*/
-	
-/*	-moz-border-radius-topleft : 20px;  */
-/*	-moz-border-radius-topright: 20px;  */
-/*	-moz-border-radius-bottomleft: 20px;  */
-/*	-moz-border-radius-bottomright: 20px;  */
-	
-/*	-webkit-border-top-left-radius: 20px;  */
-/*	-webkit-border-top-right-radius: 20px;  */
-/*	-webkit-border-bottom-left-radius: 20px;  */
-/*	-webkit-border-bottom-right-radius: 20px;  */
-/*}*/
+        /*검색 결과창 , view, 지도 마커 */
 
-
-/* 팝업 배경 css */
-/*#popup_mask { */
-/*    position: fixed;*/
-/*    width: 100vw;*/
-/*    height: 100vh;*/
-/*    top: 0px;*/
-/*    left: 0px;*/
-/*    display: none; */
-/*    background-color:#000;*/
-/*    opacity: 0.7;*/
-/*    z-index : 3;*/
-/*}*/
-
-
+        /* 팝업창 css */
+        #popupDiv {  
+            overflow-x: hidden;
+        	top : 10vh;
+        	margin : 10vw 10vw;
+        	position: absolute;
+        	background: white;
+        	width: 80vw;
+        	height: 80vh;
+        	display: none; 
+        	z-index : 4;
+        	
+        	-moz-border-radius-topleft : 20px;  
+        	-moz-border-radius-topright: 20px;  
+        	-moz-border-radius-bottomleft: 20px;  
+        	-moz-border-radius-bottomright: 20px;  
+        	
+        	-webkit-border-top-left-radius: 20px;  
+        	-webkit-border-top-right-radius: 20px;  
+        	-webkit-border-bottom-left-radius: 20px;  
+        	-webkit-border-bottom-right-radius: 20px;  
+        }
+        
+        
+        /* 팝업 배경 css */
+        #popup_mask { 
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0px;
+            left: 0px;
+            display: none; 
+            background-color:#000;
+            opacity: 0.7;
+            z-index : 3;
+        }
+        
 /*팝업 리스트 css */
-/*div.items{ */
-/*    text-align : center;*/
-/*    font-size : 14px;*/
-/*    padding :3vw 5vh ;*/
-/*    border-bottom : 1.5px solid skyblue;*/
-/*}*/
-/*div.items:hover {*/
-/*    background : skyblue ;*/
-/*    color : white ;*/
-/*    font-size : 16px;*/
-/*    font-weight : bold;*/
-/*}*/
+        div.items{ 
+            text-align : center;
+            font-size : 14px;
+            padding :3vw 5vh ;
+            height : 4vh;
+            border-bottom : 1.5px solid skyblue;
+            width : auto;
+        }
+        div.items:hover {
+            background : skyblue ;
+            color : white ;
+            font-size : 16px;
+            font-weight : bold;
+        }
+        
 
-/*지도에 표시될 마커*/
-/*.itemOverlays{*/
-/*                position : relative;*/
-/*                white-space : normal;*/
-/*                backface-visibility: hidden;*/
-/*                transform-style: preserve-3d;*/
-/*                transition: 0.5s;*/
-/*            }*/
-            
-/*.itemOverlays.noMark{*/
-/*    display : none;    */
-/*}*/
+        
+        /*지도에 표시될 마커*/
+        .itemOverlays{
+            width: 80vw; 
+            height: 50vw;
+            position : relative;
+            white-space : normal;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            transition: 0.5s;
+            bottom : 28vw;
+        }
+        
+        .itemOverlays:after{
+            content: '';
+            position: absolute;
+            left: 47%;
+            bottom: -6vw;
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 3vw;
+            border-color: white transparent transparent transparent;
+        }
+                    
+        .itemOverlays.noMark{
+            display : none;    
+            transform: rotateY(180deg);
+        }
+        
+        .itemOverlays.setMark{
+            display : block;
+            transform: rotateY(0deg);
+        }
+        
+        .itemOverlays.place {
+            /*top : -2vh;*/
+            background: white;
+        }
+        
+        .itemOverlays.place .placeInfo{
+            height : 75%;
+        }
+        
+        .itemOverlays.place .placeName{
+            font-size : 3em;
+            font-weight : bold;
+            color : #2196F3;
+        }
+        
+        .itemOverlays.place img{
+            float : right;
+            width : 50%;
+            height : auto;
+            margin : 0 auto ;
+        }
+        
+        
+        .itemOverlays.place .placeType{
+            font-size : 1.5em;
+            color : #9e9e9e;
+        }
+        
+        .itemOverlays.place .addr1{
+            font-size : 2em;
+            font-weight : bold;
+        }
+        
+        .itemOverlays.place .addTripnote{
+            background : #2196F3;
+            color : white;
+            font-weight : bold;
+            font-size : 1.2em;
+            width: 40%; height : 11%;
+            margin: 0 auto;
+            padding-top : 1vw;
+            text-align: center;
+            border-radius: 1em;
+        }
+        
+        .itemOverlays.picture {
+            background: green;
+        }
 
-/*.itemOverlays.setMark{*/
-/*    display : block;    */
-/*}*/
 
-/*.itemOverlays.place {*/
-/*    top : -2vh;*/
-/*    background: red;*/
-/*}*/
+        .itemOverlays .close{
+            position : relative;
+            text-align : right;
+            background : white ;
 
-/*.itemOverlays.picture {*/
-/*    top : -20vh;*/
-/*    transform: rotateY(180deg);*/
-/*    background: green;*/
-/*}*/
+        }
+        
+        .itemOverlays .off{
+            display : none;
+        }
+        
+        
+        .swiper-container{
+            width : 80vw;
+        }
+        
+        .swiper-slide {
+            width : auto ;
+        }
