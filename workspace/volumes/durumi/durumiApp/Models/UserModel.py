@@ -159,3 +159,15 @@ class AchieveInfo(models.Model):
 
     def __str__(self):
         return self.name
+
+
+"공지사항"
+
+
+class Notice(models.Model):
+    title = models.CharField(max_length=200, null=False)
+    content = models.TextField()
+    pubDate = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title

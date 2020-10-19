@@ -2,8 +2,9 @@
 from django.urls import path
 
 from . import views
-from .Views import mapView, pageView, accountView, tripnoteView
+from .Views import mapView, pageView, accountView, tripnoteView, postView
 
+from django.contrib import admin
 
 app_name = 'durumiApp'
 urlpatterns = [
@@ -21,5 +22,6 @@ urlpatterns = [
     # path("addTripnote", tripnoteView.addTripnote, name="addTripnote"),
     # path("selectTripnoteForaddTripnote", tripnoteView.selectTripnoteForaddTripnote,
         #  name="selectTripnoteForaddTripnote"),
+    path("admin/", admin.site.urls),
 
 ]
