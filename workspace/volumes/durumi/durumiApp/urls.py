@@ -15,6 +15,7 @@ urlpatterns = [
     path("viewPage/", pageView.viewBase, name="viewBase"),
     path("viewPage/<pageName>/", pageView.viewPage, name="viewPage"),
     path("accountPage/<pageName>/",accountView.select,name="accountPage"),
+    path("postPage/<pageName>/", postView.select,name="postPage"),
     path("tripnotePage/<pageName>/",tripnoteView.select,name="tripnotePage"),
     path("selectTripnote", tripnoteView.selectTripnote, name="selectTripnote"),
     path("tripnote", tripnoteView.tripnoteView, name="tripnote"),
