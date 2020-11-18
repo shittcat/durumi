@@ -1,0 +1,72 @@
+{% extends 'durumiApp/viewPage/viewBase.html' %}
+{% load static %}
+
+{% block pageName %}
+    고객센터
+{% endblock%}
+
+
+{% block pageContent %}
+    <!-- using pageView.css -->
+    
+    <body>
+        <div id="inputContainer">
+            <form id="inputForm" method="post">
+                {% csrf_token %}
+                <div class="inputRow">
+                    <input type="text" id="inputChangeInfo" name="title"" placeholder="제목" class="accInput"></input>
+                </div> <br/>
+                <div class="inputRow">
+                    {% if userMail == '404' %}
+                    <input type="email" id="inputChangeInfo" name="email" placeholder="이메일" class="accInput"></input>
+                    {% else %}
+                    <input type="email" id="inputChangeInfo" name="email" placeholder="이메일" class="accInput" value="{{ userMail }}""></input>
+                    {% endif %}
+                </div> <br/>
+                <div class="inputRow">
+                    <input type="text" name="content" placeholder="문의내용" class="accInput"></input>
+                </div> <br/>
+                <div id="errorStr"></div>
+                <div id="inputSubmit" onclick="goSendQuestion()">문의 전송</div>
+                <br/>
+            </form>
+        </div>
+    </body>     
+    
+    <script>
+        document.addEventListener('keydown', function(event) 
+        {
+            if ((event.keyCode === 13) && (checkPage == 1) && ($("#inputChangeInfo").val())) //이 페이지를 사용중인지 체크 
+            {
+                event.preventDefault();
+                goSendQuestion();
+            };
+        }, true);   
+
+        function goSendQuestion(){
+            var formData = $('#inputForm').serialize();
+            
+            $.ajax({
+                cache : false,
+                url : "{% url 'durumiApp:postPage' pageName='sendQuestion' %}" ,
+                type : 'POST',
+                data : formData,
+                success : function(data){
+                    var res = data['result']
+                    if(res == "ok") 
+                    {
+                        alert('문의를 전송했습니다.');
+                        closeView();
+                    }
+                    else
+                        $('#errorStr').html(res);
+                },
+                error : function(xhr,status,)
+                {
+                    alert("통신 실패");
+                },
+            });
+        }
+        
+    </script>
+{% endblock %}

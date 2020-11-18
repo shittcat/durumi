@@ -6,5 +6,59 @@
 
 
 {% block pageContent %}
-    this is view Bases's block contents.
+    <body>
+        <div id="postList">
+            <h1>공지사항</h1>
+            {% for list in noticeList %}
+            <div id="noticeDiv">
+                <div class="noticeHeader" value='{{list.id}}'>
+                    <div class="noticeTitle">
+                        <table>
+                            <tr>
+                                <td>{{list.id}}</td>
+                                <td>{{list.title}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="noticePubDate">
+                        {{list.pubDate|date:"m-d"}}
+                    </div>
+                </div>
+                <div class="noticeContent" name='{{list.id}}'>
+                    {{list.content}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".noticeContent").hide();
+        })
+
+        $(".noticeHeader").click(function(){
+            var id = $(this).attr("value");
+            console.log(id);
+            //$("div[name="+id+"]")
+
+            if($("div[name="+id+"]").css('display') == "none"){
+                $("div[name="+id+"]").show();
+                console.log($("div[name="+id+"]").attr("name"));
+            }
+            else{
+                $("div[name="+id+"]").hide();
+            }
+
+            /*
+            if($("#noticeContent").css('display') == "none"){
+                $("#noticeContent").show();
+                console.log($("#noticeContent").attr('name'));
+            }
+            else{
+                $("#noticeContent").hide();
+            }
+            */ 
+        });
+    </script>
 {% endblock %}

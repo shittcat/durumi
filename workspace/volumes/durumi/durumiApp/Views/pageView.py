@@ -1,9 +1,10 @@
+from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from ..apicodes import keyword
-
+from ..Models.UserModel import User, Notice
 import simplejson as json
 import os
 import sys
@@ -20,10 +21,37 @@ def viewBase(request):  # 맵 템플릿 연결
     }
     return render(request, template_name, context)
 
-
+@csrf_exempt  # 보안문제로 적어줌
 def viewPage(request, pageName):  # 맵 템플릿 연결
     template_name = 'durumiApp/viewPage/'+pageName+'.html'
-    context = {
-        "test": "viewInfo test",
-    }
+    if pageName == "viewNotice":
+        context = loadNotice()
+    elif pageName == "viewQuestion":
+        if request.session['loginOk'] == False:
+            context = {
+                "userMail": "404"
+            }
+        else:
+            context = loadEmail(request.session['userId'])
+    else:
+        context = {
+            "test": "viewInfo test",
+        }
     return render(request, template_name, context)
+
+@csrf_exempt  # 보안문제로 적어줌
+def loadNotice():
+    timeNow = datetime.now()
+    timeYearAgo = timeNow + timedelta(days=-365)
+    noticeList = Notice.objects.filter(pubDate__range=(timeYearAgo, timeNow)).order_by('-id')
+    context = {
+        "noticeList": noticeList
+    }
+    return context
+
+@csrf_exempt  # 보안문제로 적어줌
+def loadEmail(sessionId):
+    context = {
+        "userMail": User.objects.filter(userId=sessionId)[0].userMail
+        }
+    return context
