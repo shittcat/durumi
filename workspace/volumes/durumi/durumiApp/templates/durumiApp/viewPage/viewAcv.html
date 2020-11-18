@@ -1,10 +1,57 @@
 {% extends 'durumiApp/viewPage/viewBase.html' %}
-
+{% load static %}
 {% block pageName %}
-    viewAchievement
+    
 {% endblock%}
 
 
 {% block pageContent %}
-    this is view Bases's block contents.
+    <style>
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .undone{
+            -webkit-filter: grayscale(100%);
+            filter: gray;
+        }
+    </style>
+
+    <body>
+        <div id="postList">
+            <h1>도전과제</h1>
+            <div id="acvDiv">
+                <div class="noticeHeader" value='{{list.id}}'>
+                    <div class="noticeTitle">
+                        <table>
+                            <tr>
+                                <td rowspan="2"><img src='{% static "image/Achv/firstPlan.png" %}'></td>
+                                <td>첫 계획</td>
+                            </tr>
+                            <tr>
+                                <td>당신의 첫 여행계획을 세워보세요!</td>
+                            </tr>
+
+                            <tr>
+                                <td rowspan="2"><img src='{% static "image/Achv/NYD.png" %}' class='undone'></td>
+                                <td>첫 일출</td>
+                            </tr>
+                            <tr>
+                                <td>유명한 일출 명소에서 새해를 지켜보세요</td>
+                            </tr>
+
+                            <tr>
+                                <td rowspan="2"><img src='{% static "image/Achv/Observatory.png" %}'></td>
+                                <td>별이 빛나는 밤</td>
+                            </tr>
+                            <tr>
+                                <td>천문대에 가서 천체관측을 해보세요</td>
+                            </tr>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </body>
 {% endblock %}
