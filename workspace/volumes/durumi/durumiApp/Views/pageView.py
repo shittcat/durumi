@@ -27,12 +27,18 @@ def viewPage(request, pageName):  # 맵 템플릿 연결
     if pageName == "viewNotice":
         context = loadNotice()
     elif pageName == "viewQuestion":
+        try : 
+            if request.session['loginOk'] == False:
+                pass
+        except : 
+            request.session['loginOk'] = False
         if request.session['loginOk'] == False:
             context = {
                 "userMail": "404"
             }
         else:
             context = loadEmail(request.session['userId'])
+    
     else:
         context = {
             "test": "viewInfo test",
