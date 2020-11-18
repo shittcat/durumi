@@ -2,6 +2,47 @@ body{
     position : fixed;
 }
 
+/*pageview.css*/
+
+/*각 view의 페이지 div*/
+#viewDiv{
+    position : relative;
+    width : 100vw;
+    height : 100vh;
+    background : white;
+    display : none;
+    z-index : 5 ;
+}                
+        
+/*로그인 페이지 */
+#loginPage{
+    text-align : center;
+    
+    display : block;
+    position : absolute ;
+    width : 90vw;
+    height : 65vh;
+    font-size : 1.25em;
+    transition : top 0.8s;
+    
+    top : 120vh;
+    margin : 0 5vw;
+    z-index : 4;
+    background : white;
+    
+    
+	-moz-border-radius-topleft : 10px;  
+    -moz-border-radius-topright: 10px;  
+    -moz-border-radius-bottomleft: 10px;  
+    -moz-border-radius-bottomright: 10px;  
+    
+    -webkit-border-top-left-radius: 10px;  
+    -webkit-border-top-right-radius: 10px;  
+    -webkit-border-bottom-left-radius: 10px;  
+    -webkit-border-bottom-right-radius: 10px; 
+}       
+
+
 #logo{
     width : 50vw;
 }

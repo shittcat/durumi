@@ -84,13 +84,16 @@ function SetMarkerTripnote(place) {
   overlay.setMap(map);
 }
 
-function hideMarkers(map) {
+function hideMarkers() {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
   }
+  for (var i = 0; i < backMarkers.length; i++) {
+    backMarkers[i].setMap(null);
+  }
 }
 
-function hideOverlays(map) {
+function hideOverlays() {
   for (var i = 0; i < overlays.length; i++) {
     overlays[i].setMap(null);
   }

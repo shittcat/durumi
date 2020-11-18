@@ -1,0 +1,92 @@
+/*searchDiv*/
+        #searchDiv {
+            position : absolute;
+            width :90vw;
+            margin-left : 5vw;
+            top:4vh; 
+            transition : top 1s;
+            z-index: 2;
+            display : table;
+        }
+        
+        #searchForm{
+            width : 70vw;
+            display : table-cell;
+            text-align : center;
+            vertical-align : middle;            
+        }
+        
+        #searchBox{
+            width:70vw;
+            display : inline-block;
+            height: 7vw;
+            padding: .9em .9em;
+            
+            box-shadow : 0 1px 5px #000;
+            
+            border : none ;
+            outline-style: none; 
+            -webkit-appearance: none; 
+            -moz-appearance: none; 
+            font-family: inherit;
+            font-size : 1.25em;
+            
+        	-moz-border-radius-topleft : 10px;  
+            -moz-border-radius-topright: 10px;  
+            -moz-border-radius-bottomleft: 10px;  
+            -moz-border-radius-bottomright: 10px;  
+            
+            -webkit-border-top-left-radius: 10px;  
+            -webkit-border-top-right-radius: 10px;  
+            -webkit-border-bottom-left-radius: 10px;  
+            -webkit-border-bottom-right-radius: 10px;  
+        }
+        
+        #modeChange{
+            display : table-cell;
+            z-index:2;
+            width : 8vw;
+            transition : left 0.5s, top 1s;
+        }
+        
+        #modeChange img{
+            /*position : relative;*/
+            max-width: 100%; 
+            width:auto; height:auto;
+            border-radius : 1vw;
+        }
+
+        
+        #openMenu{
+            display : table-cell;
+            z-index:2;
+            width : 7vw; height: 7vw;
+            transition : left 0.5s, top 1s;
+            
+        }
+        
+        #openMenu img{
+            max-height: 100%; 
+            width:auto; height:auto;
+            vertical-align : sub;
+            margin-bottom : 1vw;
+        }
+/*menuDiv*/
+        #menuDiv{
+        	top : 0vh;
+        	left : 130vw;
+        	position: absolute;
+        	background: white;
+        	width: 40vw;
+        	height: 100vh;
+        	font-size : 1.25em;
+            /*display: none;*/
+        	z-index : 4;
+        	transition : left 0.8s;
+        	
+        	-moz-border-radius-topleft : 20px;  
+            -moz-border-radius-bottomleft: 20px;   
+            
+            -webkit-border-top-left-radius: 20px;  
+            -webkit-border-bottom-left-radius: 20px; 
+        }

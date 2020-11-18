@@ -15,12 +15,12 @@
         
         
         
-        <link rel="stylesheet" type="text/css" href=" {% static 'css/catDiv.css' %}">
-        <link rel="stylesheet" type="text/css" href=" {% static 'css/overlays.css' %}">
-        <link rel="stylesheet" type="text/css" href=" {% static 'css/searchMenuDiv.css' %}">
-        <link rel="stylesheet" type="text/css" href=" {% static 'css/tripNote.css' %}">
-        <link rel="stylesheet" type="text/css" href=" {% static 'css/pageView.css' %}">
-        <link rel="stylesheet" type="text/css" href=" {% static 'css/swiper-bundle.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/catDiv.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/overlays.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/searchMenuDiv.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/tripNote.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/pageView.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
         
         <link rel="manifest" href=" {% static 'manifest.json' %}">
         
@@ -50,80 +50,6 @@
         ::-webkit-scrollbar { display: none; } /*스크롤바 감추기 + 고정 */
     
     
-        /*searchDiv*/
-        #searchDiv {
-            position : absolute;
-            width :90vw;
-            margin-left : 5vw;
-            top:4vh; 
-            transition : top 1s;
-            z-index: 2;
-            display : table;
-        }
-        
-        #searchForm{
-            width : 70vw;
-            display : table-cell;
-            text-align : center;
-            vertical-align : middle;            
-        }
-        
-        #searchBox{
-            width:70vw;
-            display : inline-block;
-            height: 7vw;
-            padding: .9em .9em;
-            
-            box-shadow : 0 1px 5px #000;
-            
-            border : none ;
-            outline-style: none; 
-            -webkit-appearance: none; 
-            -moz-appearance: none; 
-            font-family: inherit;
-            font-size : 1.25em;
-            
-        	-moz-border-radius-topleft : 10px;  
-            -moz-border-radius-topright: 10px;  
-            -moz-border-radius-bottomleft: 10px;  
-            -moz-border-radius-bottomright: 10px;  
-            
-            -webkit-border-top-left-radius: 10px;  
-            -webkit-border-top-right-radius: 10px;  
-            -webkit-border-bottom-left-radius: 10px;  
-            -webkit-border-bottom-right-radius: 10px;  
-        }
-        
-        #modeChange{
-            display : table-cell;
-            z-index:2;
-            width : 8vw;
-            transition : left 0.5s, top 1s;
-        }
-        
-        #modeChange img{
-            /*position : relative;*/
-            max-width: 100%; 
-            width:auto; height:auto;
-            border-radius : 1vw;
-        }
-
-        
-        #openMenu{
-            display : table-cell;
-            z-index:2;
-            width : 7vw; height: 7vw;
-            transition : left 0.5s, top 1s;
-            
-        }
-        
-        #openMenu img{
-            max-height: 100%; 
-            width:auto; height:auto;
-            vertical-align : sub;
-            margin-bottom : 1vw;
-        }
-
         /*메인페이지 표시될 지도*/
         #map {
             position:absolute;
@@ -139,105 +65,10 @@
    
         <!--상세 뷰 css -->
         <style>
-        /*menuDiv*/
-        #menuDiv{
-        	top : 0vh;
-        	left : 130vw;
-        	position: absolute;
-        	background: white;
-        	width: 40vw;
-        	height: 100vh;
-        	font-size : 1.25em;
-            /*display: none;*/
-        	z-index : 4;
-        	transition : left 0.8s;
-        	
-        	-moz-border-radius-topleft : 20px;  
-            -moz-border-radius-bottomleft: 20px;   
-            
-            -webkit-border-top-left-radius: 20px;  
-            -webkit-border-bottom-left-radius: 20px; 
-        }
-
-        /*pageview.css*/
-        /*각 view의 페이지 div*/
-        #viewDiv{
-            position : relative;
-            width : 100vw;
-            height : 100vh;
-            background : white;
-            display : none;
-            z-index : 5 ;
-        }                
-                
-        /*로그인 페이지 */
-        #loginPage{
-            text-align : center;
-            
-            display : block;
-            position : absolute ;
-            width : 90vw;
-            height : 65vh;
-            font-size : 1.25em;
-            transition : top 0.8s;
-            
-            top : 120vh;
-            margin : 0 5vw;
-            z-index : 4;
-            background : white;
-            
-            
-        	-moz-border-radius-topleft : 10px;  
-            -moz-border-radius-topright: 10px;  
-            -moz-border-radius-bottomleft: 10px;  
-            -moz-border-radius-bottomright: 10px;  
-            
-            -webkit-border-top-left-radius: 10px;  
-            -webkit-border-top-right-radius: 10px;  
-            -webkit-border-bottom-left-radius: 10px;  
-            -webkit-border-bottom-right-radius: 10px; 
-        }       
         
-        /*overlays.css*/
 
-        /*검색 결과창 , view, 지도 마커 */
-
-        /* 팝업창 css */
-        #popupDiv {  
-            overflow-x: hidden;
-        	top : 10vh;
-        	margin : 10vw 10vw;
-        	position: absolute;
-        	background: white;
-        	width: 80vw;
-        	height: 80vh;
-        	display: none; 
-        	z-index : 4;
-        	
-        	-moz-border-radius-topleft : 20px;  
-        	-moz-border-radius-topright: 20px;  
-        	-moz-border-radius-bottomleft: 20px;  
-        	-moz-border-radius-bottomright: 20px;  
-        	
-        	-webkit-border-top-left-radius: 20px;  
-        	-webkit-border-top-right-radius: 20px;  
-        	-webkit-border-bottom-left-radius: 20px;  
-        	-webkit-border-bottom-right-radius: 20px;  
-        }
         
         
-        /* 팝업 배경 css */
-        #popup_mask { 
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            top: 0px;
-            left: 0px;
-            display: none; 
-            background-color:#000;
-            opacity: 0.7;
-            z-index : 3;
-        }
         
         /* 트립노트추가 css */
         
@@ -322,222 +153,7 @@
         	-webkit-border-bottom-left-radius: 20px;  
         	-webkit-border-bottom-right-radius: 20px;  
         }
-        
-        /*팝업 리스트 css */
-        div.items{ 
-            text-align : center;
-            font-size : 14px;
-            padding :3vw 5vh ;
-            height : 4vh;
-            border-bottom : 1.5px solid skyblue;
-        }
-        div.items:hover {
-            background : skyblue ;
-            color : white ;
-            font-size : 16px;
-            font-weight : bold;
-        }
-        
-
-        
-        /*지도에 표시될 마커*/
-        .itemOverlays{
-            width: 80vw; 
-            height: 50vw;
-            position : relative;
-            white-space : normal;
-            backface-visibility: hidden;
-            transform-style: preserve-3d;
-            transition: 0.5s;
-            bottom : 28vw;
-        }
-        
-        .itemOverlays:after{
-            content: '';
-            position: absolute;
-            left: 47%;
-            bottom: -6vw;
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 3vw;
-            border-color: white transparent transparent transparent;
-        }
-                    
-        .itemOverlays.noMark{
-            display : none;    
-            transform: rotateY(180deg);
-        }
-        
-        .itemOverlays.setMark{
-            display : block;
-            transform: rotateY(0deg);
-        }
-        
-        .itemOverlays.place {
-            /*top : -2vh;*/
-            background: white;
-        }
-        
-        .itemOverlays.place .placeInfo{
-            height : 75%;
-        }
-        
-        .itemOverlays.place .placeName{
-            font-size : 3em;
-            font-weight : bold;
-            color : #2196F3;
-        }
-        
-        .itemOverlays.place img{
-            float : right;
-            width : 50%;
-            height : auto;
-            margin : 0 auto ;
-        }
-        
-        
-        .itemOverlays.place .placeType{
-            font-size : 1.5em;
-            color : #9e9e9e;
-        }
-        
-        .itemOverlays.place .addr1{
-            font-size : 2em;
-            font-weight : bold;
-        }
-        
-        .itemOverlays.place .addTripnote{
-            background : #2196F3;
-            color : white;
-            font-weight : bold;
-            font-size : 1.2em;
-            width: 40%; height : 11%;
-            margin: 0 auto;
-            padding-top : 1vw;
-            text-align: center;
-            border-radius: 1em;
-        }
-        
-        .itemOverlays.picture {
-            background: green;
-        }
-
-
-        .itemOverlays .close{
-            position : relative;
-            text-align : right;
-            background : white ;
-
-        }
-        
-        .itemOverlays .off{
-            display : none;
-        }
-        
-        
-        .swiper-container{
-            width : 80vw;
-        }
-        
-        .swiper-slide {
-            width : auto;
-        }
-        
-        /*.midCat .swiper-slide {*/
-        /*    width:95%;*/
-        /*    margin : 1vh 3vw 3vw 1vh;*/
-        /*}*/
-    
-    
-        /*catDiv.css*/    
-            #catDiv{
-            position : relative;
-            margin-top : 3vh;
-            top : 10vw ;
-            left : 5vw ;
-            width : 90vw;
-            height : auto;
-            z-index : 2;
-            transition : top 1s;
-        }
-        
-        
-        .larCatDiv{ /*position 속성 선언되어있지 않으면 무조건 아래로 내려감.*/
-            width : 15vw;
-            height : 15vw;
-            margin : 1vw 1vw;
-            padding : 1vw 1vw;
-            transition : top 0.5s, visibility 0.5s ,opacity 0.5s;
-            background : none;
-            z-index : 2;
-            float : left;
-            
-        } 
-        
-        .larCatDiv.main{
-            position : relative;
-            left : -2vw;
-            z-index : 3;
-            background : #2196F3;
-            border-radius : 10vw;
-            box-shadow : 0 2px 5px #000;
-        }
-        
-        .larCatDiv.other{
-            position : relative;
-            display : none;
-            margin-top : 1vh;
-            left : -2vw;
-            background : white;
-            border-radius : 10vw;
-            box-shadow : 0 2px 5px #000;
-        }
-        
-        .larCatDiv img{
-            position : absolute;
-            max-width: 70%; 
-            width:auto; height:auto;
-            margin:auto;
-            top:0; bottom:0; left:0; right:0;
-            border-radius : 1vw;
-        	pointer-events: none 
-        	/*이벤트 전파 순서 변경. bubbling -> capturing*/
-        }
-        
-        .midCatDiv{
-            width: 70vw; height: 15vw;
-            margin-top : 1vw;
-            float : none;
-            position : relative;
-            border-radius : 10vw;
-            background-color: rgba( 255, 255, 255, 0.5 );
-        	top : 2vh;
-        	z-index : 2;
-        }
-        
-        .midCat{
-            width: 13vw; height: 13vw;
-            margin : 1vh 3vw 3vw 1vh;
-            float : left;
-            box-shadow : 0 2px 5px #000;
-            background : white;
-            border-radius : 10vw;
-            transition : top 0.5s, visibility 0.5s ,opacity 0.5s;
-            z-index : 2;
-        }
-        
-        .midCat img {
-            position : absolute;
-            max-width: 80%; 
-            width:auto; height:auto;
-            margin:auto;
-            top:0; bottom:0; left:0; right:0;
-            border-radius : 3vw;
-        }
-
-        </style>
+    </style>
         
     </head>
     
@@ -780,6 +396,7 @@
     
     <script> //페이지 로드시 초기화할 변수들 모음 
     var markers = [];
+    var backMarkers = [];
     var overlays = [];
     
     var code = 0; // 카테고리별 코드 저장
@@ -1060,63 +677,74 @@ function modeChange(){
         $("#modeChange").html("<img src='/static/image/icons/picture.png'>")
         
     }
-    // Change_Marker_Photo();
     console.log(viewMode)
     viewMode *= -1;
 }
 
-// function Change_Marker_Photo()
-// {
-//     hideMarkers();
-//     hideOverlays();
-//     for(var item in GlobalList){
-//         var list = $.parseJSON(GlobalList[item]);
-//         if(viewMode == -1)
-//         {
-//             SetMarker(item, marker_basic);
-//             if(code != 0)
-//             {
-//                 var imageSize = new kakao.maps.Size(24, 35);
-//                 var markerImage = new kakao.maps.MarkerImage(marker_basic, imageSize);
-//                 var marker = new kakao.maps.Marker({
-//                 map: map, // 마커를 표시할 지도
-//                 position: new kakao.maps.LatLng(lat,lon), // 마커를 표시할 위치
-//                 title : "현재위치", // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-//                 image : markerImage, // 마커 이미지 
-//                 });
-//                 markers.push(marker);
-//             }
-//         }
-//         else
-//         {
-//             SetMarker(item, photo_basic);
-//             if(code != 0)
-//             {
-//                 var imageSize = new kakao.maps.Size(24, 35);
-//                 var markerImage = new kakao.maps.MarkerImage(photo_basic, imageSize);
-//                 var marker = new kakao.maps.Marker({
-//                 map: map, // 마커를 표시할 지도
-//                 position: new kakao.maps.LatLng(lat,lon), // 마커를 표시할 위치
-//                 title : "현재위치", // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-//                 image : markerImage, // 마커 이미지 
-//                 });
-//                 markers.push(marker);
-//             }
-//         }
-//     }
-// }
-    
 </script>
 
 <script>
+
+codeList1 = ['A05020100' , 'A05020200','A05020300','A05020400','A05020500','A05020600',
+'A05020700','A05020800','A05020900',]
+catList1 = ['food_Korean','food_Western','food_Japaneses','food_Chineses',
+'food_Asian','food_Restaurant','food_Exotic','food_Vegetarian',]
+
+codeList2 = ['A0101','A0201','A0202','A0203','A0204','A0205','A0206','A0208','A0302','A0303','A0304']
+
+catList2 = ['tourspot_nature','tourspot_history','tourspot_recreation','tourspot_experience','tourspot_industry',
+'tourspot_architecture','tourspot_culture','tourspot_festival','tourspot_leportsGround','tourspot_leportsWater',
+'tourspot_leportsSky']
+
+function codeToCatName(catcode){
+    
+    if (catcode.indexOf('A0502') != -1) {
+        for(i=0;i!=(codeList1.length)+1;i++){
+            if (catcode == codeList1[i])
+                return catList1[i]
+        }
+    }
+    else{
+        for(i=0;i!=(codeList2.length)+1;i++){
+            if (catcode.indexOf(codeList2[i]) != -1)
+                return catList2[i]
+        }
+    }
+}
+
+
+
 function SetMarker(inum, imageSrc){
     var list = $.parseJSON(GlobalList[inum]);
-    // 마커 이미지의 이미지 크기 입니다
-    var imageSize = new kakao.maps.Size(24, 35); 
-    // 마커 이미지를 생성합니다    
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    catName = codeToCatName(list['cat3'])
+    
+    var backMarkerImage = new kakao.maps.MarkerImage( //마커 이미지 크기 및 위치 조정 
+        "/static/image/backMarker/backMarker"+Math.floor( Math.random() * 10 +1 )+".png",
+        new kakao.maps.Size(32, 40),
+        {
+            offset: new kakao.maps.Point(15, 29)
+        }
+        
+    ); 
+
+    var markerImage = new kakao.maps.MarkerImage(
+        "/static/image/icons/"+catName+".png",
+        new kakao.maps.Size(30, 30),
+        {
+        }
+    ); 
+
+
     // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
+    
+    var backMarker = new kakao.maps.Marker({ //배경마커
+        map: map, // 마커를 표시할 지도
+        position: new kakao.maps.LatLng(list['mapy'],list['mapx']), // 마커를 표시할 위치
+        image : backMarkerImage, // 마커 이미지 
+    });
+    
+    var marker = new kakao.maps.Marker({ //실제마커
         map: map, // 마커를 표시할 지도
         position: new kakao.maps.LatLng(list['mapy'],list['mapx']), // 마커를 표시할 위치
         title : list['title'], // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
@@ -1132,12 +760,12 @@ function SetMarker(inum, imageSrc){
         position: marker.getPosition(),   
     });
     
+    backMarkers.push(backMarker);
     markers.push(marker);
     overlays.push(overlay);
     var tmpcont = overlay.getContent()
     var divsize = "style=\"width: 80vw; height: 50vw;\""
     kakao.maps.event.addListener(marker, 'click', function() {
-        
         var mtitle = marker.getTitle()
         
         
@@ -1147,8 +775,6 @@ function SetMarker(inum, imageSrc){
         var list = $.parseJSON(GlobalList[idx]);
         console.log(list);
         
-        
-         
         mtitle = "<div class=\"placeInfo\">"
         if(list['firstimage2']){
             mtitle += "<div class=\"placePicture\">"
@@ -1264,6 +890,43 @@ function SetMarker(inum, imageSrc){
         }
     }
 </script>
+<script>
+function keywordSearch(jdata){ //키워드 검색 함수  
+
+//이전 검색결과의 마커랑 오버레이 전부 비우기 
+hideOverlays();
+hideMarkers();
+
+markers = []; 
+backMarkers = [];
+overlays = [];
+
+$("#popup_mask").css("display","block"); //팝업 뒷배경 display block
+$("#popupDiv").css("display","block"); //팝업창 display block
+//새로운 지역 검색시 팝업창 내용 초기화 
+searchswiper.removeAllSlides();
+
+GlobalList = jdata;
+for(var item in jdata){
+    var list = $.parseJSON(jdata[item]);
+    if(viewMode == 1)
+    {
+        SetMarker(item, marker_basic);
+    }
+    else
+    {
+        SetMarker(item, photo_basic);
+    }
+    var Ddata = "<div id ="+item+" class='items swiper-slide' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
+    searchswiper.appendSlide(Ddata); //popupdiv 슬라이드에 item 데이터 추가  
+}
+checkSearch = 1;
+$("#popCloseBtn").click(function(event){
+    popUpClose(); 
+});
+}
+</script>
 
 
 </html>
+
