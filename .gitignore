@@ -6,5 +6,6 @@ __pycache__/
 appkey.py
 apikey.py
 hides.py
+certbot/
 *.pyc
 .env
