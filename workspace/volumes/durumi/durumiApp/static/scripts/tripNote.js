@@ -21,11 +21,11 @@ function selectTripnoteForaddTripnoteOpen() {
   });
   $("#selectTripnoteForaddTripnoteDiv").css("display", "block");
 }
-// function addTripNoteListOpen() {
-//     $("#popup_mask").css("display","block");
-//     $("#addTripnoteListDiv").css("display","block");
-//     $("#addTripnoteListDiv").css("top","20vh");
-// }
+ function addTripNoteListOpen() {
+     $("#popup_mask").css("display","block");
+     $("#addTripnoteListDiv").css("display","block");
+     $("#addTripnoteListDiv").css("top","20vh");
+ }
 
 function selectTripnotePlace(item) {
   //지역 선택 시 화면 전환 함수
