@@ -1,90 +1,91 @@
 {% load static %}
 <html>
-    <head>
-        
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83bbe8eebf0695e3a6a3ef988fe26092"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        
-        <meta charset = "utf-8" />
-        
-        <!--모바일 환경 뷰포트 대응-->
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-        
-        <title> 함께 걸어가는 여행의 동반자! 여행거르미</title>
-        
-        
-        
-        
-        <link rel="stylesheet" type="text/css" href="{% static 'css/catDiv.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/overlays.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/searchMenuDiv.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/tripNote.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/pageView.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
-        
-        <link rel="manifest" href=" {% static 'manifest.json' %}">
-        
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'image/apple-touch-icon.png' %}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'image/favicon-32x32.png' %}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/favicon-16x16.png' %}">
-        <link rel="mask-icon" href="{% static 'image/safari-pinned-tab.svg' %}" color="#5bbad5">
-        
-        
-        <style>
-        
-        html{
-        /* 뷰 포트별 폰트 사이즈 조절 필요*/
+
+<head>
+
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f5d5f8cae467bcfcc2fd2ed0a65b173"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <meta charset="utf-8" />
+
+    <!--모바일 환경 뷰포트 대응-->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title> 함께 걸어가는 여행의 동반자! 여행거르미</title>
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/catDiv.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/overlays.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/searchMenuDiv.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tripNote.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pageView.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
+
+    <link rel="manifest" href=" {% static 'manifest.json' %}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'image/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'image/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/favicon-16x16.png' %}">
+    <link rel="mask-icon" href="{% static 'image/safari-pinned-tab.svg' %}" color="#5bbad5">
+
+
+    <style>
+        html {
+            /* 뷰 포트별 폰트 사이즈 조절 필요*/
             /*font-size : 16px;*/
             max-width: 110%;
             max-height: 100%;
-            overflow : hidden;
+            overflow: hidden;
         }
-        
-        body{ 
-            -ms-overflow-style: none; 
-            width : 110vw;
-            height : 100vh;
-            font-size : 16px;
-            margin : 0 0 0 0;
-        } 
-        ::-webkit-scrollbar { display: none; } /*스크롤바 감추기 + 고정 */
-    
-    
+
+        body {
+            -ms-overflow-style: none;
+            width: 110vw;
+            height: 100vh;
+            font-size: 16px;
+            margin: 0 0 0 0;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /*스크롤바 감추기 + 고정 */
+
+
         /*메인페이지 표시될 지도*/
         #map {
-            position:absolute;
-            font-size : 10px;
-            top:-.5em;
-            left:-.5em;
-            width:110vw; 
-            height:110vh; 
-            z-index:1; 
+            position: absolute;
+            font-size: 10px;
+            top: -.5em;
+            left: -.5em;
+            width: 110vw;
+            height: 110vh;
+            z-index: 1;
         }
-        
-        </style>
-   
-        <!--상세 뷰 css -->
-        <style>
-        
+    </style>
 
-        
-        
-        
+    <!--상세 뷰 css -->
+    <style>
         /* 트립노트추가 css */
-        
+
         #addTripnoteListDiv {
-            text-align : center;
-            display : block;
-            position : absolute ;
-            width : 90vw;
-            height : 15vh;
-            font-size : 1.25em;
-            transition : top 0.8s;
-            
-            top : 120vh;
-            margin : 0 5vw;
-            z-index : 4;
-            background : white;
+            text-align: center;
+            display: block;
+            position: absolute;
+            width: 90vw;
+            height: 15vh;
+            font-size: 1.25em;
+            transition: top 0.8s;
+
+            top: 120vh;
+            margin: 0 5vw;
+            z-index: 4;
+            background: white;
 
             -moz-border-radius-topleft: 20px;
             -moz-border-radius-topright: 20px;
@@ -96,69 +97,67 @@
             -webkit-border-bottom-left-radius: 20px;
             -webkit-border-bottom-right-radius: 20px;
         }
-        
-        #addTripnoteListDiv .inputRow{
+
+        #addTripnoteListDiv .inputRow {
             width: 80%;
             position: relative;
             margin: 0 auto;
             margin-top: 2%;
             border: solid 1px #bababa;
             background: white;
-            
-        	-moz-border-radius-topleft : 10px;  
-            -moz-border-radius-topright: 10px;  
-            -moz-border-radius-bottomleft: 10px;  
-            -moz-border-radius-bottomright: 10px;  
-            
-            -webkit-border-top-left-radius: 10px;  
-            -webkit-border-top-right-radius: 10px;  
-            -webkit-border-bottom-left-radius: 10px;  
-            -webkit-border-bottom-right-radius: 10px; 
+
+            -moz-border-radius-topleft: 10px;
+            -moz-border-radius-topright: 10px;
+            -moz-border-radius-bottomleft: 10px;
+            -moz-border-radius-bottomright: 10px;
+
+            -webkit-border-top-left-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            -webkit-border-bottom-right-radius: 10px;
         }
-        #addTripnoteListDiv #errormsg{
-            font-size : 0.75em;
+
+        #addTripnoteListDiv #errormsg {
+            font-size: 0.75em;
         }
-        
-        #addTripnoteListDiv #btnlist{
-            float : left;
-            font-size : 0.75em;
+
+        #addTripnoteListDiv #btnlist {
+            float: left;
+            font-size: 0.75em;
         }
-        
-        #TripnoteListNameBox{
-            width:70vw;
-            display : inline-block;
+
+        #TripnoteListNameBox {
+            width: 70vw;
+            display: inline-block;
             height: 7vw;
-            margin : 1vh 0 1vh 0 ;
-            border : none;
-            outline-style : none;
+            margin: 1vh 0 1vh 0;
+            border: none;
+            outline-style: none;
         }
-        
-        #selectTripnoteForaddTripnoteDiv {  
-        	top : 20vw;
-        	position: absolute;
-        	background: white;
-        	width: 80vw;
-        	height: 80vh;
-        	display: none; 
-        	z-index : 4;
-        	
-        	-moz-border-radius-topleft : 20px;  
-        	-moz-border-radius-topright: 20px;  
-        	-moz-border-radius-bottomleft: 20px;  
-        	-moz-border-radius-bottomright: 20px;  
-        	
-        	-webkit-border-top-left-radius: 20px;  
-        	-webkit-border-top-right-radius: 20px;  
-        	-webkit-border-bottom-left-radius: 20px;  
-        	-webkit-border-bottom-right-radius: 20px;  
+
+        #selectTripnoteForaddTripnoteDiv {
+            top: 20vw;
+            position: absolute;
+            background: white;
+            width: 80vw;
+            height: 80vh;
+            display: none;
+            z-index: 4;
+
+            -moz-border-radius-topleft: 20px;
+            -moz-border-radius-topright: 20px;
+            -moz-border-radius-bottomleft: 20px;
+            -moz-border-radius-bottomright: 20px;
+
+            -webkit-border-top-left-radius: 20px;
+            -webkit-border-top-right-radius: 20px;
+            -webkit-border-bottom-left-radius: 20px;
+            -webkit-border-bottom-right-radius: 20px;
         }
     </style>
-        
-    </head>
-    
-        </script>
 
-    <style>
+</head>
+<style>
     /*loading.css*/
     #loading {
         width: 100%;
@@ -178,15 +177,17 @@
         left: 50%;
         z-index: 100;
     }
-    </style>
+</style>
+
 <body scroll="overflow-x: hidden">
-    
+
     <div id="loading">
         <img id="loading-image" src='{% static "image/loading.gif" %}' alt="Loading." />
     </div>
-    
-    
-    <div id="popupDiv" class="swiper-container searchswiper"> <!-- 팝업창 -->
+
+
+    <div id="popupDiv" class="swiper-container searchswiper">
+        <!-- 팝업창 -->
         <!--<button id="popCloseBtn">close</button>-->
         <div class='swiper-wrapper'>
         </div>
@@ -196,53 +197,53 @@
     <!-- 팝업 배경 DIV. 마스크를 만들어서 씌우는 식으로 뒷 화면을 가리게함 . -->
 
     <!-- Map이 들어갈 위치를 정해주는 태그-->
-    <div id = "map">
+    <div id="map">
     </div>
-    
-        <!-- searchBox의 위치를 정해주는 태그-->
-    <div id="searchDiv" >
+
+    <!-- searchBox의 위치를 정해주는 태그-->
+    <div id="searchDiv">
         <!--검색을 위한 FORM 태그-->
-        <div id ="modeChange" onclick='modeChange()' >
+        <div id="modeChange" onclick='modeChange()'>
             <img src='{% static "image/icons/picture.png" %}'>
-        </div> 
+        </div>
         <form id="searchForm">
             <!-- 보안을 위해 적어줌-->
             {% csrf_token %}
             <!-- 한개의 문자열로 검색하는 기능-->
-            <input type=text name="searchBox" placeholder="여행지 검색" id="searchBox" >
+            <input type=text name="searchBox" placeholder="여행지 검색" id="searchBox">
             <input type=button id="search" value="확인" style="display:none;">
         </form>
         <input type=hidden id="gpsLoc" name="gpsLoc">
-        <div id ="openMenu" onclick='openMenu()'>
-            <img src = '{% static "image/menu2.png" %}'>
-        </div> 
+        <div id="openMenu" onclick='openMenu()'>
+            <img src='{% static "image/menu2.png" %}'>
+        </div>
     </div>
-    
+
     <!-- div 태그 선언 영역 -->
     <div id="viewDiv"> 페이지 view div</div>
-    
-    <div id ="openNote" onclick='openTripNote()'>opennote</div> 
-    
-    <div id ="noteDiv">{% include 'durumiApp/tripNote.html' %}</div>
-    <div id ="menuDiv">{% include 'durumiApp/hamburgerMenu.html' %}</div>
 
-    <div id ="catDiv">
-        
-        <div class = "larCatDiv">
-            <div id ="tourspotlarCat" class ="larCatDiv main"  >
+    <div id="openNote" onclick='openTripNote()'>opennote</div>
+
+    <div id="noteDiv">{% include 'durumiApp/tripNote.html' %}</div>
+    <div id="menuDiv">{% include 'durumiApp/hamburgerMenu.html' %}</div>
+
+    <div id="catDiv">
+
+        <div class="larCatDiv">
+            <div id="tourspotlarCat" class="larCatDiv main">
                 <img src='{% static "image/icons/tourspot.png" %}' name="tourspotCat">
             </div>
-            <div id ="foodlarCat" class ="larCatDiv other" >
+            <div id="foodlarCat" class="larCatDiv other">
                 <img src='{% static "image/icons/food.png" %}' name="foodCat">
             </div>
-            <div id ="etclarCat" class ="larCatDiv other" >
+            <div id="etclarCat" class="larCatDiv other">
                 <img src='{% static "image/icons/etc.png" %}' name="etcCat">
             </div>
         </div>
-        
+
         <!-- tourspot -->
-        <div id='tourspotCat' class ="midCatDiv swiper-container swiper1" >
-            <div class="swiper-wrapper" >
+        <div id='tourspotCat' class="midCatDiv swiper-container swiper1">
+            <div class="swiper-wrapper">
                 <div class="midCat swiper-slide" id="12:A01:A0101">
                     <img src='{% static "image/icons/tourspot_nature.png" %}' name="natureCat">
                 </div>
@@ -278,10 +279,10 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- food -->
-        <div id='foodCat' class ="midCatDiv swiper-container swiper2">
-            <div class="swiper-wrapper" >
+        <div id='foodCat' class="midCatDiv swiper-container swiper2">
+            <div class="swiper-wrapper">
                 <div class="midCat swiper-slide" id="39:A05:A0502:A05020100">
                     <img src='{% static "image/icons/food_Korean.png" %}' name="foodKorean">
                 </div>
@@ -311,10 +312,10 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- etc -->
-        <div id='etcCat' class ="midCatDiv swiper-container">
-            <div class="swiper-wrapper" >
+        <div id='etcCat' class="midCatDiv swiper-container">
+            <div class="swiper-wrapper">
                 <div class="midCat swiper-slide" id="32:B02:B0201">
                     <img src='{% static "image/icons/etc_accommodation.png" %}' name="accommodationCat">
                 </div>
@@ -323,27 +324,26 @@
                 </div>
             </div>
         </div>
-      </div>
+    </div>
 
     </div>
 
     <div class="itemOverlays">
-      <div class="itemOverlays place noMark off">
-        <div class="close" onclick="closeOverlay(olnum)">닫기</div>
-        <div class="contentDiv">placeContent</div>
-      </div>
-      <div class="itemOverlays picture noMark off">
-        <div class="close" onclick="closeOverlay(olnum)">닫기</div>
-        <div class="contentDiv">pictureContent</div>
-      </div>
+        <div class="itemOverlays place noMark off">
+            <div class="close" onclick="closeOverlay(olnum)">닫기</div>
+            <div class="contentDiv">placeContent</div>
+        </div>
+        <div class="itemOverlays picture noMark off">
+            <div class="close" onclick="closeOverlay(olnum)">닫기</div>
+            <div class="contentDiv">pictureContent</div>
+        </div>
     </div>
-    
+
     <!--트립노트 추가를 위한 팝업창-->
     <div id="addTripnoteListDiv">
         <!-- 팝업창 -->
         <div class="inputRow">
-            <input type="text" name="TripnoteListNameBox" placeholder="새 거르미의 이름을 입력하세요"
-                id="TripnoteListNameBox" />
+            <input type="text" name="TripnoteListNameBox" placeholder="새 거르미의 이름을 입력하세요" id="TripnoteListNameBox" />
         </div>
         <div id="errormsg"></div>
         <div id="btnDiv" style="width:50%;margin:0 auto;">
@@ -353,432 +353,458 @@
     </div>
 
     <!--트립노트에 장소 추가시 트립노트를 선택하기 위한 팝업창-->
-    
+
     <div id="selectTripnoteForaddTripnoteDiv">
         <!-- 팝업창 -->
         <button id="addTripnoteListcancelBtn" onclick="selectTripnoteForaddTripnoteCancel()">
             cancel
         </button>
     </div>
-    
-    <div id="loginPage"> {% include 'durumiApp/loginPage.html' %} </div>
-</body>    
-    <script src="{% static 'scripts/searchList.js' %}"></script>
-    <script src="{% static 'scripts/uiButtons.js' %}"></script>
-    <script src="{% static 'scripts/itemOverlays.js' %}"></script>
-    <script src="{% static 'scripts/catDiv.js' %}"></script>
-    <script src="{% static 'scripts/swiper-bundle.min.js' %}"></script>
-    <script src="{% static 'scripts/tripNote.js' %}"></script>
 
-    
-    <!-- Initialize Swiper -->
-    <script>
+    <div id="loginPage"> {% include 'durumiApp/loginPage.html' %} </div>
+</body>
+<script src="{% static 'scripts/searchList.js' %}"></script>
+<script src="{% static 'scripts/uiButtons.js' %}"></script>
+<script src="{% static 'scripts/itemOverlays.js' %}"></script>
+<script src="{% static 'scripts/catDiv.js' %}"></script>
+<script src="{% static 'scripts/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'scripts/tripNote.js' %}"></script>
+
+
+<!-- Initialize Swiper -->
+<script>
     var swiper1 = new Swiper('.swiper1', {
         slidesPerView: 'auto',
         spaceBetween: 10,
-        freeMode : true,
+        freeMode: true,
     });
-    
+
     var swiper2 = new Swiper('.swiper2', {
         slidesPerView: 'auto',
         spaceBetween: 10,
-        freeMode : true,
+        freeMode: true,
     });
-    
+
     var searchswiper = new Swiper('.searchswiper', {
         slidesPerView: 'auto',
         direction: 'vertical',
         freeMode: true,
     });
 
-    </script>
-    
-    <script> //페이지 로드시 초기화할 변수들 모음 
+</script>
+
+<script> //페이지 로드시 초기화할 변수들 모음 
     var markers = [];
     var backMarkers = [];
     var overlays = [];
-    
+
     var code = 0; // 카테고리별 코드 저장
 
-    $(document).ready(function()  {
-        checkNote = -1 ; //tripnote 올라왔는지 내려왔는지 체크 
-        checkMenu = -1 ; //menu
+    $(document).ready(function () {
+        checkNote = -1; //tripnote 올라왔는지 내려왔는지 체크 
+        checkMenu = -1; //menu
         checkNewList = -1; //newlist
         checkPage = -1 //viewPages
         checkSearch = -1; //searchpage
-        viewMode = 1 ; //place
+        viewMode = 1; //place
         checkLoginPage = -1; //loginpage
         searchFocus = -1; //searchfocus
-        
-        $('#element').on('scroll touchmove mousewheel', function(event) { 
+
+        $('#element').on('scroll touchmove mousewheel', function (event) {
             /*스크롤바 감추기 + 고정 */
             event.preventDefault();
             event.stopPropagation();
             return false;
         });
-        
-        
-        
-    }); 
-    
-    $(window).ready(function()  { //페이지 로드 완료시 이벤트 
-        $('.midCatDiv').css("display","none");
-        $('#tourspotCat').css("display","block");
+
+
+
+    });
+
+    $(window).ready(function () { //페이지 로드 완료시 이벤트 
+        $('.midCatDiv').css("display", "none");
+        $('#tourspotCat').css("display", "block");
         $('#loading').fadeOut();
         $('#loading').remove();
     });
-    </script>
-    <script>
-        $('#addTripnoteListDiv input').on('focus',function(event){
-            $(event.target).closest('.inputRow').css('border','solid 1px #2196F3')
-        });
-        
-        $('#addTripnoteListDiv input').on('focusout',function(event){
-            $(event.target).closest('.inputRow').css('border','solid 1px #bababa')
-        });
-    
-        function addTripnoteListCancel() {
-            $("#popup_mask").css("display","none");
-            $("#addTripnoteListDiv").css("top","120vh");
-        }
-        
-        function openAddTripNoteList() {
-            $("#popup_mask").css("display","block");
-            $("#addTripnoteListDiv").css("display","block");
-            $("#addTripnoteListDiv").css("top","40vh");
-        }
-    </script>
-    
-    
-    <script>
-        function openMenu(){
-            if (checkMenu == -1){ //메뉴 나와 있는 상태 
-                $("#popup_mask").css("display","block"); //팝업창 뒷배경 mask display block
-                $("#menuDiv").css("display","block"); //팝업창 display block
-                $("#menuDiv").css("left","60vw");
-                $("#openMenu").css("left","68vw");
-                checkMenu = checkMenu * -1; 
-            }
-           // alert("note")
-        }
-        
-                
-        $(".openView").on('click',function(event){ //해당 객체의 아이디 값 가져와서 페이지 로드 
-            var tName = $(event.target).attr("id");
-            checkPage = 1; 
-            $("#viewDiv").css("display","block");
-            $("#viewDiv").load("/durumiApp/viewPage/"+tName);
-        });
-    </script> 
+</script>
+<script>
+    $('#addTripnoteListDiv input').on('focus', function (event) {
+        $(event.target).closest('.inputRow').css('border', 'solid 1px #2196F3')
+    });
 
-    <script>
-       	var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng({{Map.yPos}} , {{Map.xPos}}),
-            level: 3
+    $('#addTripnoteListDiv input').on('focusout', function (event) {
+        $(event.target).closest('.inputRow').css('border', 'solid 1px #bababa')
+    });
+
+    function addTripnoteListCancel() {
+        $("#popup_mask").css("display", "none");
+        $("#addTripnoteListDiv").css("top", "120vh");
+    }
+
+    function openAddTripNoteList() {
+        $("#popup_mask").css("display", "block");
+        $("#addTripnoteListDiv").css("display", "block");
+        $("#addTripnoteListDiv").css("top", "40vh");
+    }
+</script>
+
+
+<script>
+    function openMenu() {
+        if (checkMenu == -1) { //메뉴 나와 있는 상태 
+            $("#popup_mask").css("display", "block"); //팝업창 뒷배경 mask display block
+            $("#menuDiv").css("display", "block"); //팝업창 display block
+            $("#menuDiv").css("left", "60vw");
+            $("#openMenu").css("left", "68vw");
+            checkMenu = checkMenu * -1;
+        }
+        // alert("note")
+    }
+
+
+    $(".openView").on('click', function (event) { //해당 객체의 아이디 값 가져와서 페이지 로드 
+        var tName = $(event.target).attr("id");
+        checkPage = 1;
+        $("#viewDiv").css("display", "block");
+        $("#viewDiv").load("/durumiApp/viewPage/" + tName);
+    });
+</script>
+
+<script>
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng({{ Map.yPos }}, {{ Map.xPos }}),
+    level: 3
 		};
-        
-        var map = new kakao.maps.Map(container, options);
+
+    var map = new kakao.maps.Map(container, options);
 
 
     // 엔터키의 기본기능인 submit 을 제거하고 엔터키를 입력시 search 버튼을 누른것과 같은 효과를 줌
     {   //검색창 활성화 시에만 엔터키를 이용한 submit 가능하게 지정. - 로그인 기능과 충돌 방지 
-        $('#searchBox').on('focus',function(event){
+        $('#searchBox').on('focus', function (event) {
             searchFocus = 1;
         });
-        
-        $('#searchBox').on('focusout',function(event){
+
+        $('#searchBox').on('focusout', function (event) {
             searchFocus = -1;
         });
-        
-        document.addEventListener('keydown', function(event) 
-        {
-            if ((event.keyCode === 13) && (searchFocus === 1))
-            {
+
+        document.addEventListener('keydown', function (event) {
+            if ((event.keyCode === 13) && (searchFocus === 1)) {
                 event.preventDefault();
                 document.getElementById('search').click();
             };
-        }, true);    
+        }, true);
     }
-    
-    function panTo(y,x) //카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수
+
+    function panTo(y, x) //카카오맵 API를 이용해 지도의 중심을 이동시켜주는 함수
     {
-        var moveLatLng = new kakao.maps.LatLng(y,x)
+        var moveLatLng = new kakao.maps.LatLng(y, x)
         map.panTo(moveLatLng)
     }
-    </script>
+</script>
 
 
-    <!-- Ajax 를 이용한 template와 view 사이의 통신-->
-    <script type="text/javascript">
-    $('#search').click(function()
-    {
+<!-- Ajax 를 이용한 template와 view 사이의 통신-->
+<script type="text/javascript">
+    $('#search').click(function () {
         code = 0;
         //form 에 있는 데이터를 한번에 모아줌 .serialize();
         var formData = $("#searchForm").serialize();
         console.log(formData);
         $.ajax
-        ({
-            cache: false,
-            //어떤 View 와 데이터통신을 진행할것인지 url로 표시
-            url : "{% url 'durumiApp:searchKeyword' %}", 
-            // Pos view로 데이터를 전송 하면, Pos view 에서는 http로 결과값을 반환하므로, 해당 반환값을 받아서 data로 사용함. 
-            //POST방식을 사용할것임
-            type: 'POST',
-            data: formData,
-            success : function(data)
-            {
-                // 성공이라는 메시지를 띄워줌
-                alert("성공");
-                var jdata = data['result'];
-                keywordSearch(jdata);
-            },
-            error : function(xhr, status,)
-            {
-                //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
-                alert("실패");
-                alert(xhr + ":" + status);
-            },
-        });
-    })
-    </script>
-
-    <!--GPS정보 가져오기 -->
-    <script> 
-    function getLocation(){
-        if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(function(position){
-         		$('#gpsLoc').val(position.coords.latitude+":"+position.coords.longitude);
-                },function(error){
-                    console.error(error);
+            ({
+                cache: false,
+                //어떤 View 와 데이터통신을 진행할것인지 url로 표시
+                url: "{% url 'durumiApp:searchKeyword' %}",
+                // Pos view로 데이터를 전송 하면, Pos view 에서는 http로 결과값을 반환하므로, 해당 반환값을 받아서 data로 사용함. 
+                //POST방식을 사용할것임
+                type: 'POST',
+                data: formData,
+                success: function (data) {
+                    // 성공이라는 메시지를 띄워줌
+                    alert("성공");
+                    var jdata = data['result'];
+                    keywordSearch(jdata);
                 },
+                error: function (xhr, status, ) {
+                    //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
+                    alert("실패");
+                    alert(xhr + ":" + status);
+                },
+            });
+    })
+</script>
+
+<!--GPS정보 가져오기 -->
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var my_longitude = position.coords.longitude.toString();
+                //my_longitude = my_longitude.split(".");
+                //my_longitude = my_longitude[0] + "." + my_longitude[1].substring(0, 6);
+                var my_latitude = position.coords.latitude.toString();
+                //my_latitude = my_latitude.split(".");
+                //my_latitude = my_latitude[0] + "." + my_latitude[1].substring(0, 6);
+                var gps = my_longitude + ":" + my_latitude;
+                $("#gpsLoc").html(gps);
+                alert($("#gpsLoc").text());
+                //var formData = $("#searchForm").serialize() + "&gpsLoc=" + gps + "&code=" + code;
+                var formData = $("#searchForm").serialize() + "&gpsLoc=" + $("#gpsLoc").text() + "&code=" + code;
+                alert(formData);
+                $.ajax
+                    ({
+                        cache: false,
+                        //어떤 View 와 데이터통신을 진행할것인지 url로 표시
+                        url: "{% url 'durumiApp:searchLocation' %}",
+                        //POST방식을 사용할것임
+                        type: 'POST',
+                        data: formData,
+                        success: function (data) {
+                            // 성공이라는 메시지를 띄워줌
+                            alert("성공");
+                            var jdata = data['result'];
+                            locationSearch(jdata);
+                        },
+                        error: function (xhr, status, ) {
+                            //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
+                            alert("실패");
+                            alert(xhr + ":" + status);
+                        },
+                    });
+            }, function (error) {
+                console.error(error);
+            },
                 {
                     enableHighAccuracy: false,
-                    maximumAge:0,
-                    timeout:Infinity
+                    maximumAge: 0,
+                    timeout: Infinity
                 },
             );
-      } else {
-        return "gps를 지원하지 않습니다.";
-      }
+        } else {
+            return "gps를 지원하지 않습니다.";
+        }
     }
 
-    $(".midcat").click(function(){
+    $(".midcat").click(function () {
         code = $(this).attr('id');
+
         locationSearchtest(code);
-  
+
     });
 
-    function loctest(){
+    function loctest() {
         $('#gpsLoc').html("126.804388:37.485773");
     }
     //  좌표기반 검색 함수 호출
-    function locationSearchtest(code){
-        // getLocation();
-        loctest()
-        var formData = $("#searchForm").serialize()+"&gpsLoc="+$("#gpsLoc").text()+"&code="+code;
-        $.ajax
-        ({
-            cache: false,
-            //어떤 View 와 데이터통신을 진행할것인지 url로 표시
-            url : "{% url 'durumiApp:searchLocation' %}", 
-            //POST방식을 사용할것임
-            type: 'POST',
-            data : formData,
-            success : function(data)
+    function locationSearchtest(code) {
+        getLocation();
+        //loctest()
+    }
+
+</script>
+<script>
+    function openTripNote() {
+        console.log(checkNote);
+
+        if (checkNote == 1) { //노트 올라와 있는 상태 
+            $("#noteDiv").css("top", "130vh");
+            $("#openNote").css("top", "95vh");
+            $("#searchDiv").css("top", "4vh");
+            $("#catDiv").css("top", "10vw");
+        }
+        else if (checkNote == -1) {//노트 내려와 있는 상태 
+            {% if request.session.loginOk != True %}
+            openLoginPage();
+            {% else %}
+            appearTripnote();
+            $("#noteDiv").css("display", "block"); //팝업창 display block
+            $("#noteDiv").css("top", "70vh");
+            $("#openNote").css("top", "68vh");
+            $("#searchDiv").css("top", "-10vh");
+            $("#catDiv").css("top", "-10vw");
+            {% endif %}
+
+        }
+        //다른 ui 숨기기
+        checkNote = checkNote * -1;
+        // alert("note")
+    }
+</script>
+
+<script>
+    function modeChange() {
+
+        console.log(code);
+        console.log(GlobalList);
+        if (viewMode == 1) { //place -> picture 전환
+            $(".place").css("transform", "rotateY(180deg)");
+            setTimeout(function () {
+
+                $(".place").removeClass("setMark")
+                $(".place").addClass("noMark")
+
+                $(".picture").removeClass("noMark")
+                $(".picture").addClass("setMark")
+                $(".picture").css("transform", "rotateY(0deg)");
+
+            }, 310);
+
+
+
+            $("#modeChange").html("<img src='/static/image/icons/place.png'>")
+        }
+        else if (viewMode == -1) { //picture -> place 전환 
+            $(".picture").css("transform", "rotateY(180deg)");
+
+            setTimeout(function () {
+                $(".picture").removeClass("setMark")
+                $(".picture").addClass("noMark")
+
+                $(".place").removeClass("noMark")
+                $(".place").addClass("setMark")
+                $(".place").css("transform", "rotateY(0deg)");
+            }, 310);
+
+
+
+            $(".picture").css("transform", "rotateY(180deg)");
+
+
+
+            $("#modeChange").html("<img src='/static/image/icons/picture.png'>")
+
+        }
+        console.log(viewMode)
+        viewMode *= -1;
+    }
+
+</script>
+
+<script>
+    codeList1 = ['A05020100', 'A05020200', 'A05020300', 'A05020400', 'A05020500', 'A05020600',
+        'A05020700', 'A05020800', 'A05020900',]
+    catList1 = ['food_Korean', 'food_Western', 'food_Japaneses', 'food_Chineses',
+        'food_Asian', 'food_Restaurant', 'food_Exotic', 'food_Vegetarian',]
+
+    codeList2 = ['A0101', 'A0201', 'A0202', 'A0203', 'A0204', 'A0205', 'A0206', 'A0208', 'A0302', 'A0303', 'A0304']
+
+    catList2 = ['tourspot_nature', 'tourspot_history', 'tourspot_recreation', 'tourspot_experience', 'tourspot_industry',
+        'tourspot_architecture', 'tourspot_culture', 'tourspot_festival', 'tourspot_leportsGround', 'tourspot_leportsWater',
+        'tourspot_leportsSky']
+
+    function codeToCatName(catcode) {
+
+        if (catcode.indexOf('A0502') != -1) {
+            for (i = 0; i != (codeList1.length) + 1; i++) {
+                if (catcode == codeList1[i])
+                    return catList1[i]
+            }
+        }
+        else {
+            for (i = 0; i != (codeList2.length) + 1; i++) {
+                if (catcode.indexOf(codeList2[i]) != -1)
+                    return catList2[i]
+            }
+        }
+    }
+
+
+
+    function SetMarker(inum, imageSrc) {
+        var list = $.parseJSON(GlobalList[inum]);
+
+        catName = codeToCatName(list['cat3'])
+
+        var backMarkerImage = new kakao.maps.MarkerImage( //마커 이미지 크기 및 위치 조정 
+            "/static/image/backMarker/backMarker" + Math.floor(Math.random() * 10 + 1) + ".png",
+            new kakao.maps.Size(32, 40),
             {
-                // 성공이라는 메시지를 띄워줌
-                alert("성공");
-                var jdata = data['result'];
-                locationSearch(jdata);
-            },
-            error : function(xhr, status,)
+                offset: new kakao.maps.Point(15, 29)
+            }
+
+        );
+
+        var markerImage = new kakao.maps.MarkerImage(
+            "/static/image/icons/" + catName + ".png",
+            new kakao.maps.Size(30, 30),
             {
-                //데이터 통신이 원활이 이루어지지 않으면 실패라는 에러메시지를 띄워줌
-                alert("실패");
-                alert(xhr + ":" + status);
-            },
+            }
+        );
+
+
+        // 마커를 생성합니다
+
+        var backMarker = new kakao.maps.Marker({ //배경마커
+            map: map, // 마커를 표시할 지도
+            position: new kakao.maps.LatLng(list['mapy'], list['mapx']), // 마커를 표시할 위치
+            image: backMarkerImage, // 마커 이미지 
+        });
+
+        var marker = new kakao.maps.Marker({ //실제마커
+            map: map, // 마커를 표시할 지도
+            position: new kakao.maps.LatLng(list['mapy'], list['mapx']), // 마커를 표시할 위치
+            title: list['title'], // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+            image: markerImage, // 마커 이미지 
+            mnum: inum
+        });
+
+        var content = $('.itemOverlays').html()
+
+        var overlay = new kakao.maps.CustomOverlay({
+            content: content,  // 오버레이에 표시할 내용
+            map: null,
+            position: marker.getPosition(),
+        });
+
+        backMarkers.push(backMarker);
+        markers.push(marker);
+        overlays.push(overlay);
+        var tmpcont = overlay.getContent()
+        var divsize = "style=\"width: 80vw; height: 50vw;\""
+        kakao.maps.event.addListener(marker, 'click', function () {
+            var mtitle = marker.getTitle()
+
+
+            // 마커가 지도위에 처음으로 노출될 때의 스타일 설정 
+
+            var idx = findListByTitle(mtitle);
+            var list = $.parseJSON(GlobalList[idx]);
+            console.log(list);
+
+            mtitle = "<div class=\"placeInfo\">"
+            if (list['firstimage2']) {
+                mtitle += "<div class=\"placePicture\">"
+                mtitle += "<img src=\"" + list['firstimage'] + "\" </img> </div>";
+            }
+
+            mtitle += "<div class=\"placeName\" >" + marker.getTitle() + "</div>"
+
+            mtitle += "<div class=\"placeType\"> " + list['cat3'] + "</div>";
+            mtitle += "<div class=\"addr1\">" + list['addr1'] + "</div>  </div>";
+            mtitle += "<div class=\"addTripnote\" onclick=\"addTripnote(" + list['contentid'] + ")\">거르미에 추가</div>"
+
+            tmpcont = tmpcont.replace(/placeContent/, mtitle);
+            tmpcont = tmpcont.replace(/off/, "");
+            tmpcont = tmpcont.replace(/olnum/gi, idx.replace(/item/, ''));
+            // tmpcont = tmpcont.replace(/place/,'place"'+divsize)
+            // tmpcont = tmpcont.replace(/picture/,'picture"'+divsize)
+            if (viewMode == 1) { //place view 일때
+                tmpcont = tmpcont.replace(/itemOverlays place noMark /gi, 'itemOverlays place setMark ');
+                tmpcont = tmpcont.replace(/itemOverlays picture setMark /gi, 'itemOverlays picture noMark ');
+            }
+            else { //picture 일때
+                tmpcont = tmpcont.replace(/itemOverlays place setMark /gi, 'itemOverlays place noMark ');
+                tmpcont = tmpcont.replace(/itemOverlays picture noMark /gi, 'itemOverlays picture setMark ');
+
+            }
+            overlay.setContent(tmpcont);
+            overlay.setMap(map);
         });
     }
-    
-    
-    </script>
-<script>
-    
-function openTripNote(){
-    console.log(checkNote);
-    
-    if (checkNote == 1){ //노트 올라와 있는 상태 
-        $("#noteDiv").css("top","130vh");
-        $("#openNote").css("top","95vh");
-        $("#searchDiv").css("top","4vh");
-        $("#catDiv").css("top","10vw");
-    }
-    else if(checkNote == -1){//노트 내려와 있는 상태 
-        {% if request.session.loginOk != True %}
-            openLoginPage();
-        {% else %}
-            appearTripnote();
-            $("#noteDiv").css("display","block"); //팝업창 display block
-            $("#noteDiv").css("top","70vh");
-            $("#openNote").css("top","68vh");
-            $("#searchDiv").css("top","-10vh");
-            $("#catDiv").css("top","-10vw");
-        {% endif %}
-    
-    }
-    //다른 ui 숨기기
-    checkNote = checkNote * -1; 
-       // alert("note")
-}
-</script>
-
-<script>
-function modeChange(){
-    
-    console.log(code);
-    console.log(GlobalList);
-    if(viewMode == 1){ //place -> picture 전환
-        $(".place").css("transform","rotateY(180deg)");
-        setTimeout(function() {
-        
-            $(".place").removeClass("setMark")
-            $(".place").addClass("noMark")
-            
-            $(".picture").removeClass("noMark")
-            $(".picture").addClass("setMark")
-            $(".picture").css("transform","rotateY(0deg)");
-            
-        }, 310);
-        
-       
-        
-        $("#modeChange").html("<img src='/static/image/icons/place.png'>")
-    }
-    else if(viewMode == -1){ //picture -> place 전환 
-        $(".picture").css("transform","rotateY(180deg)");
-        
-        setTimeout(function() {
-            $(".picture").removeClass("setMark")
-            $(".picture").addClass("noMark")
-            
-            $(".place").removeClass("noMark")
-            $(".place").addClass("setMark")
-            $(".place").css("transform","rotateY(0deg)");
-        }, 310);
-        
-        
-        
-        $(".picture").css("transform","rotateY(180deg)");
-        
-        
-        
-        $("#modeChange").html("<img src='/static/image/icons/picture.png'>")
-        
-    }
-    console.log(viewMode)
-    viewMode *= -1;
-}
-
-</script>
-
-<script>
-
-codeList1 = ['A05020100' , 'A05020200','A05020300','A05020400','A05020500','A05020600',
-'A05020700','A05020800','A05020900',]
-catList1 = ['food_Korean','food_Western','food_Japaneses','food_Chineses',
-'food_Asian','food_Restaurant','food_Exotic','food_Vegetarian',]
-
-codeList2 = ['A0101','A0201','A0202','A0203','A0204','A0205','A0206','A0208','A0302','A0303','A0304']
-
-catList2 = ['tourspot_nature','tourspot_history','tourspot_recreation','tourspot_experience','tourspot_industry',
-'tourspot_architecture','tourspot_culture','tourspot_festival','tourspot_leportsGround','tourspot_leportsWater',
-'tourspot_leportsSky']
-
-function codeToCatName(catcode){
-    
-    if (catcode.indexOf('A0502') != -1) {
-        for(i=0;i!=(codeList1.length)+1;i++){
-            if (catcode == codeList1[i])
-                return catList1[i]
-        }
-    }
-    else{
-        for(i=0;i!=(codeList2.length)+1;i++){
-            if (catcode.indexOf(codeList2[i]) != -1)
-                return catList2[i]
-        }
-    }
-}
-
-
-
-function SetMarker(inum, imageSrc){
-    var list = $.parseJSON(GlobalList[inum]);
-    
-    catName = codeToCatName(list['cat3'])
-    
-    var backMarkerImage = new kakao.maps.MarkerImage( //마커 이미지 크기 및 위치 조정 
-        "/static/image/backMarker/backMarker"+Math.floor( Math.random() * 10 +1 )+".png",
-        new kakao.maps.Size(32, 40),
-        {
-            offset: new kakao.maps.Point(15, 29)
-        }
-        
-    ); 
-
-    var markerImage = new kakao.maps.MarkerImage(
-        "/static/image/icons/"+catName+".png",
-        new kakao.maps.Size(30, 30),
-        {
-        }
-    ); 
-
-
-    // 마커를 생성합니다
-    
-    var backMarker = new kakao.maps.Marker({ //배경마커
-        map: map, // 마커를 표시할 지도
-        position: new kakao.maps.LatLng(list['mapy'],list['mapx']), // 마커를 표시할 위치
-        image : backMarkerImage, // 마커 이미지 
-    });
-    
-    var marker = new kakao.maps.Marker({ //실제마커
-        map: map, // 마커를 표시할 지도
-        position: new kakao.maps.LatLng(list['mapy'],list['mapx']), // 마커를 표시할 위치
-        title : list['title'], // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        image : markerImage, // 마커 이미지 
-        mnum : inum
-    });
-    
-    var content = $('.itemOverlays').html()
-    
-    var overlay = new kakao.maps.CustomOverlay({
-        content: content,  // 오버레이에 표시할 내용
-        map: null,
-        position: marker.getPosition(),   
-    });
-    
-    backMarkers.push(backMarker);
-    markers.push(marker);
-    overlays.push(overlay);
-    var tmpcont = overlay.getContent()
-    var divsize = "style=\"width: 80vw; height: 50vw;\""
-    kakao.maps.event.addListener(marker, 'click', function() {
-        var mtitle = marker.getTitle()
-        
-        
-        // 마커가 지도위에 처음으로 노출될 때의 스타일 설정 
-       
-        var idx = findListByTitle(mtitle);
-        var list = $.parseJSON(GlobalList[idx]);
-        console.log(list);
-        
-        mtitle = "<div class=\"placeInfo\">"
-        if(list['firstimage2']){
-            mtitle += "<div class=\"placePicture\">"
-            mtitle +="<img src=\""+list['firstimage']+"\" </img> </div>";
-        }
 
         mtitle += "<div class=\"placeName\" >"+marker.getTitle()+"</div>"
 
@@ -809,52 +835,50 @@ function SetMarker(inum, imageSrc){
 </script>
 
 <script>
-    function selectTripnoteForaddTripnote(contentid){
+    function selectTripnoteForaddTripnote(contentid) {
         {% if request.session.loginOk != True %}
-            openLoginPage();
+        openLoginPage();
         {% else %}
-            $.ajax({
-                cache:false,
-                url: "{% url 'durumiApp:tripnotePage' pageName='selectTripnoteForaddTripnote' %}",
-                type:"POST",
-                success: function(data){
-                    alert("성공");
-                    var jdata = data["result"];
-                    console.log(jdata);
-                    showselectTripnoteForaddTripnote(jdata,contentid);
-                },
-                error: function(xhr,status,)
-                {
-                    alert("실패");
-                    alert(xhr+":"+status);
-                },
-            });
+        $.ajax({
+            cache: false,
+            url: "{% url 'durumiApp:tripnotePage' pageName='selectTripnoteForaddTripnote' %}",
+            type: "POST",
+            success: function (data) {
+                alert("성공");
+                var jdata = data["result"];
+                console.log(jdata);
+                showselectTripnoteForaddTripnote(jdata, contentid);
+            },
+            error: function (xhr, status, ) {
+                alert("실패");
+                alert(xhr + ":" + status);
+            },
+        });
         {% endif %}
 
     }
 </script>
 <script>
-    function addTripnote(tripnoteName,contentid){
+    function addTripnote(tripnoteName, contentid) {
         console.log(contentid);
         console.log(tripnoteName);
         var reqData = {
-            contentid : contentid,
-            tripnoteName : tripnoteName};
-        
+            contentid: contentid,
+            tripnoteName: tripnoteName
+        };
+
         $.ajax({
-            cache:false,
-            url:"{% url 'durumiApp:tripnotePage' pageName='addTripnote' %}",
+            cache: false,
+            url: "{% url 'durumiApp:tripnotePage' pageName='addTripnote' %}",
             data: reqData,
-            type:"POST",
-            success: function(data)
-            {
+            type: "POST",
+            success: function (data) {
                 alert("성공");
                 selectTripnoteForaddTripnoteCancel();
             },
-            error: function(xhr,status,)
-            {
+            error: function (xhr, status, ) {
                 alert("실패");
-                alert(xhr + ":"+status);
+                alert(xhr + ":" + status);
             },
 
         });
@@ -862,70 +886,66 @@ function SetMarker(inum, imageSrc){
 </script>
 
 <script>
-    function addTripnoteList(){
-        if( $("#TripnoteListNameBox").val() == "")
+    function addTripnoteList() {
+        if ($("#TripnoteListNameBox").val() == "")
             $('#addTripnoteListDiv #errormsg').html('올바르지 않은 이름입니다.')
         else {
             var formData = $("#TripnoteListNameBox").serialize();
-    
+
             $.ajax({
                 cache: false,
                 url: "{% url 'durumiApp:tripnotePage' pageName='addTripnoteList' %}",
                 data: formData,
-                type:"POST",
-                success: function(data)
-                {
+                type: "POST",
+                success: function (data) {
                     alert("성공");
                     appearTripnote();
                     addTripnoteListCancel();
                 },
-                error : function(xhr, status,data)
-                {
+                error: function (xhr, status, data) {
                     alert("실패");
                     alert(xhr + ":" + status);
                 },
-    
+
             });
         }
     }
 </script>
 <script>
-function keywordSearch(jdata){ //키워드 검색 함수  
 
-//이전 검색결과의 마커랑 오버레이 전부 비우기 
-hideOverlays();
-hideMarkers();
+    function keywordSearch(jdata) { //키워드 검색 함수  
 
-markers = []; 
-backMarkers = [];
-overlays = [];
+        //이전 검색결과의 마커랑 오버레이 전부 비우기 
+        hideOverlays();
+        hideMarkers();
 
-$("#popup_mask").css("display","block"); //팝업 뒷배경 display block
-$("#popupDiv").css("display","block"); //팝업창 display block
-//새로운 지역 검색시 팝업창 내용 초기화 
-searchswiper.removeAllSlides();
+        markers = [];
+        backMarkers = [];
+        overlays = [];
 
-GlobalList = jdata;
-for(var item in jdata){
-    var list = $.parseJSON(jdata[item]);
-    if(viewMode == 1)
-    {
-        SetMarker(item, marker_basic);
+        $("#popup_mask").css("display", "block"); //팝업 뒷배경 display block
+        $("#popupDiv").css("display", "block"); //팝업창 display block
+        //새로운 지역 검색시 팝업창 내용 초기화 
+        searchswiper.removeAllSlides();
+
+        GlobalList = jdata;
+        for (var item in jdata) {
+            var list = $.parseJSON(jdata[item]);
+            if (viewMode == 1) {
+                SetMarker(item, marker_basic);
+            }
+            else {
+                SetMarker(item, photo_basic);
+            }
+            var Ddata = "<div id =" + item + " class='items swiper-slide' onclick='selectPlace(\"" + item + "\")'>" + list['title'] + "</div>";
+            searchswiper.appendSlide(Ddata); //popupdiv 슬라이드에 item 데이터 추가  
+        }
+        checkSearch = 1;
+        $("#popCloseBtn").click(function (event) {
+            popUpClose();
+        });
     }
-    else
-    {
-        SetMarker(item, photo_basic);
-    }
-    var Ddata = "<div id ="+item+" class='items swiper-slide' onclick='selectPlace(\"" + item + "\")'>"+list['title']+"</div>";
-    searchswiper.appendSlide(Ddata); //popupdiv 슬라이드에 item 데이터 추가  
-}
-checkSearch = 1;
-$("#popCloseBtn").click(function(event){
-    popUpClose(); 
-});
-}
 </script>
 
 
 </html>
-
