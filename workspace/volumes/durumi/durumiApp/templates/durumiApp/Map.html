@@ -4,7 +4,7 @@
 <head>
 
     <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f5d5f8cae467bcfcc2fd2ed0a65b173"></script>
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a008f8471540e4e1fe8c0f01ed08a5a"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
     <meta charset="utf-8" />
@@ -806,30 +806,6 @@
         });
     }
 
-        mtitle += "<div class=\"placeName\" >"+marker.getTitle()+"</div>"
-
-        mtitle += "<div class=\"placeType\"> "+list['cat3']+"</div>";
-        mtitle += "<div class=\"addr1\">"+list['addr1']+"</div>  </div>";
-        mtitle += "<div class=\"addTripnote\" onclick=\"selectTripnoteForaddTripnote("+list['contentid']+")\">거르미에 추가</div>"
-    
-        tmpcont = tmpcont.replace(/placeContent/,mtitle);
-        tmpcont = tmpcont.replace(/off/,"");
-        tmpcont = tmpcont.replace(/olnum/gi,idx.replace(/item/,''));  
-        // tmpcont = tmpcont.replace(/place/,'place"'+divsize)
-        // tmpcont = tmpcont.replace(/picture/,'picture"'+divsize)
-        if(viewMode == 1){ //place view 일때
-            tmpcont = tmpcont.replace(/itemOverlays place noMark /gi,'itemOverlays place setMark ');
-            tmpcont = tmpcont.replace(/itemOverlays picture setMark /gi,'itemOverlays picture noMark ');
-        }
-        else{ //picture 일때
-            tmpcont = tmpcont.replace(/itemOverlays place setMark /gi,'itemOverlays place noMark ');
-            tmpcont = tmpcont.replace(/itemOverlays picture noMark /gi,'itemOverlays picture setMark ');
-            
-        }
-        overlay.setContent(tmpcont);
-        overlay.setMap(map);
-    });
-} 
     
     
 </script>
