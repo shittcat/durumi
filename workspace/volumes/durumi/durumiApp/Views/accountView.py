@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import EmailMessage
 from django.core.mail import send_mail
 from ..apicodes import keyword
-from ..Models.UserModel import User
+from ..Models.UserModel import User, AchieveClear
 import simplejson as json
 import os
 import sys
@@ -68,6 +68,13 @@ def signup(request):
         linkId = data['id'],
         userMail = data['email'],
     ).save()
+
+    signuser = User.objects.filter(userId = data['id'])[0]
+
+    AchieveClear(
+        userId = signuser
+    ).save()
+
     context = {
         "result": "ok"
     }

@@ -39,26 +39,13 @@
 
         $(".noticeHeader").click(function(){
             var id = $(this).attr("value");
-            console.log(id);
-            //$("div[name="+id+"]")
 
             if($("div[name="+id+"]").css('display') == "none"){
                 $("div[name="+id+"]").show();
-                console.log($("div[name="+id+"]").attr("name"));
             }
             else{
                 $("div[name="+id+"]").hide();
             }
-
-            /*
-            if($("#noticeContent").css('display') == "none"){
-                $("#noticeContent").show();
-                console.log($("#noticeContent").attr('name'));
-            }
-            else{
-                $("#noticeContent").hide();
-            }
-            */ 
         });
     </script>
 {% endblock %}

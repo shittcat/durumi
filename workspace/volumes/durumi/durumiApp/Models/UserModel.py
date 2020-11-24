@@ -18,7 +18,7 @@ class User(models.Model):
     linkId = models.CharField(max_length=20, blank=True, unique=True)
 
     def __str__(self):
-        return self.userId
+        return str(self.userId)
 
 
 "관광타입 ID"
@@ -139,14 +139,14 @@ class BadgeInfo(models.Model):
 
 class AchieveClear(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
-    Achieve1 = models.BooleanField
-    Achieve2 = models.BooleanField
-    Achieve3 = models.BooleanField
-    Achieve4 = models.BooleanField
-    Achieve5 = models.BooleanField
+    Achieve1 = models.BooleanField(default=False)
+    Achieve2 = models.BooleanField(default=False)
+    Achieve3 = models.BooleanField(default=False)
+    Achieve4 = models.BooleanField(default=False)
+    Achieve5 = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.userId
+        return str(self.userId)
 
 
 "업적 정보"
