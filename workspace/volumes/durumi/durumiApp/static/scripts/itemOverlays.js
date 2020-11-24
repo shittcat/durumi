@@ -59,30 +59,30 @@ var photo_basic = "/static/image/photo/photo_basic.png";
 //     });
 // }
 
-function SetMarkerTripnote(place) {
-  // 마커 이미지의 이미지 크기 입니다
-  var imageSize = new kakao.maps.Size(24, 35);
-  // 마커 이미지를 생성합니다
-  var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-  // 마커를 생성합니다
-  var marker = new kakao.maps.Marker({
-    map: map, // 마커를 표시할 지도
-    position: new kakao.maps.LatLng(place.mapy, place.mapx), // 마커를 표시할 위치
-    image: markerImage, // 마커 이미지
-  });
-  var content = $(".itemOverlays").html();
+// function SetMarkerTripnote(place) {
+//   // 마커 이미지의 이미지 크기 입니다
+//   var imageSize = new kakao.maps.Size(24, 35);
+//   // 마커 이미지를 생성합니다
+//   var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+//   // 마커를 생성합니다
+//   var marker = new kakao.maps.Marker({
+//     map: map, // 마커를 표시할 지도
+//     position: new kakao.maps.LatLng(place.mapy, place.mapx), // 마커를 표시할 위치
+//     image: markerImage, // 마커 이미지
+//   });
+//   var content = $(".itemOverlays").html();
 
-  var overlay = new kakao.maps.CustomOverlay({
-    content: content, // 오버레이에 표시할 내용
-    map: null,
-    position: marker.getPosition(),
-  });
+//   var overlay = new kakao.maps.CustomOverlay({
+//     content: content, // 오버레이에 표시할 내용
+//     map: null,
+//     position: marker.getPosition(),
+//   });
 
-  markers.push(marker);
-  overlays.push(overlay);
+//   markers.push(marker);
+//   overlays.push(overlay);
 
-  overlay.setMap(map);
-}
+//   overlay.setMap(map);
+// }
 
 function hideMarkers() {
   for (var i = 0; i < markers.length; i++) {

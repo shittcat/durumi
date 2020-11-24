@@ -186,7 +186,7 @@
     </div>
 
 
-    <div id="popupDiv" class="swiper-container searchswiper">
+    <div id="popupDiv" class="swiper-container searchswiper listDiv">
         <!-- 팝업창 -->
         <!--<button id="popCloseBtn">close</button>-->
         <div class='swiper-wrapper'>
@@ -224,7 +224,7 @@
 
     <div id="openNote" onclick='openTripNote()'>opennote</div>
 
-    <div id="noteDiv">{% include 'durumiApp/tripNote.html' %}</div>
+    <div id="noteDiv" class="listDiv swiper-container noteswiper ">{% include 'durumiApp/tripNote.html' %}</div>
     <div id="menuDiv">{% include 'durumiApp/hamburgerMenu.html' %}</div>
 
     <div id="catDiv">
@@ -513,7 +513,7 @@
         code = 0;
         //form 에 있는 데이터를 한번에 모아줌 .serialize();
         var formData = $("#searchForm").serialize();
-        console.log(formData);
+        
         $.ajax
             ({
                 cache: false,
@@ -608,7 +608,6 @@
 </script>
 <script>
     function openTripNote() {
-        console.log(checkNote);
 
         if (checkNote == 1) { //노트 올라와 있는 상태 
             $("#noteDiv").css("top", "130vh");
@@ -638,8 +637,6 @@
 <script>
     function modeChange() {
 
-        console.log(code);
-        console.log(GlobalList);
         if (viewMode == 1) { //place -> picture 전환
             $(".place").css("transform", "rotateY(180deg)");
             setTimeout(function () {
@@ -678,7 +675,6 @@
             $("#modeChange").html("<img src='/static/image/icons/picture.png'>")
 
         }
-        console.log(viewMode)
         viewMode *= -1;
     }
 
@@ -697,7 +693,7 @@
         'tourspot_leportsSky']
 
     function codeToCatName(catcode) {
-
+        // console.log(catcode)
         if (catcode.indexOf('A0502') != -1) {
             for (i = 0; i != (codeList1.length) + 1; i++) {
                 if (catcode == codeList1[i])
@@ -711,12 +707,8 @@
             }
         }
     }
-
-
-
-    function SetMarker(inum, imageSrc) {
-        var list = $.parseJSON(GlobalList[inum]);
-
+    
+    function SetMarker(list, imageSrc) {
         catName = codeToCatName(list['cat3'])
 
         var backMarkerImage = new kakao.maps.MarkerImage( //마커 이미지 크기 및 위치 조정 
@@ -749,7 +741,7 @@
             position: new kakao.maps.LatLng(list['mapy'], list['mapx']), // 마커를 표시할 위치
             title: list['title'], // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
             image: markerImage, // 마커 이미지 
-            mnum: inum
+            // mnum: inum
         });
 
         var content = $('.itemOverlays').html()
@@ -773,7 +765,6 @@
 
             var idx = findListByTitle(mtitle);
             var list = $.parseJSON(GlobalList[idx]);
-            console.log(list);
 
             mtitle = "<div class=\"placeInfo\">"
             if (list['firstimage2']) {
@@ -785,7 +776,7 @@
 
             mtitle += "<div class=\"placeType\"> " + list['cat3'] + "</div>";
             mtitle += "<div class=\"addr1\">" + list['addr1'] + "</div>  </div>";
-            mtitle += "<div class=\"addTripnote\" onclick=\"addTripnote(" + list['contentid'] + ")\">거르미에 추가</div>"
+            mtitle += "<div class=\"addTripnote\" onclick=\"selectTripnoteForaddTripnote(" + list['contentid'] + ")\">거르미에 추가</div>"
 
             tmpcont = tmpcont.replace(/placeContent/, mtitle);
             tmpcont = tmpcont.replace(/off/, "");
@@ -822,7 +813,7 @@
             success: function (data) {
                 alert("성공");
                 var jdata = data["result"];
-                console.log(jdata);
+                
                 showselectTripnoteForaddTripnote(jdata, contentid);
             },
             error: function (xhr, status, ) {
@@ -834,10 +825,10 @@
 
     }
 </script>
+
 <script>
     function addTripnote(tripnoteName, contentid) {
-        console.log(contentid);
-        console.log(tripnoteName);
+        
         var reqData = {
             contentid: contentid,
             tripnoteName: tripnoteName
@@ -908,10 +899,10 @@
         for (var item in jdata) {
             var list = $.parseJSON(jdata[item]);
             if (viewMode == 1) {
-                SetMarker(item, marker_basic);
+                SetMarker(list, marker_basic);
             }
             else {
-                SetMarker(item, photo_basic);
+                SetMarker(list, photo_basic);
             }
             var Ddata = "<div id =" + item + " class='items swiper-slide' onclick='selectPlace(\"" + item + "\")'>" + list['title'] + "</div>";
             searchswiper.appendSlide(Ddata); //popupdiv 슬라이드에 item 데이터 추가  

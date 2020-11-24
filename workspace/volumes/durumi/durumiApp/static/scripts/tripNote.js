@@ -51,7 +51,7 @@ function showTripnoteList(jdata) {
     var Ddata =
       '<div id ="' +
       List[item] +
-      "\" class='tripNoteList' onclick='selectTripnote(\"" +
+      "\" class='items swiper-slide' onclick='selectTripnote(\"" +
       List[item] +
       "\")'>" +
       List[item] +
@@ -91,35 +91,34 @@ function EmptyselectTripnoteForaddTripnote() {
     }
   }
 }
-function showTripnote(jdata) {
-  GlobalTripnote = jdata;
-  List = jdata;
-  console.log(jdata);
-  EmptyTripnote();
-  EmptyTripnoteList();
-  $("#addTripNoteListBtn").css("display", "none");
-  $("#tripnoteBackBtn").css("display", "inline");
 
-  for (var item in jdata) {
-    console.log(List[item].iconAddr);
-    console.log(List[item]);
-    var Ddata =
-      "<div id =" +
-      List[item].code +
-      " class='tripNoteItems' onclick='selectTripnotePlace(\"" +
-      item +
-      "\")'>" +
-      List[item].dest +
-      "<img src = " +
-      List[item].cat +
-      "> </div>";
-
-    $("#tripnoteDiv").html($("#tripnoteDiv").html() + Ddata);
-    console.log(List[item]);
-
-    SetMarkerTripnote(List[item]);
-  }
-}
+    function showTripnote(jdata) {
+      GlobalTripnote = jdata;
+      List = jdata;
+      console.log(jdata);
+      EmptyTripnote();
+      EmptyTripnoteList();
+      $("#addTripNoteListBtn").css("display", "none");
+      $("#tripnoteBackBtn").css("display", "inline");
+    
+      for (var item in jdata) {
+        var Ddata =
+          "<div id =" +
+          List[item].code +
+          " class='items swiper-slide ' onclick='selectTripnotePlace(\"" +
+          item +
+          "\")'>" +
+          List[item].dest +
+          "<img src = " +
+          List[item].cat +
+          "> </div>";
+    
+        $("#tripnoteDiv").html($("#tripnoteDiv").html() + Ddata);
+        console.log(List[item]);
+    
+        SetMarker(List[item]['place']);
+      }
+    }
 
 function showselectTripnoteForaddTripnote(jdata, contentid) {
   GlobalselctTripnoteForaddTripnoteList = jdata;
