@@ -45,6 +45,11 @@ def selectTripnoteForaddTripnote(request):
 
 @csrf_exempt  # 보안문제로 적어줌
 def addTripnote(request):
+    loginId = request.session['userId']
+    userAch = AchieveClear.objects.filter(userId_id = loginId)[0]
+    if userAch.Achieve1 == False:
+        userAch.Achieve1 = True
+        userAch.save()
     contentid = request.POST.get("contentid", "")
     tripnoteName = request.POST.get("tripnoteName", "")
     userId = request.session['userId']
