@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from ..Models.UserModel import Tripnote
 from ..Models.UserModel import User
-from ..Models.UserModel import DurumiCat
+from ..Models.UserModel import DurumiCat,AchieveClear, AchieveInfo
 from ..apicodes import searchAPI as sa
 from ..apicodes import keyword
 import simplejson as json
@@ -46,7 +46,8 @@ def selectTripnoteForaddTripnote(request):
 @csrf_exempt  # 보안문제로 적어줌
 def addTripnote(request):
     loginId = request.session['userId']
-    userAch = AchieveClear.objects.filter(userId_id = loginId)[0]
+    id = User.objects.filter(userId = loginId)[0].id
+    userAch = AchieveClear.objects.filter(userId_id = id)[0]
     if userAch.Achieve1 == False:
         userAch.Achieve1 = True
         userAch.save()
