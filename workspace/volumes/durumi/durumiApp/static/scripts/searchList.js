@@ -86,14 +86,14 @@ function locationSearch(jdata) { //현위치 기반 검색 함수
     for (var item in jdata) {
         var list = $.parseJSON(jdata[item]);
         if (viewMode == 1) {
-            SetMarker(item, marker_basic);
+            SetMarker(list, marker_basic);
         }
         else {
-            SetMarker(item, photo_basic);
+            SetMarker(list, photo_basic);
         }
-        var Ddata = "<div id =" + item + " class='items' onclick='selectPlace(\"" + item + "\")'>" + list['title'] + "</div>";
+        //var Ddata = "<div id =" + item + " class='items' onclick='selectPlace(\"" + item + "\")'>" + list['title'] + "</div>";
 
-        searchswiper.appendSlide(Ddata);
+        //searchswiper.appendSlide(Ddata);
     }
     // 현재위치 마커 설정
     lon = parseFloat(temp[0]);
