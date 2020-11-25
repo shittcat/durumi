@@ -18,10 +18,41 @@
   }
   
   .tripNoteInfoDiv{
+    text-align:center;
+    font-size:30px;
     display : none;
     color: grey;
     margin: 1vh 0 1vh 1vw;
   }
+
+
+  
+  .addBtn {
+    background: url( "static/image/add.png" ) no-repeat;
+    border : none;
+    width: 64px;
+    height:64px;
+    cursor:pointer;
+
+  }
+  .closeBtn{
+    background: url( "static/image/close.png" ) no-repeat;
+    border:none;
+    width: 64px;
+    height:64px;
+    cursor:pointer;
+    float: right;
+    margin-right:10;
+  }
+
+  .backBtn{
+    background: url( "static/image/back.png" ) no-repeat;
+    border:none;
+    width: 64px;
+    height:64px;
+    cursor:pointer;
+  }
+
   </style>
   
     
@@ -35,10 +66,9 @@
 <!--this is tripnote : {{ test }} -->
 <div style="overflow-y: scroll" id="tripnoteDiv">
   <!-- 팝업창 -->
-  <button id="addTripNoteListBtn" onclick="addTripNoteListOpen()">add</button>
-  <button id="tripnoteBackBtn" onclick="appearTripnote()">back</button>
-  <button id="tripnoteModifyBtn">Modify</button>
-  <button id="tripnoteCloseBtn" onclick="openTripNote()">close</button>
+  <button id="addTripNoteListBtn" class="addBtn" onclick="addTripNoteListOpen()"></button>
+  <button id="tripnoteBackBtn" class="backBtn" onclick="appearTripnote()"></button>
+  <button id="tripnoteCloseBtn" class="closeBtn" onclick="openTripNote()"></button>
   <div class="tripNoteInfoDiv" id="showTripNoteListDiv">
     나의 여행 거르미 목록
   </div>
