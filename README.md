@@ -1,14 +1,6 @@
 # 여행거르미
 
 
-![Alt text](res/app_poster.png)   
-https://www.true-inno.com/ko/suggestionView.do?cSeq=46ad7bc159da30c5b21b7871260a9f8f&strSearchType=
-
-
-
-
-![pannel](res/pannel.png)
-
 ![logo](res/yeohaeng.png)
 
 ![docker](res/docker.png)
@@ -19,23 +11,35 @@ https://www.true-inno.com/ko/suggestionView.do?cSeq=46ad7bc159da30c5b21b7871260a
 
 
 ## 프로젝트 개요
+
+![panel_1](res/panel_1.jpg)
+
 - 이용자들에게 여행에 대한 도움을 주고 관광 활동을 촉진하는 것
 - 여행 계획 수립 시 간략화 된 선택지를 제공
 - 다른 사람의 관광 여정 공유
   
 ## 개발환경 구축 
+
+![panel_1](res/panel_4.jpg)
+
 - 새로운 언어사용과 개발방법 등의 학습 목적 (Python, django, nginx, docker 등)
 - DJANGO를 사용하여 빠르게 서비스를 구축 
 
-
 ## 지역 활성화와 서비스의 성장
+
+![panel_1](res/panel_3.jpg)
+
 ### 어플리케이션의 프로세스 
+
 여행거르미 어플 사용 -> 도전과제 달성을 위한 관광지 방문 -> 도전과제 달성 -> 해당 도전과제 제품 구매 -> 제품의 어플 홍보 기능 -> 어플 이용자 증가
 ![process](res/process.png)
 
 ## 프로젝트 기능
 
+![panel_1](res/panel_2.jpg)
+
 ### 기본 기능
+
 - 분류별 관광지 표시 
 - 검색 결과 표시
 - 여행지 목록 표시
